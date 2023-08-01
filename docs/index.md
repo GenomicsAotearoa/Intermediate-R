@@ -1,17 +1,16 @@
-<center>
 # Intermediate-R
-</center>
 
-# Preamble
+## Preamble
 
 Goals include:
 
 * Write fewer lines of code
-* Understand how to put multiple concepts together
 * Scale analyses
+* Understand how to put multiple concepts together
+* Make code predictable and readable.
 
-# Pre-requisites
+## Pre-requisites
 
 * Intro to R
-  * Tidyverse
-  * Lists
+  * Tidyverse: Understand `mutate()`, `filter()`, `group_by()`, `summarise()`
+  * Lists: Understand nested lists, operations of subset, indexing, naming elements.
