@@ -1,6 +1,7 @@
 <center>
-# Intermediate-R
+# ![image](./figures/r-logo.png)
 </center>
+
 ## Preamble
 
 !!! circle-info "In this workshop, we will be learning a few techniques to achieve the following goals:"
