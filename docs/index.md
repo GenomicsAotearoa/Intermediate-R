@@ -1,23 +1,28 @@
+<center>
 # Intermediate-R
-
+</center>
 ## Preamble
 
-In this workshop, we will be learning a few techniques to achieve the following goals:
+!!! circle-info "In this workshop, we will be learning a few techniques to achieve the following goals:"
 
-* Write fewer lines of code
-* Scale analyses
-* Understand how to put multiple concepts together
-* Make code predictable and readable.
+    * Write fewer lines of code
+    * Scale analyses
+    * Understand how to put multiple concepts together
+    * Make code predictable and readable.
 
-The topics we will cover here are:
+!!! bookmark "The topics we will cover here are:"
 
-[1. Managing and manipulating relational data](./1.relational_data.md)<br>
-[2. Manipulating strings](./2.string_manipulation.md)<br>
-[3. Writing functions](./3.function_conditions.md)<br>
-[4. Using iterations](./4.iterations.md)<br>
-[5. Understanding data structures](./5.data_structures.md)<br>
+    [1. Managing and manipulating relational data](./1.relational_data.md)<br>
+    [2. Manipulating strings](./2.string_manipulation.md)<br>
+    [3. Writing functions](./3.function_conditions.md)<br>
+    [4. Using iterations](./4.iterations.md)<br>
+    [5. Understanding data structures](./5.data_structures.md)<br>
+
+!!! info ""
 
 Although the lessons are structured in a modular fashion, these techniques complement each other in order to help us achieve the goals above.
+
+!!! info ""
 
 ## Pre-requisites
 

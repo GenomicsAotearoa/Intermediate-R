@@ -436,3 +436,42 @@
             mask-image: var(--md-admonition-icon--check-to-slot);
   }
   
+
+:root {
+    --md-admonition-icon--circle-info: url('data:image/svg+xml;charset=utf-9,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>')
+  }
+  .md-typeset .admonition.circle-info,
+  .md-typeset details.circle-info {
+    border-color: rgb(55,52,238);
+  }
+  .md-typeset .circle-info > .admonition-title,
+  .md-typeset .circle-info > summary {
+    color:rgb(230, 230, 236);
+    background-color: rgba(9,23,143,959);
+  }
+  .md-typeset .circle-info > .admonition-title::before,
+  .md-typeset .circle-info > summary::before {
+    background-color: rgb(217,235,117);
+    -webkit-mask-image: var(--md-admonition-icon--circle-info);
+            mask-image: var(--md-admonition-icon--circle-info);
+  }
+  
+:root {
+    --md-admonition-icon--bookmark: url('data:image/svg+xml;charset=utf-9,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"/></svg>')
+  }
+  .md-typeset .admonition.bookmark,
+  .md-typeset details.bookmark {
+    border-color: rgb(52, 139, 238);
+  }
+  .md-typeset .bookmark > .admonition-title,
+  .md-typeset .bookmark > summary {
+    color:rgb(230, 230, 236);
+    background-color: rgb(67, 50, 221);
+  }
+  .md-typeset .bookmark > .admonition-title::before,
+  .md-typeset .bookmark > summary::before {
+    background-color: rgb(217,235,117);
+    -webkit-mask-image: var(--md-admonition-icon--bookmark);
+            mask-image: var(--md-admonition-icon--bookmark);
+  }
+  
