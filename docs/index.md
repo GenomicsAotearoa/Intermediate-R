@@ -1,5 +1,5 @@
 <center>
-# ![image](./figures/r-logo.png){width="400"}
+# ![image](./figures/r-logo.png){width="300"}
 </center>
 
 ## Preamble
