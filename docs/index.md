@@ -21,15 +21,17 @@ Although the lessons are structured in a modular fashion, these techniques compl
 
 ## Pre-requisites
 
-To fully engage with the material in this workshop, you will need:
+!!! check-to-slot "To fully engage with the material in this workshop, you will need:"
 
-* An [introductory knowledge of R](https://genomicsaotearoa.github.io/Introduction-to-R/)
-    * Variable assignment
-    * Mathematical and Boolean operators
-    * Data modes
-    * Importing data
-* Some familiarity with the `tidyverse` dialect of R code as shown [here](https://genomicsaotearoa.github.io/Introduction-to-R/appendix/05-dplyr/):
-    * `mutate()` and `filter()`
-    * `group_by()` and `summarise()`
-    * `%>%`
-* [Familiarity with lists](https://genomicsaotearoa.github.io/Introduction-to-R/01-r-basics/#lists)
+    * [X] An [introductory knowledge of R](https://genomicsaotearoa.github.io/Introduction-to-R/)
+
+          * Variable assignment
+          * Mathematical and Boolean operators
+          * Data modes
+          * Importing data
+          
+    * [X] Some familiarity with the `tidyverse` dialect of R code as shown [here](https://genomicsaotearoa.github.io/Introduction-to-R/appendix/05-dplyr/):
+          * `mutate()` and `filter()`
+          * `group_by()` and `summarise()`
+          * `%>%`
+    * [X] [Familiarity with lists](https://genomicsaotearoa.github.io/Introduction-to-R/01-r-basics/#lists)
