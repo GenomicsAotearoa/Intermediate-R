@@ -1,0 +1,1790 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Intermediate-R/3.function_conditions/">
+      
+      
+        <link rel="prev" href="../2.string_manipulation/">
+      
+      
+        <link rel="next" href="../4.iterations/">
+      
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.3.2">
+    
+    
+      
+        <title>Functions and conditional statements - Intermediate R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.30068a00.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#functions-and-conditional-statements" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Custom Banner -->
+<div class="banner">
+    <p style="color:rgb(250, 246, 246); display:inline;font-size: 160%;">This repository is in the early stages of development (Alpha Version)</p>
+</div>
+
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Intermediate R" class="md-header__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Intermediate R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Functions and conditional statements
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Intermediate-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Intermediate-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Intermediate R" class="md-nav__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Intermediate R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Intermediate-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Intermediate-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.prep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    An introduction to the data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.relational_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Relational data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.string_manipulation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    String manipulation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Functions and conditional statements
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Functions and conditional statements
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-can-make-those" class="md-nav__link">
+    I can make those?!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anatomy-of-a-function" class="md-nav__link">
+    Anatomy of a function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conditional-execution" class="md-nav__link">
+    Conditional execution
+  </a>
+  
+    <nav class="md-nav" aria-label="Conditional execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nested-statements" class="md-nav__link">
+    Nested statements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vectorised-conditional-statements" class="md-nav__link">
+    Vectorised conditional statements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practical-usage" class="md-nav__link">
+    Practical usage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-are-objects-too" class="md-nav__link">
+    Functions are objects too
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-in-action-a-function-for-alpha-diversity" class="md-nav__link">
+    Code in action: A function for \(\alpha\)-diversity
+  </a>
+  
+    <nav class="md-nav" aria-label="Code in action: A function for \(\alpha\)-diversity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-diverse-is-a-sampled-community" class="md-nav__link">
+    How diverse is a sampled community?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-start-small" class="md-nav__link">
+    Step 1: Start small
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-add-arguments-as-required" class="md-nav__link">
+    Step 2: Add arguments as required
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-refine-function" class="md-nav__link">
+    Step 3: Refine function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-defend-function" class="md-nav__link">
+    Step 4: Defend function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#improving-function-writing" class="md-nav__link">
+    Improving function writing
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.iterations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Iterations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.data_structures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data structures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a1.taxa_bar_plot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercise: Taxonomic bar plot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a3.correlation_analysis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercise: Correlation analysis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Supplementary
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Supplementary
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/s1.seq_prep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sequence processing for Intermediate R workshop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/s2.dat_prep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data preparation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-can-make-those" class="md-nav__link">
+    I can make those?!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anatomy-of-a-function" class="md-nav__link">
+    Anatomy of a function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conditional-execution" class="md-nav__link">
+    Conditional execution
+  </a>
+  
+    <nav class="md-nav" aria-label="Conditional execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nested-statements" class="md-nav__link">
+    Nested statements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vectorised-conditional-statements" class="md-nav__link">
+    Vectorised conditional statements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practical-usage" class="md-nav__link">
+    Practical usage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-are-objects-too" class="md-nav__link">
+    Functions are objects too
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-in-action-a-function-for-alpha-diversity" class="md-nav__link">
+    Code in action: A function for \(\alpha\)-diversity
+  </a>
+  
+    <nav class="md-nav" aria-label="Code in action: A function for \(\alpha\)-diversity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-diverse-is-a-sampled-community" class="md-nav__link">
+    How diverse is a sampled community?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-start-small" class="md-nav__link">
+    Step 1: Start small
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-add-arguments-as-required" class="md-nav__link">
+    Step 2: Add arguments as required
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-refine-function" class="md-nav__link">
+    Step 3: Refine function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-defend-function" class="md-nav__link">
+    Step 4: Defend function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#improving-function-writing" class="md-nav__link">
+    Improving function writing
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="functions-and-conditional-statements">Functions and conditional statements<a class="headerlink" href="#functions-and-conditional-statements" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Learning objectives</p>
+<ul>
+<li>Write custom functions</li>
+<li>Use conditional statements to control execution of code</li>
+<li>Apply concepts in defensive programming to function writing</li>
+</ul>
+</div>
+<h2 id="i-can-make-those">I can make those?!<a class="headerlink" href="#i-can-make-those" title="Permanent link">&para;</a></h2>
+<p>Functions are integral components of R. They are what make it possible to do, well, everything! Even addition <code>+</code> is a function: </p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">mode</span><span class="p">(</span><span class="n">`+`</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nf">str</span><span class="p">(</span><span class="n">`+`</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[1] &quot;function&quot;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>function (e1, e2)
+</code></pre></div>
+</blockquote>
+</div>
+<p>Like all things in R, a function is also an object (we'll see what other implications that has later). Think of functions as verbs. They are pieces of code that do something and produce an outcome (sometimes invisibly). Just as you can assign an object to a variable, you can assign entire chunks of code that "does something" to a object. In R, that is what a function is: an object that does something. So yes, you can write functions! </p>
+<p>In this lesson, we will learn to construct custom functions and conditional statements. Conditional statements are code chunks that helps us handle decision making according to rules. Then, we will write a custom function that calculates different alpha diversity metrics (a staple in any ecological analysis). As part of writing the custom function, we will learn a little bit about defensive programming and how that provides a practical foundation for writing resilient and reliable functions.</p>
+<h2 id="anatomy-of-a-function">Anatomy of a function<a class="headerlink" href="#anatomy-of-a-function" title="Permanent link">&para;</a></h2>
+<p>Here is a pseudocode representation of assigning a function:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">my_function</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">arguments</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">do</span><span class="w"> </span><span class="n">something</span><span class="o">&gt;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>All functions start with the <code>function</code> call, followed by arguments enveloped between parentheses, and finally the expression (the <code>&lt;do something&gt;</code> part of the pseudocode above). This defines what the function does. The expression need not be wrapped in curly brackets <code>{}</code> so long as it is on the same line as the <code>function</code> call. However, for long expressions, this makes code more legible such that the reader understands that the lines of code wrapped in <code>{...}</code> are part of the function object. Here is an example of a function that does <span class="arithmatex">\(\sqrt{2(x + 1)}\)</span>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">f1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nf">f1</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>[1] 2.828427
+</code></pre></div>
+</blockquote>
+</div>
+<div class="admonition tip">
+<p class="admonition-title"><code>function</code> shorthand</p>
+<p>The <code>function</code> call can also be shortened to just a backslash <code>\</code> to mean the same thing. For example, this is equivalent to the code above:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">f1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<p>This makes it easier to write short functions on the fly for interactive use.</p>
+</div>
+<p><strong>Default values</strong></p>
+<p>Many pre-built functions that we use on a day-to-day basis takes one argument as user input. However, this is usually a convenience. For example:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nf">log</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>[1] 1.609438
+</code></pre></div>
+</blockquote>
+</div>
+<p>By default, the <code>log()</code> function returns the natural log (base <span class="arithmatex">\(e\)</span>). If we access its help page, we find that we can specify another base for the logarithm conversion.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nf">log</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>[1] 1
+</code></pre></div>
+</blockquote>
+</div>
+<p>To set default values for our custom functions, we need only place the value when configuring the arguments. The following function cubes <code>x</code> by default, but can take other values to exponentiate <code>x</code>.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">f2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">p</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nf">f2</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nf">f2</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[1] 27
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>[1] 243
+</code></pre></div>
+</blockquote>
+</div>
+<h2 id="conditional-execution">Conditional execution<a class="headerlink" href="#conditional-execution" title="Permanent link">&para;</a></h2>
+<p>Before continuing on our journey to write functions, we need to take a brief look at conditional statements. These are common across all programming languages; you may know them as <code>if-else</code> statements. They are important constructs that control the flow of operations at all levels, be it within a function or a script, and even across scripts. In their most fundamental form, they resemble this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nf">if </span><span class="p">(</span><span class="o">&lt;</span><span class="n">predicate</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">expression_1</span><span class="o">&gt;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">expression_2</span><span class="o">&gt;</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="p">}</span>
+</code></pre></div>
+<p>The code above means:</p>
+<blockquote>
+<p>If the predicate returns a TRUE, run code defined by <code>&lt;expression_1&gt;</code>, else run <code>&lt;expression_2&gt;</code>.</p>
+</blockquote>
+<details class="note">
+<summary>Predicate and predicate functions</summary>
+<p>A predicate is a statement or function that evaluation that returns <strong>a single</strong> <code>TRUE</code> or <code>FALSE</code>. For example, this is a predicate that evaluates if <code>x</code> is larger than 5:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">5</span>
+</code></pre></div>
+<p>If we set <code>x &lt;- 10</code>, the code will return a <code>TRUE</code>.</p>
+<p>R has many built-in predicate functions (i.e., functions that evaluate a statement or object and returns a <code>TRUE</code>/<code>FALSE</code>) are often prefixed using <code>is.&lt;something&gt;()</code>. For example:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">9</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">tim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Tim is eating&quot;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">6</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># Predicate function</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="nf">is.character</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="nf">is.character</span><span class="p">(</span><span class="n">tim</span><span class="p">)</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="nf">is.character</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="nf">is.numeric</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>[1] FALSE
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>[1] TRUE
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>[1] FALSE
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>[1] TRUE
+</code></pre></div>
+</blockquote>
+</div>
+<p>Notice that regardless of the length of the vector, the predicate functions return only one Boolean variable. This is important for conditional statements as it can only evaluate predicates and not a vector of Boolean variables.</p>
+</details>
+<p>To better illustrate what conditional statements do, lets construct an <code>if...else</code> to evaluate the following question:</p>
+<p>Did we recruit enough reads to perform meaningful ecological analyses?</p>
+<p>Let's say that a total read count of at least 500 is required for further analysis and that any value lower than or equal to 500 means we must remedy procedures in handling that sample. Here, our predicate is: <code>sum(&lt;sample_column&gt;) &gt; 500</code>. </p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">reads_AS1A1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">asv</span><span class="o">$</span><span class="n">AS1A1</span><span class="p">)</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nf">if </span><span class="p">(</span><span class="n">reads_AS1A1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">500</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="c1"># If the predicate is TRUE, do this</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;This sample has&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">reads_AS1A1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;reads.&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">  </span><span class="p">)</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;It has sufficient reads.&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">  </span><span class="c1"># If the predicate is FALSE, do this</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;This sample has insufficient reads.&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>[1] &quot;This sample has 5610 reads.&quot;
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>[1] &quot;It has sufficient reads.&quot;
+</code></pre></div>
+</blockquote>
+</div>
+<h3 id="nested-statements">Nested statements<a class="headerlink" href="#nested-statements" title="Permanent link">&para;</a></h3>
+<p>If we had multiple predicates that need to be chained one after another, we can construct nested conditional statements:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nf">if </span><span class="p">(</span><span class="o">&lt;</span><span class="n">predicate</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">expression_1</span><span class="o">&gt;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="nf">if </span><span class="p">(</span><span class="o">&lt;</span><span class="n">predicate</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">expression_2</span><span class="o">&gt;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">expression_3</span><span class="o">&gt;</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="p">}</span>
+</code></pre></div>
+<p>For example:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">reads_S3C3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">asv</span><span class="o">$</span><span class="n">S3C3</span><span class="p">)</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">reads_S3C3</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="nf">if </span><span class="p">(</span><span class="n">reads_S3C3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">5000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;Abundant reads&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="nf">if </span><span class="p">(</span><span class="n">reads_S3C3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">reads_S3C3</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">5000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;High number of reads&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="nf">if </span><span class="p">(</span><span class="n">reads_S3C3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">reads_S3C3</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;Sufficient reads&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;Insufficient reads&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>[1] 870
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>[1] &quot;Sufficient reads&quot;
+</code></pre></div>
+</blockquote>
+</div>
+<p>When using nested statements, keep in mind that order matters. This means that if the first predicate is <code>TRUE</code>, none of the statements below it will be evaluated.</p>
+<h3 id="vectorised-conditional-statements">Vectorised conditional statements<a class="headerlink" href="#vectorised-conditional-statements" title="Permanent link">&para;</a></h3>
+<p>These are functions that: </p>
+<ol>
+<li>Takes a vector of Boolean variables (or an expression that produces them)</li>
+<li>Returns an outcome for each element if it is TRUE</li>
+<li>Returns another outcome for each element if it FALSE</li>
+</ol>
+<p>For binary decisions (i.e., <code>if (predicate) {...} else {...}</code>), there are two functions:</p>
+<ul>
+<li><code>ifelse()</code>: part of base R</li>
+<li><code>if_else()</code>: part of <code>dplyr</code></li>
+</ul>
+<p>They can both return short, simple variables:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">read_sums</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colSums</span><span class="p">(</span><span class="n">asv</span><span class="p">[,</span><span class="w"> </span><span class="m">-1</span><span class="p">])</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nf">ifelse</span><span class="p">(</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span><span class="n">read_sums</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">5000</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">  </span><span class="s">&quot;Sufficient reads&quot;</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">  </span><span class="s">&quot;Insufficient reads&quot;</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">  </span><span class="nf">tail</span><span class="p">()</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>                 AS2C1                  AS2C2                  AS2C3                   S3C1 
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>&quot;Sufficient reads&quot; &quot;Sufficient reads&quot; &quot;Sufficient reads&quot; &quot;Insufficient reads&quot; 
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>                  S3C2                   S3C3 
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>&quot;Insufficient reads&quot;          &quot;Insufficient reads&quot;
+</code></pre></div>
+</blockquote>
+</div>
+<p>or return values after evaluating longer expressions:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nf">if_else</span><span class="p">(</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="n">read_sums</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1000</span><span class="p">,</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">read_sums</span><span class="p">)</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">    </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;The square root of this is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_sums</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">)</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">    </span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;The cube root of this is&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="w">  </span><span class="nf">tail</span><span class="p">()</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>                                        AS2C1                                         AS2C2 
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>&quot;The square root of this is 78.4283112147648&quot; &quot;The square root of this is 75.6174583016383&quot; 
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>                                        AS2C3                                          S3C1 
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>&quot;The square root of this is 82.4075239283404&quot; &quot;The square root of this is 33.5111921602321&quot; 
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>                                         S3C2                                          S3C3 
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>&quot;The square root of this is 60.5061980296234&quot;   &quot;The cube root of this is 9.54640270936004&quot;
+</code></pre></div>
+</blockquote>
+</div>
+<p>For nested statements, there is <code>case_when()</code> from <code>dplyr</code> that takes the form of:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nf">case_when</span><span class="p">(</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">predicate_1</span><span class="o">&gt;</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="o">&lt;</span><span class="n">expression_1</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">predicate_2</span><span class="o">&gt;</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="o">&lt;</span><span class="n">expression_2</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">predicate_3</span><span class="o">&gt;</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="o">&lt;</span><span class="n">expression_3</span><span class="o">&gt;</span><span class="p">,</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span><span class="kc">...</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="o">&lt;</span><span class="n">default_value</span><span class="o">&gt;</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="practical-usage">Practical usage<a class="headerlink" href="#practical-usage" title="Permanent link">&para;</a></h3>
+<p><strong><code>else</code> is optional</strong></p>
+<p>For most use cases it is sufficient to only construct the <code>if (&lt;predicate&gt;) {&lt;expression&gt;}</code> part of the statement. Unless there is a good reason to pick one option over the other, the <code>else {&lt;expression&gt;}</code> is optional and can be entirely omitted. This is because R will only execute the expression within the statement if the predicate is <code>TRUE</code>. For this reason, it is very common to see the <code>else {}</code> omitted in functions.</p>
+<p><strong>Nested statements are rarely a good idea</strong></p>
+<p>Often, nested statements are not helpful. Nested statements can lead to messy code that ends up being illegible and the results can be cryptic (i.e., the reader may not intuitively know where the results come from based on the chain of statements). </p>
+<p>Sometimes you may have a reason to use nested statements. For example, there may be genuine need for a hierarchical way of evaluating the flow of data where some collection of thresholds warrant a different method of processing data downstream. </p>
+<p>An alternative to nested statements is writing multiple functions which are called under different scenarios. This modular structure means that you not only remove potential redundancies, but it also improves code legibility where readers can easily determine the functions that are being called, the expression the function uses, and the intended result.</p>
+<p><strong>Vectorise for one-off use cases</strong></p>
+<p>R is particularly proficient when we use functions that take in vectors. In cases where you need to <code>mutate()</code> a column in a data frame (e.g., replacing values based on pattern searches and return a variable), the vectorised <code>if_else()</code> and <code>case_when()</code> are your friends. Also, I prefer to use <code>if_else()</code> as opposed to <code>ifelse()</code> as it can handle missing values and produce consistent output types, a coveted feature in ensuring input-output consistency.</p>
+<h2 id="functions-are-objects-too">Functions are objects too<a class="headerlink" href="#functions-are-objects-too" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p>This section is a little more abstract than previous sections and might take a while to get our heads around. However, it is nonetheless useful to know how functions can behave like objects so that we can use them more flexibly.</p>
+</div>
+<p>At the beginning of this lesson, we came across the concept that functions are objects. In examples above, we assign names to functions in order to call them. That is one property of an object: <em>they can be named</em>. However, there are also objects that we use on the fly without naming them. Consider the following:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nf">c</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;F&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>If you run the above, it will print out the letters <code>A</code>, <code>B</code>, <code>D</code>, and <code>F</code>. We haven't named them, and yet we can use them. The same goes for functions, but the syntax is slightly different:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="p">(</span>\<span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">)(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>[1] 8
+</code></pre></div>
+</blockquote>
+</div>
+<p>We've encased the function itself in brackets <code>()</code>, supplied it with the required arguments, and it provides an output. This is known as an <strong>anonymous function</strong>. Keep this in mind as it will be quite prominent in the next lesson.</p>
+<p>Another property of objects is that <em>they can be stored</em>. While it is not possible to store a function in a vector, it is possible to store them in a list. This is a valid way to store functions:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">flist</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">  </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="p">,</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">  </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="m">3</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="p">)</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="n">flist</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>[[1]]
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>\(x) x + 1
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>[[2]]
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>\(x) x + 2
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>[[3]]
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>\(x) x ^ 3
+</code></pre></div>
+<p>With this structure, you can iterate through the list and generate different outputs depending on the function applied.</p>
+<p>You can also use it as input to another function. For example, if you pass that into <code>class()</code> or <code>mode()</code>, it will tell you it is a character vector. When you pass a function into <code>class()</code>, it will tell you that it is a function (no surprise there).</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nf">class</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>[1] &quot;function&quot;
+</code></pre></div>
+</blockquote>
+</div>
+<p>That reveals another aspect of functions: they can be <em>treated as input</em>.</p>
+<p>We will learn about iterations in the next lesson, but to showcase the points:</p>
+<ul>
+<li>functions can be stored (thus iterated)</li>
+<li>functions can be treated as input</li>
+</ul>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nf">map</span><span class="p">(</span><span class="n">flist</span><span class="p">,</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">x</span><span class="p">(</span><span class="m">2</span><span class="p">))</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>[[1]]
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>[1] 3
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>[[2]]
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>[1] 4
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a>[[3]]
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>[1] 8
+</code></pre></div>
+</blockquote>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Recursive functions</p>
+<p>The last property of an object is that for some types, they can exist inside themselves. Consider a nested list:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1">1</a></span>
+<span class="normal"><a href="#__codelineno-35-2">2</a></span>
+<span class="normal"><a href="#__codelineno-35-3">3</a></span>
+<span class="normal"><a href="#__codelineno-35-4">4</a></span>
+<span class="normal"><a href="#__codelineno-35-5">5</a></span>
+<span class="normal"><a href="#__codelineno-35-6">6</a></span>
+<span class="normal"><a href="#__codelineno-35-7">7</a></span>
+<span class="normal"><a href="#__codelineno-35-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="n">nl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2"></a><span class="n">nl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3"></a><span class="w">  </span><span class="n">nl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4"></a><span class="w">    </span><span class="n">nl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5"></a><span class="w">      </span><span class="n">nl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nl</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7"></a><span class="w">  </span><span class="p">)</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8"></a><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>The above is a list object, in it's own list object, it it's own list object, in it's own list object. Phew what a mouthful! That is a valid structure for an object. Given that functions are also objects, this applies also to functions. When used this way, it is known as a <strong>recursive function</strong> (i.e., a function, that calls itself).</p>
+<div class="admonition warning">
+<p class="admonition-title">Use sparingly</p>
+<p>These constructs often require lots of tinkering and can lead to more problems if they are not coded right. We certainly do not want a function that runs <em>ad inifinitum</em>!</p>
+</div>
+<p>An simple example for this is the factorial. This is defined:</p>
+<div class="arithmatex">\[
+n! = n \times (n-1) \times (n-2) \times (n-3) \times ... \times 2 \times 1
+\]</div>
+<p>In code, we can construct:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1">1</a></span>
+<span class="normal"><a href="#__codelineno-36-2">2</a></span>
+<span class="normal"><a href="#__codelineno-36-3">3</a></span>
+<span class="normal"><a href="#__codelineno-36-4">4</a></span>
+<span class="normal"><a href="#__codelineno-36-5">5</a></span>
+<span class="normal"><a href="#__codelineno-36-6">6</a></span>
+<span class="normal"><a href="#__codelineno-36-7">7</a></span>
+<span class="normal"><a href="#__codelineno-36-8">8</a></span>
+<span class="normal"><a href="#__codelineno-36-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="n">fr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">fr</span><span class="p">(</span><span class="n">x</span><span class="m">-1</span><span class="p">)</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-36-5" name="__codelineno-36-5"></a><span class="w">    </span><span class="nf">return</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-36-7" name="__codelineno-36-7"></a><span class="p">}</span>
+<a id="__codelineno-36-8" name="__codelineno-36-8"></a>
+<a id="__codelineno-36-9" name="__codelineno-36-9"></a><span class="nf">fr</span><span class="p">(</span><span class="m">4</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>[1] 24
+</code></pre></div>
+</blockquote>
+</div>
+</div>
+<!-- Could add a sub-section on recursive functions using a limited integral or factorial as an example. -->
+
+<h2 id="code-in-action-a-function-for-alpha-diversity">Code in action: A function for <span class="arithmatex">\(\alpha\)</span>-diversity<a class="headerlink" href="#code-in-action-a-function-for-alpha-diversity" title="Permanent link">&para;</a></h2>
+<h3 id="how-diverse-is-a-sampled-community">How diverse is a sampled community?<a class="headerlink" href="#how-diverse-is-a-sampled-community" title="Permanent link">&para;</a></h3>
+<p>This is likely the first question one asks when considering community ecology of any environment. A direct measure <em>diversity within a sample</em> (also known as <em><span class="arithmatex">\(\alpha\)</span>-diversity</em>) is richness (often denoted <span class="arithmatex">\(q\)</span> or <span class="arithmatex">\(S\)</span>), which is the tally of number of species/taxonomic units present in any given sample. While simple and intuitive, it is heavily influenced by rare taxonomic units (as is often the case in microbiome samples). Therefore, other metrics which account for the <em>uneven distribution</em> of taxonomic units are also reported alongside richness. Popular options are:</p>
+<p><strong>Shannon's index, <span class="arithmatex">\(\textrm{H}\)</span></strong></p>
+<div class="arithmatex">\[
+\large
+\textrm{H} = - \sum_{i=1}^{q} {p_i} \log {p_i}
+\]</div>
+<p>Where <span class="arithmatex">\(p_i\)</span> is the proportion of the <span class="arithmatex">\(i\)</span><sup>th</sup> organism relative to the sample total (also known as the relative frequency of the organism).</p>
+<p><strong>Inverse Simpson's concentration index, <span class="arithmatex">\(D\)</span></strong></p>
+<div class="arithmatex">\[
+\large
+D = \frac{1}{\lambda}
+\]</div>
+<p>Where the concentration index <span class="arithmatex">\(\lambda\)</span> is defined as</p>
+<div class="arithmatex">\[
+\large
+\lambda = \sum_{i=1}^{q} {p_i}^2
+\]</div>
+<p>If you are mathematically inclined, you might observe that these indices give more weight to abundant taxonomic units and that weighting is higher for <span class="arithmatex">\(D\)</span> than for <span class="arithmatex">\(\textrm{H}\)</span>.</p>
+<p>If you are <em>not</em> mathematically inclined, or you are busy focusing on learning coding today, don't worry about understanding the math for now - it's enough to know "It's a formula". </p>
+<h2 id="step-1-start-small">Step 1: Start small<a class="headerlink" href="#step-1-start-small" title="Permanent link">&para;</a></h2>
+<p>Lets start by writing a function that calculates richness. Recall that this is the number of taxonomic units present in the sample (i.e., the number of non-zero elements in a numeric vector). We will also create a test vector so we can test our function.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-38-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-38-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-38-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-38-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-38-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-38-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-38-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="c1"># Create test vector based on a column in asv</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="n">test_sample</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">asv</span><span class="o">$</span><span class="n">AS1A3</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3"></a>
+<a id="__codelineno-38-4" name="__codelineno-38-4"></a><span class="c1"># Write richness function</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="n">alpha_diversity</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6"></a><span class="w">  </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7"></a><span class="p">}</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8"></a>
+<a id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="c1"># Test function</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_sample</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>[1] 1149
+</code></pre></div>
+</blockquote>
+</div>
+<h2 id="step-2-add-arguments-as-required">Step 2: Add arguments as required<a class="headerlink" href="#step-2-add-arguments-as-required" title="Permanent link">&para;</a></h2>
+<p>We know from the preamble above that <span class="arithmatex">\(\textrm{H}\)</span> and <span class="arithmatex">\(D\)</span> are also useful metrics to look at. Lets incorporate them into our function.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-40-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-40-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-40-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-40-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-40-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-40-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-40-10">10</a></span>
+<span class="normal"><a href="#__codelineno-40-11">11</a></span>
+<span class="normal"><a href="#__codelineno-40-12">12</a></span>
+<span class="normal"><a href="#__codelineno-40-13">13</a></span>
+<span class="normal"><a href="#__codelineno-40-14">14</a></span>
+<span class="normal"><a href="#__codelineno-40-15">15</a></span>
+<span class="normal"><a href="#__codelineno-40-16">16</a></span>
+<span class="normal"><a href="#__codelineno-40-17">17</a></span>
+<span class="normal"><a href="#__codelineno-40-18">18</a></span>
+<span class="normal"><a href="#__codelineno-40-19">19</a></span>
+<span class="normal"><a href="#__codelineno-40-20">20</a></span>
+<span class="normal"><a href="#__codelineno-40-21">21</a></span>
+<span class="normal"><a href="#__codelineno-40-22">22</a></span>
+<span class="normal"><a href="#__codelineno-40-23">23</a></span>
+<span class="normal"><a href="#__codelineno-40-24">24</a></span>
+<span class="normal"><a href="#__codelineno-40-25">25</a></span>
+<span class="normal"><a href="#__codelineno-40-26">26</a></span>
+<span class="normal"><a href="#__codelineno-40-27">27</a></span>
+<span class="normal"><a href="#__codelineno-40-28">28</a></span>
+<span class="normal"><a href="#__codelineno-40-29">29</a></span>
+<span class="normal"><a href="#__codelineno-40-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1"></a><span class="n">alpha_diversity</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2"></a>
+<a id="__codelineno-40-3" name="__codelineno-40-3"></a><span class="w">  </span><span class="c1"># Richness</span>
+<a id="__codelineno-40-4" name="__codelineno-40-4"></a><span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5"></a>
+<a id="__codelineno-40-6" name="__codelineno-40-6"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">metric</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;richness&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-40-7" name="__codelineno-40-7"></a><span class="w">    </span><span class="nf">return</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-40-8" name="__codelineno-40-8"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-40-9" name="__codelineno-40-9"></a>
+<a id="__codelineno-40-10" name="__codelineno-40-10"></a><span class="w">  </span><span class="c1"># Relative frequency</span>
+<a id="__codelineno-40-11" name="__codelineno-40-11"></a><span class="w">  </span><span class="n">p_i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-40-12" name="__codelineno-40-12"></a>
+<a id="__codelineno-40-13" name="__codelineno-40-13"></a><span class="w">  </span><span class="c1"># Operation for Shannon&#39;s index</span>
+<a id="__codelineno-40-14" name="__codelineno-40-14"></a><span class="w">  </span><span class="c1"># sum(na.rm = TRUE) to account for NAs as a result of log(0)</span>
+<a id="__codelineno-40-15" name="__codelineno-40-15"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">metric</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;shannon&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-40-16" name="__codelineno-40-16"></a><span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="nf">sum</span><span class="p">(</span><span class="n">p_i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">p_i</span><span class="p">),</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<a id="__codelineno-40-17" name="__codelineno-40-17"></a><span class="w">    </span><span class="nf">return</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+<a id="__codelineno-40-18" name="__codelineno-40-18"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-40-19" name="__codelineno-40-19"></a>
+<a id="__codelineno-40-20" name="__codelineno-40-20"></a><span class="w">  </span><span class="c1"># Operation for Inverse Simpson&#39;s</span>
+<a id="__codelineno-40-21" name="__codelineno-40-21"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">metric</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;simpson&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-40-22" name="__codelineno-40-22"></a><span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">p_i</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="m">-1</span>
+<a id="__codelineno-40-23" name="__codelineno-40-23"></a><span class="w">    </span><span class="nf">return</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<a id="__codelineno-40-24" name="__codelineno-40-24"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-40-25" name="__codelineno-40-25"></a>
+<a id="__codelineno-40-26" name="__codelineno-40-26"></a><span class="p">}</span>
+<a id="__codelineno-40-27" name="__codelineno-40-27"></a>
+<a id="__codelineno-40-28" name="__codelineno-40-28"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_sample</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;richness&quot;</span><span class="p">)</span>
+<a id="__codelineno-40-29" name="__codelineno-40-29"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_sample</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;shannon&quot;</span><span class="p">)</span>
+<a id="__codelineno-40-30" name="__codelineno-40-30"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_sample</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;simpson&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>[1] 1149
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>[1] 6.649886
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>[1] 468.1816
+</code></pre></div>
+</blockquote>
+</div>
+<p>Notice that for shared variables like <code>p_i</code>, they are placed outside of conditional statements. This reduces code redundancies. Also, in this step, we are introduced to a new function: <code>return()</code>. By default, the function will evaluate all code in its "body" and return the result of the last expression. <code>return()</code> literally returns the result of the evaluated expression, regardless of its position in the code.</p>
+<h2 id="step-3-refine-function">Step 3: Refine function<a class="headerlink" href="#step-3-refine-function" title="Permanent link">&para;</a></h2>
+<p>While the function we wrote is pretty good, there are some small improvements we can make:</p>
+<ul>
+<li><strong>Multiple <code>return()</code></strong> Ideally it should only have one. This is because if the user picks richness, there should be no further evaluation of the function code below richness, thus saving time and computation. Although this function (and the data) is so small that computational efficiency is of minimal concern, the thought of wasteful computation should be part of your function writing consideration.</li>
+<li><strong>Selection of log bases</strong> Traditionally, the log base of Shannon's index has always been <span class="arithmatex">\(e\)</span>. However, one might want to use a different log base, perhaps as a comparison against another study which uses a different base.</li>
+<li><strong>Redundant variables</strong> While the notation of <span class="arithmatex">\(\textrm{H}\)</span> and <span class="arithmatex">\(D\)</span> is useful to us in differentiating the indices in mathematical notation, it is a redundancy in the code. The decision to return either indices is already managed by the conditional statements. </li>
+</ul>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-42-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-42-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-42-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-42-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-42-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-42-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-42-10">10</a></span>
+<span class="normal"><a href="#__codelineno-42-11">11</a></span>
+<span class="normal"><a href="#__codelineno-42-12">12</a></span>
+<span class="normal"><a href="#__codelineno-42-13">13</a></span>
+<span class="normal"><a href="#__codelineno-42-14">14</a></span>
+<span class="normal"><a href="#__codelineno-42-15">15</a></span>
+<span class="normal"><a href="#__codelineno-42-16">16</a></span>
+<span class="normal"><a href="#__codelineno-42-17">17</a></span>
+<span class="normal"><a href="#__codelineno-42-18">18</a></span>
+<span class="normal"><a href="#__codelineno-42-19">19</a></span>
+<span class="normal"><a href="#__codelineno-42-20">20</a></span>
+<span class="normal"><a href="#__codelineno-42-21">21</a></span>
+<span class="normal"><a href="#__codelineno-42-22">22</a></span>
+<span class="normal"><a href="#__codelineno-42-23">23</a></span>
+<span class="normal"><a href="#__codelineno-42-24">24</a></span>
+<span class="normal"><a href="#__codelineno-42-25">25</a></span>
+<span class="normal"><a href="#__codelineno-42-26">26</a></span>
+<span class="normal"><a href="#__codelineno-42-27">27</a></span>
+<span class="normal"><a href="#__codelineno-42-28">28</a></span>
+<span class="normal"><a href="#__codelineno-42-29">29</a></span>
+<span class="normal"><a href="#__codelineno-42-30">30</a></span>
+<span class="normal"><a href="#__codelineno-42-31">31</a></span>
+<span class="normal"><a href="#__codelineno-42-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1"></a><span class="n">alpha_diversity</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="p">,</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2"></a>
+<a id="__codelineno-42-3" name="__codelineno-42-3"></a><span class="w">  </span><span class="c1"># Richness</span>
+<a id="__codelineno-42-4" name="__codelineno-42-4"></a><span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<a id="__codelineno-42-5" name="__codelineno-42-5"></a>
+<a id="__codelineno-42-6" name="__codelineno-42-6"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">metric</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;richness&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-42-7" name="__codelineno-42-7"></a><span class="w">    </span><span class="nf">return</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-42-9" name="__codelineno-42-9"></a>
+<a id="__codelineno-42-10" name="__codelineno-42-10"></a><span class="w">  </span><span class="c1"># Relative frequency</span>
+<a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="w">  </span><span class="n">p_i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-42-12" name="__codelineno-42-12"></a>
+<a id="__codelineno-42-13" name="__codelineno-42-13"></a><span class="w">  </span><span class="c1"># Operation for Shannon&#39;s index</span>
+<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="w">  </span><span class="c1"># sum(na.rm = TRUE) to account for NAs as a result of log(0)</span>
+<a id="__codelineno-42-15" name="__codelineno-42-15"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">metric</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;shannon&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-42-16" name="__codelineno-42-16"></a><span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="nf">sum</span><span class="p">(</span><span class="n">p_i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">p_i</span><span class="p">,</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">),</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<a id="__codelineno-42-17" name="__codelineno-42-17"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span>
+<a id="__codelineno-42-18" name="__codelineno-42-18"></a>
+<a id="__codelineno-42-19" name="__codelineno-42-19"></a><span class="w">  </span><span class="c1"># Operation for Inverse Simpson&#39;s</span>
+<a id="__codelineno-42-20" name="__codelineno-42-20"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">metric</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;simpson&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-42-21" name="__codelineno-42-21"></a><span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">p_i</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="m">-1</span>
+<a id="__codelineno-42-22" name="__codelineno-42-22"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-42-23" name="__codelineno-42-23"></a>
+<a id="__codelineno-42-24" name="__codelineno-42-24"></a><span class="w">  </span><span class="c1"># Return result</span>
+<a id="__codelineno-42-25" name="__codelineno-42-25"></a><span class="w">  </span><span class="n">H</span>
+<a id="__codelineno-42-26" name="__codelineno-42-26"></a>
+<a id="__codelineno-42-27" name="__codelineno-42-27"></a><span class="p">}</span>
+<a id="__codelineno-42-28" name="__codelineno-42-28"></a>
+<a id="__codelineno-42-29" name="__codelineno-42-29"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_sample</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;richness&quot;</span><span class="p">)</span>
+<a id="__codelineno-42-30" name="__codelineno-42-30"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_sample</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;shannon&quot;</span><span class="p">)</span>
+<a id="__codelineno-42-31" name="__codelineno-42-31"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_sample</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;shannon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<a id="__codelineno-42-32" name="__codelineno-42-32"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_sample</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;simpson&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>[1] 1149
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>[1] 6.649886
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>[1] 9.593758
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>[1] 468.1816
+</code></pre></div>
+</blockquote>
+</div>
+<h2 id="step-4-defend-function">Step 4: Defend function<a class="headerlink" href="#step-4-defend-function" title="Permanent link">&para;</a></h2>
+<p>Our function has held up well under ideal conditions. Let's imagine using this function under less than ideal scenarios (dirty data, incorrect types, etc.). What are some of the pitfalls you can think of with the function we wrote?</p>
+<details class="warning">
+<summary>Possible pitfalls</summary>
+<ol>
+<li>While we have guarded our function against <code>NA</code>s resulting from <code>log(0)</code>, there remains the problem of negative numbers. Both richness and Simpson index will continue to be calculated without error or warning, even if it does not make sense to do so.</li>
+<li>If the data was supposed to be numeric but was read incorrectly and coerced to become a character, how would we handle that?</li>
+<li>How would we handle missing values in general?</li>
+</ol>
+</details>
+<p>To address these concerns, we will take hints from a concept called <strong>defensive programming</strong>. An aspect of defensive programming is preventing incorrect usage of code by "failing fast". This is where errors are produced and code will stop running if inputs are incorrect or do not make sense. In practice, that means we need to be strict with inputs and how they are to be pre-processed. We also need to balance this with the prospect that users know what they are doing and provide flexible implementation when needed. </p>
+<p>In this case, we need to address:</p>
+<div class="admonition success">
+<p class="admonition-title">Improvements to make</p>
+<ol>
+<li>Negative numbers makes no sense for the calculation of richness and relative frequencies. Therefore, we must insist on the provision of strictly zero or positive numbers as inputs and produce an error that stops further code execution if a negative number is found.</li>
+<li>Regardless of the reason for non-numeric inputs, calculations only make sense for numeric data. This is non-negotiable. Thus, we must write code the produces an error if non-numeric inputs are detected.</li>
+<li>We can be flexible around missing values. For these indices, there is no way to differentiate a missing observation versus a zero count. Therefore, we can warn the user that there are missing values and that they are removed prior to calculation.</li>
+</ol>
+</div>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-44-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-44-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-44-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-44-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-44-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-44-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-44-10">10</a></span>
+<span class="normal"><a href="#__codelineno-44-11">11</a></span>
+<span class="normal"><a href="#__codelineno-44-12">12</a></span>
+<span class="normal"><a href="#__codelineno-44-13">13</a></span>
+<span class="normal"><a href="#__codelineno-44-14">14</a></span>
+<span class="normal"><a href="#__codelineno-44-15">15</a></span>
+<span class="normal"><a href="#__codelineno-44-16">16</a></span>
+<span class="normal"><a href="#__codelineno-44-17">17</a></span>
+<span class="normal"><a href="#__codelineno-44-18">18</a></span>
+<span class="normal"><a href="#__codelineno-44-19">19</a></span>
+<span class="normal"><a href="#__codelineno-44-20">20</a></span>
+<span class="normal"><a href="#__codelineno-44-21">21</a></span>
+<span class="normal"><a href="#__codelineno-44-22">22</a></span>
+<span class="normal"><a href="#__codelineno-44-23">23</a></span>
+<span class="normal"><a href="#__codelineno-44-24">24</a></span>
+<span class="normal"><a href="#__codelineno-44-25">25</a></span>
+<span class="normal"><a href="#__codelineno-44-26">26</a></span>
+<span class="normal"><a href="#__codelineno-44-27">27</a></span>
+<span class="normal"><a href="#__codelineno-44-28">28</a></span>
+<span class="normal"><a href="#__codelineno-44-29">29</a></span>
+<span class="normal"><a href="#__codelineno-44-30">30</a></span>
+<span class="normal"><a href="#__codelineno-44-31">31</a></span>
+<span class="normal"><a href="#__codelineno-44-32">32</a></span>
+<span class="normal"><a href="#__codelineno-44-33">33</a></span>
+<span class="normal"><a href="#__codelineno-44-34">34</a></span>
+<span class="normal"><a href="#__codelineno-44-35">35</a></span>
+<span class="normal"><a href="#__codelineno-44-36">36</a></span>
+<span class="normal"><a href="#__codelineno-44-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1"></a><span class="n">alpha_diversity</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="p">,</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2"></a>
+<a id="__codelineno-44-3" name="__codelineno-44-3"></a><span class="w">  </span><span class="c1"># Warns for missing values</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="nf">anyNA</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5"></a><span class="w">    </span><span class="nf">warning</span><span class="p">(</span><span class="s">&quot;x contains missing values. These were removed prior to calculations.&quot;</span><span class="p">)</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6"></a><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+<a id="__codelineno-44-7" name="__codelineno-44-7"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-44-8" name="__codelineno-44-8"></a>
+<a id="__codelineno-44-9" name="__codelineno-44-9"></a><span class="w">  </span><span class="c1"># Ensure positive numeric inputs</span>
+<a id="__codelineno-44-10" name="__codelineno-44-10"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">any</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-44-11" name="__codelineno-44-11"></a><span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">&quot;x must be positive numeric values!&quot;</span><span class="p">)</span>
+<a id="__codelineno-44-12" name="__codelineno-44-12"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-44-13" name="__codelineno-44-13"></a>
+<a id="__codelineno-44-14" name="__codelineno-44-14"></a><span class="w">  </span><span class="c1"># Richness</span>
+<a id="__codelineno-44-15" name="__codelineno-44-15"></a><span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<a id="__codelineno-44-16" name="__codelineno-44-16"></a>
+<a id="__codelineno-44-17" name="__codelineno-44-17"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">metric</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;richness&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-44-18" name="__codelineno-44-18"></a><span class="w">    </span><span class="nf">return</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-44-19" name="__codelineno-44-19"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-44-20" name="__codelineno-44-20"></a>
+<a id="__codelineno-44-21" name="__codelineno-44-21"></a><span class="w">  </span><span class="c1"># Relative frequency</span>
+<a id="__codelineno-44-22" name="__codelineno-44-22"></a><span class="w">  </span><span class="n">p_i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-44-23" name="__codelineno-44-23"></a>
+<a id="__codelineno-44-24" name="__codelineno-44-24"></a><span class="w">  </span><span class="c1"># Operation for Shannon&#39;s index</span>
+<a id="__codelineno-44-25" name="__codelineno-44-25"></a><span class="w">  </span><span class="c1"># sum(na.rm = TRUE) to account for NAs as a result of log(0)</span>
+<a id="__codelineno-44-26" name="__codelineno-44-26"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">metric</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;shannon&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-44-27" name="__codelineno-44-27"></a><span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="nf">sum</span><span class="p">(</span><span class="n">p_i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">p_i</span><span class="p">,</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">),</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<a id="__codelineno-44-28" name="__codelineno-44-28"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span>
+<a id="__codelineno-44-29" name="__codelineno-44-29"></a>
+<a id="__codelineno-44-30" name="__codelineno-44-30"></a><span class="w">  </span><span class="c1"># Operation for Inverse Simpson&#39;s</span>
+<a id="__codelineno-44-31" name="__codelineno-44-31"></a><span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">metric</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;simpson&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-44-32" name="__codelineno-44-32"></a><span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">p_i</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="m">-1</span>
+<a id="__codelineno-44-33" name="__codelineno-44-33"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-44-34" name="__codelineno-44-34"></a>
+<a id="__codelineno-44-35" name="__codelineno-44-35"></a><span class="w">  </span><span class="n">H</span>
+<a id="__codelineno-44-36" name="__codelineno-44-36"></a>
+<a id="__codelineno-44-37" name="__codelineno-44-37"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>We will also generate some new test vectors to simulate problematic inputs of missing values, negative numbers or character values.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1">1</a></span>
+<span class="normal"><a href="#__codelineno-45-2">2</a></span>
+<span class="normal"><a href="#__codelineno-45-3">3</a></span>
+<span class="normal"><a href="#__codelineno-45-4">4</a></span>
+<span class="normal"><a href="#__codelineno-45-5">5</a></span>
+<span class="normal"><a href="#__codelineno-45-6">6</a></span>
+<span class="normal"><a href="#__codelineno-45-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="n">test_missing</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">test_sample</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2"></a><span class="n">test_negative</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">test_sample</span><span class="p">,</span><span class="w"> </span><span class="m">-46</span><span class="p">)</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3"></a><span class="n">test_character</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">test_sample</span><span class="p">)</span>
+<a id="__codelineno-45-4" name="__codelineno-45-4"></a>
+<a id="__codelineno-45-5" name="__codelineno-45-5"></a><span class="nf">tail</span><span class="p">(</span><span class="n">test_missing</span><span class="p">)</span>
+<a id="__codelineno-45-6" name="__codelineno-45-6"></a><span class="nf">tail</span><span class="p">(</span><span class="n">test_negative</span><span class="p">)</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7"></a><span class="nf">tail</span><span class="p">(</span><span class="n">test_character</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>[1]  0  0  0  0 NA NA
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>[1]   0   0   0   0   0 -46
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>[1] &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
+</code></pre></div>
+</blockquote>
+<p>Now test the new function:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1">1</a></span>
+<span class="normal"><a href="#__codelineno-47-2">2</a></span>
+<span class="normal"><a href="#__codelineno-47-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_missing</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;richness&quot;</span><span class="p">)</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_negative</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;shannon&quot;</span><span class="p">)</span>
+<a id="__codelineno-47-3" name="__codelineno-47-3"></a><span class="nf">alpha_diversity</span><span class="p">(</span><span class="n">test_character</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;simpson&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>[1] 1149
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>Warning message:
+<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>In alpha_diversity(test_missing, &quot;richness&quot;) :
+<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>  x contains missing values. These were removed prior to calculations.
+<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>
+<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a>Error in alpha_diversity(test_negative, &quot;shannon&quot;) : 
+<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a>  x must be positive numeric values!
+<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a>
+<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a>Error in alpha_diversity(test_character, &quot;simpson&quot;) : 
+<a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a>  x must be positive numeric values!
+</code></pre></div>
+</blockquote>
+</div>
+<h2 id="improving-function-writing">Improving function writing<a class="headerlink" href="#improving-function-writing" title="Permanent link">&para;</a></h2>
+<p><strong>Read existing functions (i.e., other people's code)</strong></p>
+<p>This is often the best way to improve how you write functions. You can inspect the code for most functions by calling the function name without the brackets:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="c1"># Looking at the source code for the function that calculates an interquartile range</span>
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="n">IQR</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>function (x, na.rm = FALSE, type = 7) 
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>diff(quantile(as.numeric(x), c(0.25, 0.75), na.rm = na.rm, names = FALSE, 
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>    type = type))
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>&lt;bytecode: 0x0000023a58a9af60&gt;
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>&lt;environment: namespace:stats&gt;
+</code></pre></div>
+</blockquote>
+</div>
+<p>Some functions are handled differently depending on the input. If we call the functions directly like above, we might get this output:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="n">anova</span>
+</code></pre></div>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>function (object, ...) 
+<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>UseMethod(&quot;anova&quot;)
+<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a>&lt;bytecode: 0x0000023a3f9e4838&gt;
+<a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>&lt;environment: namespace:stats&gt;
+</code></pre></div>
+</blockquote>
+</div>
+<p>In this case, use a combination of <code>methods()</code> and <code>getAnywhere()</code> to find the source code.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="nf">methods</span><span class="p">(</span><span class="s">&quot;anova&quot;</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>[1] anova.glm*     anova.glmlist* anova.lm*      anova.lmlist*  anova.loess*   anova.mlm*     anova.mlmlist*
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>[8] anova.nls*    
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>see &#39;?methods&#39; for accessing help and source code
+</code></pre></div>
+Pick one of the outputs as the input for <code>getAnywhere()</code>.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="nf">getAnywhere</span><span class="p">(</span><span class="s">&quot;anova.lm&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>A single object matching ‘anova.lm’ was found
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>It was found in the following places
+<a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a>  registered S3 method for anova from namespace stats
+<a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a>  namespace:stats
+<a id="__codelineno-56-5" name="__codelineno-56-5" href="#__codelineno-56-5"></a>with value
+<a id="__codelineno-56-6" name="__codelineno-56-6" href="#__codelineno-56-6"></a>
+<a id="__codelineno-56-7" name="__codelineno-56-7" href="#__codelineno-56-7"></a>function (object, ...) 
+<a id="__codelineno-56-8" name="__codelineno-56-8" href="#__codelineno-56-8"></a>{
+<a id="__codelineno-56-9" name="__codelineno-56-9" href="#__codelineno-56-9"></a>    if (length(list(object, ...)) &gt; 1L) 
+<a id="__codelineno-56-10" name="__codelineno-56-10" href="#__codelineno-56-10"></a>        return(anova.lmlist(object, ...))
+<a id="__codelineno-56-11" name="__codelineno-56-11" href="#__codelineno-56-11"></a>    if (!inherits(object, &quot;lm&quot;)) 
+<a id="__codelineno-56-12" name="__codelineno-56-12" href="#__codelineno-56-12"></a>        warning(&quot;calling anova.lm(&lt;fake-lm-object&gt;) ...&quot;)
+<a id="__codelineno-56-13" name="__codelineno-56-13" href="#__codelineno-56-13"></a>    w &lt;- object$weights
+<a id="__codelineno-56-14" name="__codelineno-56-14" href="#__codelineno-56-14"></a>    ssr &lt;- sum(if (is.null(w)) object$residuals^2 else w * object$residuals^2)
+<a id="__codelineno-56-15" name="__codelineno-56-15" href="#__codelineno-56-15"></a>    mss &lt;- sum(if (is.null(w)) object$fitted.values^2 else w * 
+<a id="__codelineno-56-16" name="__codelineno-56-16" href="#__codelineno-56-16"></a>        object$fitted.values^2)
+<a id="__codelineno-56-17" name="__codelineno-56-17" href="#__codelineno-56-17"></a>    if (ssr &lt; 1e-10 * mss) 
+<a id="__codelineno-56-18" name="__codelineno-56-18" href="#__codelineno-56-18"></a>        warning(&quot;ANOVA F-tests on an essentially perfect fit are unreliable&quot;)
+<a id="__codelineno-56-19" name="__codelineno-56-19" href="#__codelineno-56-19"></a>    dfr &lt;- df.residual(object)
+<a id="__codelineno-56-20" name="__codelineno-56-20" href="#__codelineno-56-20"></a>    p &lt;- object$rank
+<a id="__codelineno-56-21" name="__codelineno-56-21" href="#__codelineno-56-21"></a>    if (p &gt; 0L) {
+<a id="__codelineno-56-22" name="__codelineno-56-22" href="#__codelineno-56-22"></a>        p1 &lt;- 1L:p
+<a id="__codelineno-56-23" name="__codelineno-56-23" href="#__codelineno-56-23"></a>        comp &lt;- object$effects[p1]
+<a id="__codelineno-56-24" name="__codelineno-56-24" href="#__codelineno-56-24"></a>        asgn &lt;- object$assign[qr.lm(object)$pivot][p1]
+<a id="__codelineno-56-25" name="__codelineno-56-25" href="#__codelineno-56-25"></a>        nmeffects &lt;- c(&quot;(Intercept)&quot;, attr(object$terms, &quot;term.labels&quot;))
+<a id="__codelineno-56-26" name="__codelineno-56-26" href="#__codelineno-56-26"></a>        tlabels &lt;- nmeffects[1 + unique(asgn)]
+<a id="__codelineno-56-27" name="__codelineno-56-27" href="#__codelineno-56-27"></a>        ss &lt;- c(vapply(split(comp^2, asgn), sum, 1), ssr)
+<a id="__codelineno-56-28" name="__codelineno-56-28" href="#__codelineno-56-28"></a>        df &lt;- c(lengths(split(asgn, asgn)), dfr)
+<a id="__codelineno-56-29" name="__codelineno-56-29" href="#__codelineno-56-29"></a>    }
+<a id="__codelineno-56-30" name="__codelineno-56-30" href="#__codelineno-56-30"></a>    else {
+<a id="__codelineno-56-31" name="__codelineno-56-31" href="#__codelineno-56-31"></a>        ss &lt;- ssr
+<a id="__codelineno-56-32" name="__codelineno-56-32" href="#__codelineno-56-32"></a>        df &lt;- dfr
+<a id="__codelineno-56-33" name="__codelineno-56-33" href="#__codelineno-56-33"></a>        tlabels &lt;- character()
+<a id="__codelineno-56-34" name="__codelineno-56-34" href="#__codelineno-56-34"></a>    }
+<a id="__codelineno-56-35" name="__codelineno-56-35" href="#__codelineno-56-35"></a>    ms &lt;- ss/df
+<a id="__codelineno-56-36" name="__codelineno-56-36" href="#__codelineno-56-36"></a>    f &lt;- ms/(ssr/dfr)
+<a id="__codelineno-56-37" name="__codelineno-56-37" href="#__codelineno-56-37"></a>    P &lt;- pf(f, df, dfr, lower.tail = FALSE)
+<a id="__codelineno-56-38" name="__codelineno-56-38" href="#__codelineno-56-38"></a>    table &lt;- data.frame(df, ss, ms, f, P)
+<a id="__codelineno-56-39" name="__codelineno-56-39" href="#__codelineno-56-39"></a>    table[length(P), 4:5] &lt;- NA
+<a id="__codelineno-56-40" name="__codelineno-56-40" href="#__codelineno-56-40"></a>    dimnames(table) &lt;- list(c(tlabels, &quot;Residuals&quot;), c(&quot;Df&quot;, 
+<a id="__codelineno-56-41" name="__codelineno-56-41" href="#__codelineno-56-41"></a>        &quot;Sum Sq&quot;, &quot;Mean Sq&quot;, &quot;F value&quot;, &quot;Pr(&gt;F)&quot;))
+<a id="__codelineno-56-42" name="__codelineno-56-42" href="#__codelineno-56-42"></a>    if (attr(object$terms, &quot;intercept&quot;)) 
+<a id="__codelineno-56-43" name="__codelineno-56-43" href="#__codelineno-56-43"></a>        table &lt;- table[-1, ]
+<a id="__codelineno-56-44" name="__codelineno-56-44" href="#__codelineno-56-44"></a>    structure(table, heading = c(&quot;Analysis of Variance Table\n&quot;, 
+<a id="__codelineno-56-45" name="__codelineno-56-45" href="#__codelineno-56-45"></a>        paste(&quot;Response:&quot;, deparse(formula(object)[[2L]]))), 
+<a id="__codelineno-56-46" name="__codelineno-56-46" href="#__codelineno-56-46"></a>        class = c(&quot;anova&quot;, &quot;data.frame&quot;))
+<a id="__codelineno-56-47" name="__codelineno-56-47" href="#__codelineno-56-47"></a>}
+<a id="__codelineno-56-48" name="__codelineno-56-48" href="#__codelineno-56-48"></a>&lt;bytecode: 0x0000025be02abf58&gt;
+<a id="__codelineno-56-49" name="__codelineno-56-49" href="#__codelineno-56-49"></a>&lt;environment: namespace:stats&gt;
+</code></pre></div></p>
+</blockquote>
+</div>
+<p>The output tells us that there is a function called <code>anova.lm</code> within the package <code>stats</code> with the function as defined in the body. </p>
+<details class="tip">
+<summary>Why the different options for <code>anova()</code>?</summary>
+<p>Some functions can produce different outputs depending on input type (or class). We used <code>anova()</code> as an example as the Analysis of Variance can be performed on the outputs of different models: linear, generalised linear, compare multiple models, etc (read the help page for <code>lm()</code> and you will find that there is a statement under the <strong>Value</strong> section: <code>lm returns an object of class "lm" or for multivariate (‘multiple’) responses of class c("mlm", "lm").</code>). However, different classes of models require different calculation to perform the same kind of analysis. Therefore, instead of storing multiple dizzying <code>if...else</code> statements (the body of the function is sufficiently voluminous!), the different functions are stored as <code>methods</code> for the different <code>class</code>. This means that whenever we call <code>anova()</code> with an input that was generated using a <code>glm()</code>, it will detect that the input carries the <code>class</code> of <code>glm</code> and dispatch (read: use) the appropriate <code>method</code> to handle it.</p>
+</details>
+<p><strong>Write according to needs</strong></p>
+<p>We strive to write functions to be as predictable and elegant as possible. However, this is only a guide. Depending on our needs, the syntax of our functions can and should change. If we are at the stage of exploratory data analysis, we should be coding for flexibility. At this early stage, if things do fail, it is not a dependency issue and we can troubleshoot as needed. Furthermore, if we are testing code on smaller data sets, we do not need to be as mindful of being computationally efficient. However, as we get ready to scale our analyses workflows that have input-output dependencies (i.e., production level code), we need to change our priorities. Here, the priorities should be code safety (predictable In/Oout, no code running <em>ad infinitum</em>, redundancies in checking I/O,), efficiency (i.e., use efficient and benchmarked algorithms/functions/packages, avoid code that produced side effects), ease of troubleshooting (i.e., use modular abstractions, informative error and warning messages), and readability (i.e., commented code, reduce shorthands if possible).</p>
+<p><strong>Break them!</strong></p>
+<p>There is no better way to know what our functions are doing than by purposefully breaking them. What would happen if we provided a nonsense input? Will it produce a valid output? Will it error out? In addition, stress testing functions (especially complex ones) is helpful. Are there portions of the code that is inefficient/stalling? How much data is too much data? When writing multiple functions (some of which might be dependent on each other), this can help us to identify weaknesses and improper use.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../2.string_manipulation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: String manipulation" rel="prev">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                String manipulation
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../4.iterations/" class="md-footer__link md-footer__link--next" aria-label="Next: Iterations" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Iterations
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Intermediate-R workshop material is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
