@@ -13,8 +13,8 @@
 
 !!! bookmark "The topics we will cover here are:"
 
-    [1. Manipulating strings](./2.string_manipulation.md)<br>
-    [2. Managing and manipulating relational data](./1.relational_data.md)<br>
+    [1. Manipulating strings](./1.string_manipulation.md)<br>
+    [2. Managing and manipulating relational data](./2.relational_data.md)<br>
     [3. Writing functions](./3.function_conditions.md)<br>
     [4. Using iterations](./4.iterations.md)<br>
     [5. Understanding data structures](./5.data_structures.md)<br>
