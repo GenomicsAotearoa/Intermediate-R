@@ -10,22 +10,28 @@
         <meta name="author" content="Genomics Aotearoa">
       
       
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Intermediate-R/0.prep/">
       
       
+        <link rel="prev" href="..">
       
-      <link rel="icon" href="/Intermediate-R/./theme_figures/nesi_ga.png">
+      
+        <link rel="next" href="../1.string_manipulation/">
+      
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
     
     
       
-        <title>Intermediate R</title>
+        <title>An introduction to the data - Intermediate R</title>
       
     
     
-      <link rel="stylesheet" href="/Intermediate-R/assets/stylesheets/main.3cba04c6.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
       
         
-        <link rel="stylesheet" href="/Intermediate-R/assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -44,16 +50,25 @@
       
     
     
-      <link rel="stylesheet" href="/Intermediate-R/stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("/Intermediate-R/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -70,6 +85,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#an-introduction-to-the-data" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -89,9 +109,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/Intermediate-R/." title="Intermediate R" class="md-header__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+    <a href=".." title="Intermediate R" class="md-header__button md-logo" aria-label="Intermediate R" data-md-component="logo">
       
-  <img src="/Intermediate-R/./theme_figures/nesi_ga.png" alt="logo">
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -108,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              An introduction to the data
             
           </span>
         </div>
@@ -231,9 +251,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/Intermediate-R/." title="Intermediate R" class="md-nav__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+    <a href=".." title="Intermediate R" class="md-nav__button md-logo" aria-label="Intermediate R" data-md-component="logo">
       
-  <img src="/Intermediate-R/./theme_figures/nesi_ga.png" alt="logo">
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
 
     </a>
     Intermediate R
@@ -260,7 +280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Intermediate-R/." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -277,10 +297,30 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/Intermediate-R/0.prep/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    An introduction to the data
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -289,6 +329,35 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#load-packages-and-import-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load packages and import data
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -300,7 +369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Intermediate-R/1.string_manipulation/" class="md-nav__link">
+      <a href="../1.string_manipulation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -320,7 +389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Intermediate-R/2.relational_data/" class="md-nav__link">
+      <a href="../2.relational_data/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -340,7 +409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Intermediate-R/3.function_conditions/" class="md-nav__link">
+      <a href="../3.function_conditions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -360,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Intermediate-R/4.iterations/" class="md-nav__link">
+      <a href="../4.iterations/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -380,7 +449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Intermediate-R/5.data_structures/" class="md-nav__link">
+      <a href="../5.data_structures/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -442,7 +511,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Intermediate-R/Supplementary/s1.seq_prep/" class="md-nav__link">
+      <a href="../Supplementary/s1.seq_prep/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -463,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Intermediate-R/Supplementary/s2.dat_prep/" class="md-nav__link">
+      <a href="../Supplementary/s2.dat_prep/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -501,6 +570,25 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#load-packages-and-import-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load packages and import data
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -512,8 +600,61 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+  
+  
+
+
+<h1 id="an-introduction-to-the-data">An introduction to the data<a class="headerlink" href="#an-introduction-to-the-data" title="Permanent link">&para;</a></h1>
+<p>The data that we will be working with today came from sequences generated for this <a href="https://doi.org/10.1111/1462-2920.15550">study</a>. Our data is a subset of the sequence data reanalysed using a popular amplicon sequence processing pipeline QIIME2. You can explore how this data was generated in the <a href="../Supplementary/s1.seq_prep/">supplementary materials</a>.</p>
+<p>This data consists of 21 sediment samples taken from the Waiwera Estuary (North of Auckland). It was part of a study that looked at how prokaryotic communities and their nitrogen cycling fractions changed along a gradient of mud contents. Alongside sequence data, environmental variables such as mud content (percentage dry weight of clays and silt) and various chemical data such as carbon, nitrogen, sulfur and phosphorus were also measured.</p>
+<p>This dataset follows a typical microbial ecology study structure, and has three distinct data files:</p>
+<ul>
+<li><code>asv</code>: a count of organisms (here, ASV or amplicon sequence variants) per sample</li>
+<li><code>tax</code>: describes the taxonomic lineage of ASVs</li>
+<li><code>env</code>: sample metadata describing various non-biological measurements obtained from the samples</li>
+</ul>
+<p>The data set, and any inference that is generated from it, is not our primary interest today. Here, it is used as an example to illustrate the functionality of the concepts in the lessons and as a convenient source of data.</p>
+<h2 id="load-packages-and-import-data">Load packages and import data<a class="headerlink" href="#load-packages-and-import-data" title="Permanent link">&para;</a></h2>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">vegan</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="nf">library</span><span class="p">(</span><span class="n">stringr</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="nf">library</span><span class="p">(</span><span class="n">purrr</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyr</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="nf">library</span><span class="p">(</span><span class="n">tibble</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="n">asv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;https://raw.githubusercontent.com/GenomicsAotearoa/Intermediate-R/main/tables/asv_table.tsv&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="n">env</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;https://raw.githubusercontent.com/GenomicsAotearoa/Intermediate-R/main/tables/env_table.tsv&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="n">tax</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.delim</span><span class="p">(</span><span class="s">&quot;https://raw.githubusercontent.com/GenomicsAotearoa/Intermediate-R/main/tables/taxonomy.tsv&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -531,6 +672,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../1.string_manipulation/" class="md-footer__link md-footer__link--next" aria-label="Next: String manipulation">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                String manipulation
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -559,17 +738,19 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "/Intermediate-R/", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "/Intermediate-R/assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/Intermediate-R/assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
-        <script src="/Intermediate-R/javascripts/mathjax.js"></script>
+        <script src="../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
-  </body>
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>
