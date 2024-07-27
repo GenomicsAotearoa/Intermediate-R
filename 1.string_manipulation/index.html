@@ -1,0 +1,1336 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Intermediate-R/1.string_manipulation/">
+      
+      
+        <link rel="prev" href="../0.prep/">
+      
+      
+        <link rel="next" href="../2.relational_data/">
+      
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+    
+    
+      
+        <title>String manipulation - Intermediate R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#string-manipulation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Custom Banner -->
+<div class="banner">
+    <p style="color:rgb(250, 246, 246); display:inline;font-size: 160%;">This repository is in the early stages of development (Alpha Version)</p>
+</div>
+
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Intermediate R" class="md-header__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Intermediate R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              String manipulation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Intermediate-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Intermediate-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Intermediate R" class="md-nav__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Intermediate R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Intermediate-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Intermediate-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.prep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    An introduction to the data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    String manipulation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    String manipulation
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cant-i-change-it-in-excel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Can't I change it in Excel?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regular-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regular expressions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrangling-taxonomy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wrangling taxonomy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wrangling taxonomy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-microbial-taxonomy-from-dna-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obtaining microbial taxonomy from DNA sequences
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inspecting-taxonomy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspecting taxonomy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detecting-and-extracting-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detecting and extracting patterns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.relational_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Relational data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.function_conditions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Functions and conditional statements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.iterations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Iterations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.data_structures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data structures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Supplementary
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Supplementary
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/s1.seq_prep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sequence processing for Intermediate R workshop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/s2.dat_prep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data preparation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cant-i-change-it-in-excel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Can't I change it in Excel?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regular-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regular expressions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrangling-taxonomy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wrangling taxonomy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wrangling taxonomy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-microbial-taxonomy-from-dna-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obtaining microbial taxonomy from DNA sequences
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inspecting-taxonomy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspecting taxonomy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detecting-and-extracting-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detecting and extracting patterns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="string-manipulation">String manipulation<a class="headerlink" href="#string-manipulation" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Learning objectives</p>
+<ul>
+<li>Construct regular expressions</li>
+<li>Find and count patterns in strings</li>
+<li>Replace and subset (sub-)strings</li>
+<li>Concatenate strings</li>
+</ul>
+</div>
+<h2 id="cant-i-change-it-in-excel">Can't I change it in Excel?<a class="headerlink" href="#cant-i-change-it-in-excel" title="Permanent link">&para;</a></h2>
+<p>Sure, go ahead for small datasets and <em>ad hoc</em> analyses. However, can we be confident of being consistent for large datasets? Did we miss a few cells? Did we introduce extra punctuation? <a href="https://www.bbc.com/news/technology-54423988">Can Excel handle the amount of data?</a> A good understanding of string manipulation can be useful for data cleaning (as mentioned before) and come in handy for many situations. For example:</p>
+<ul>
+<li><a href="https://stackoverflow.com/a/23760100">Extracting statistics</a> and <a href="https://stackoverflow.com/a/63553243">formatting them for plots</a></li>
+<li><a href="https://stackoverflow.com/a/71145164">Using sub-strings as table keys</a></li>
+<li><a href="https://stackoverflow.com/a/38021237">Pattern extraction</a></li>
+<li><a href="https://stackoverflow.com/a/65152288">Manipulating URLs</a></li>
+</ul>
+<p>In this lesson, we will learn how to use functions from the <code>stringr</code> package to manipulate and extract strings from taxonomic lineages in the <code>tax</code> data frame.</p>
+<div class="admonition note">
+<p class="admonition-title">Biological strings</p>
+<p>At the fundamental level, all biological sequences (i.e., DNA, RNA, and amino acid) are strings. While the functions covered here can handle sequences, more is needed to extract biological relevance from them. When we think about biological sequences such as nucleic or amino acid sequences, we are interested in the relationships within and between strings (e.g., translations, alignments, <em>k</em>-mers, secondary structures, etc.). R has some packages that can handle such operations (e.g., <code>seqinr</code>, <code>Biostrings</code>, <code>DADA2</code>; see other packages in the Bioconductor repository). For those analyses, other programming languages offer better support and computational efficiencies.</p>
+</div>
+<h2 id="regular-expressions">Regular expressions<a class="headerlink" href="#regular-expressions" title="Permanent link">&para;</a></h2>
+<p>A common thread (pun intended) in all string-based operations is regular expression (AKA <em>regex</em> or <em>regexp</em>). You probably have some experience with it if you have used <strong><code>sed</code></strong> or <strong><code>awk</code></strong> in <strong><code>bash</code></strong>. Formally, regular expressions are characters that represent finite sets of characters and the operations that can be performed on them. It is helpful to think of them as patterns.</p>
+<p>Consider this example:</p>
+<p><code>[0-9]+.*_(log|chk)\\.txt</code></p>
+<p>The pattern is read from left to right. Let's break it down:</p>
+<ul>
+<li><code>[0-9]</code> is a set of numbers from 0 to 9. The square brackets (<code>[]</code>) are meta-characters that allow matches to ranges (as in this example) or individual characters.</li>
+<li><code>+</code> indicates that the pattern preceding it should occur <span class="arithmatex">\(\ge\)</span> 1 time(s)</li>
+<li><code>.*</code> means to match anything <code>.</code> <span class="arithmatex">\(\ge\)</span> 0 times <code>*</code></li>
+<li><code>_</code> is just an underscore</li>
+<li><code>(log|chk)</code> means to match either <code>log</code> or <code>chk</code> as a word. The <code>|</code> functions as an OR operator and the round brackets <code>()</code> indicate that the patterns inside them must be interpreted as a word.</li>
+<li><code>\\.</code> matches a literal dot <code>.</code> where the double backslashes <code>\\</code> mean to "escape" the pattern following it</li>
+</ul>
+<p>Based on the pattern/expression, we can safely assume that it should match a text file with a date or process number as a prefix, followed by some description and the output type. For example the expression would find <code>12345_some_log.txt</code> but would not find <code>file.txt</code> because it does not start with any digits.</p>
+<p>In most cases, learning to construct regular expressions is based on trial and error and many Google searches. To soften the learning curve, the <code>stringr</code> team compiled a helpful <a href="https://rstudio.github.io/cheatsheets/strings.pdf">cheat sheet</a> we can reference.</p>
+<h2 id="wrangling-taxonomy">Wrangling taxonomy<a class="headerlink" href="#wrangling-taxonomy" title="Permanent link">&para;</a></h2>
+<h3 id="obtaining-microbial-taxonomy-from-dna-sequences">Obtaining microbial taxonomy from DNA sequences<a class="headerlink" href="#obtaining-microbial-taxonomy-from-dna-sequences" title="Permanent link">&para;</a></h3>
+<p>A major aim of microbial ecology is the identification of populations across an environment. We do that by sequencing the amplicon of the 16S small subunit ribosomal RNA gene, the standard taxonomic marker. Then, sequences are clustered based on sequence similarity (to reduce redundancy and improve computational efficiency) and then assigned a taxonomic lineage using a classifier that compares our sequence data with those in a reference database (popular options are SILVA and Greengenes 2). Depending on how similar and well-represented the sampled sequences are to those in the database, our sequences will be assigned names and ranks ranging from domain to species.</p>
+<h3 id="inspecting-taxonomy">Inspecting taxonomy<a class="headerlink" href="#inspecting-taxonomy" title="Permanent link">&para;</a></h3>
+<p>Let us begin by inspecting what our taxonomy looks like.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nf">head</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nf">tail</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<details class="note">
+<summary>What's in a taxonomy</summary>
+<ul>
+<li>A semicolon <code>;</code> separates the ranks</li>
+<li>Ranks are given a single-letter prefix followed by <code>__</code></li>
+<li>Ranks are unevenly assigned. Some are identified down to species level, while only phylum is known in others.</li>
+</ul>
+</details>
+<h3 id="detecting-and-extracting-patterns">Detecting and extracting patterns<a class="headerlink" href="#detecting-and-extracting-patterns" title="Permanent link">&para;</a></h3>
+<p>Some initial questions when inspecting the above taxonomy are:</p>
+<ol>
+<li>How well characterised are our sequences?</li>
+<li>Did we manage to retrieve biologically important taxa?</li>
+</ol>
+<p>We can answer those questions using pattern detection.</p>
+<p><strong>1. How well characterised are our sequences?</strong></p>
+<p>Let's apply a heuristic and answer a simpler question: How many sequences were classified at each taxonomic rank (species, genus, family, order, class, phylum)? If there are large numbers of sequences that were only identified at higher taxonomic ranks, the system we are studying may harbour lots of novel microbial populations.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nf">str_detect</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;s__&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="nf">sum</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>In the code above, we used the function <code>str_detect()</code> to find the species prefix <code>s__</code> in the <code>Taxon</code> column. The output of <code>str_detect()</code> is a logical/boolean vector. Thus, we use <code>sum()</code> to count the number of <code>TRUE</code> statements.</p>
+<div class="admonition tip">
+<p class="admonition-title"><code>stringr</code> syntax</p>
+<p>Most functions in the <code>stringr</code> package accept arguments in this order:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>str_&lt;name&gt;(&lt;vector&gt;, &lt;pattern&gt;, ...)
+</code></pre></div>
+</div>
+<details>
+<summary>Question</summary>
+<p>What is the proportions of ASVs that have been assigned a lineage with rank of genus and phylum?</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nf">sum</span><span class="p">(</span><span class="nf">str_detect</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;g__&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nf">sum</span><span class="p">(</span><span class="nf">str_detect</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;p__&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>It looks like our sequences are well characterised from the rank of genus and up.</p>
+</details>
+</details>
+<p><strong>2. Did we manage to retrieve biologically important taxa?</strong></p>
+<p>An ecosystem service that estuaries provide is nitrogen removal (via denitrification). These are usually performed by prokaryotes spanning the Bacterial and Archaeal domains. Their metabolic activity ensures that excess nitrogen is removed in gaseous form and thus prevents eutrophication. The starting substrate for denitrification is nitrate. Thus, reduced nitrogen must first be oxidised via nitrification. Two communities are involved in the conversion from reduced to oxidised nitrogen: </p>
+<ul>
+<li>Ammonia oxidisers (usually has the prefix "Nitroso" in their taxonomy) </li>
+<li>Nitrite oxidisers (usually has the prefix "Nitro" in their taxonomy)</li>
+</ul>
+<p>Lets find out if we managed to sample any of them.</p>
+<p>We will first need to subset the vector to retain those that have "Nitro" in their names. We will do this using <code>str_subset()</code>.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">nitro</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">str_subset</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;__Nitro&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="nf">length</span><span class="p">(</span><span class="n">nitro</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>We will also take a finer look at their lineages so we can get a better idea of which community they belong to.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nf">str_replace</span><span class="p">(</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">  </span><span class="n">nitro</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">  </span><span class="s">&quot;d__([^;]+);.*(Nitro[a-z]+).*&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">  </span><span class="s">&quot;\\1, \\2&quot;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="nf">unique</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>The code above is quite complicated. Let's break it down.</p>
+<ul>
+<li>The function <code>str_replace()</code> is a flexible function that helps us extract and replace substrings depending on how the regex was constructed.</li>
+<li><code>d__([^;]+);</code> looks for the sub-string <code>d__</code> followed by anything that is not a semicolon <code>[^;]+</code> more than once. The regex <code>[^&lt;some_pattern&gt;]</code> means to match anything that is NOT <code>&lt;some_pattern&gt;</code>. The round brackets <code>()</code> "captures" or "saves" the matches within it for replacement. This is followed by a semicolon (our rank separator) which is not captured but is present in the vector.</li>
+<li><code>.*(Nitro[a-z]+).*</code> As we do not know at which rank the first instance of "Nitro" will appear, the regex <code>.*</code> will match anything <code>.</code> more than 0 times <code>*</code>. At the first "Nitro" it encounters, we will also look for any subsequent letters in small case ranging from 'a' to 'z' as represented by <code>Nitro[a-z]+</code>. Anything after that can be matched but is not captured.</li>
+<li>The last argument in the function specifies how the replacement string should look like. <code>\\1, \\2</code> replaces the output with the two patterns we captured separated by a comma and a space. Patterns are captured sequentially and must be referenced in the order which they appear in the original string. Therefore, if we wanted the "Nitro" part to be in front, we would reverse the order to <code>\\2, \\1</code>.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">In case of failure...</p>
+<p>If <code>str_replace()</code> cannot find matches for the given pattern, it will return the original string. This is a safety mechanism. We can choose to filter it out later if necessary.</p>
+<p>Run the following and see for yourself:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="nf">str_replace</span><span class="p">(</span><span class="n">nitro</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.*p__([^;]+).*g__([^;]+).*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\\1, \\2&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">  </span><span class="nf">unique</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Other useful functions</p>
+<p>The functions <code>str_detect()</code> and <code>str_replace()</code> were the focus of this lesson for their flexible application and ease of visualising how regex and pattern capture works. Over the years, I have also found the functions below to be useful</p>
+<p><strong>Concatenation: <code>str_c()</code>, <code>paste()</code></strong></p>
+<p>Concatenates any number of string vectors per element (via the <code>sep =</code> argument) and/or across elements (via the <code>collapse =</code> argument)</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nf">str_c</span><span class="p">(</span><span class="n">fruit</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">],</span><span class="w"> </span><span class="n">words</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">],</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nf">str_c</span><span class="p">(</span><span class="n">fruit</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">],</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;||&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p><strong>Interpolation: <code>str_glue()</code></strong></p>
+<p>Evaluates expressions within <code>{}</code>, and then interpolate and concatenate them as strings. Very useful for programmatic use.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">prop_species</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="nf">str_detect</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;s__&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="nf">print</span><span class="p">(</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">  </span><span class="nf">str_glue</span><span class="p">(</span><span class="s">&quot;QIIME2 classified {prop_species} of ASVs down to species level.&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p><strong>Separation by delimiter: <code>str_split()</code></strong></p>
+<p>Splits a string based on a provided delimiter and returns a character vector. If a character vector of length &gt; 1 is provided as input, it will return a list of character vectors with each list element split based on the delimiter.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nf">str_split</span><span class="p">(</span><span class="n">nitro</span><span class="p">,</span><span class="w"> </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;; &quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p><strong>Whitespace trimming: <code>str_trim()</code></strong></p>
+<p>Removes whitespace at each end of the string. Very useful during data cleaning to make sure there are no trailing whitespaces that prevents downstream analyses.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nf">str_trim</span><span class="p">(</span><span class="s">&quot;   this has blanks   &quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>I highly recommend playing with the functions above to get a feel for how they work. <code>stringr</code> has some built-in character vectors that you can use on-the-fly as test cases: <code>fruit</code>, <code>words</code>, and <code>sentences</code>.</p>
+</div>
+<!--
+## Can't I change it in Excel? And other reasons to learn string manipulation.
+
+You receive 10 files from someone. Five of the files all share the same naming convention (e.g., all column names are in full capitals). The other five files have a mix: some column names are lower case, some have the first letter capitalised, and some have a mix of full, first, and lower. You want all your files to have the same naming convention, so you know you'll want to change the column names for those five files. It's not many columns per file, and there are *only* five of them... Should you change those names in Excel?
+
+Short answer: sure; long answer: *it depends*. If the data is small enough, Excel (or any spreadsheet software) is sufficient to fulfil your exploratory data analysis needs. However, for larger data sets, can you ensure that you have performed adequate, consistent, and robust data cleaning before analyses? Furthermore, if you are importing tabular data into R, you likely intend to perform statistical/numerical analyses and create a near-publication-level figure. Are your categorical variables consistent in their spelling? Did you check whether your European collaborator used a dot instead of a comma to delineate decimal points? Will you extract every statistic and string them together as your axis title for a 6-panel figure *by hand*? This is where understanding how to manipulate strings *en masse* is helpful. 
+
+String manipulation is a fundamental skill in every programming language, and every language has its perks and quirks in handling strings. The common thread (pun intended) that ties them together is regular expressions which form the basis for patterns and their related operations. In bash, you may have used them to find or substitute parts of a string using `grep` or `sed`/`awk`. Here, we will cover some regular expressions as part of the examples and illustrate how they are interpreted in R. However, the topic of regular expression itself is vast. Please refer to the second page of the [stringr cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf) for comprehensive coverage of most of the regex in R.
+
+!!! note "Biological strings"
+
+    At the fundamental level, all biological sequences are strings. They can be handled with the functions covered here, but more is needed to extract biological relevance from them. When we think about biological sequences such as nucleic or amino acid sequences, we are interested in the relationships within and between strings (translations, alignments, *k*-mers, secondary structures, etc.). R has some packages that can handle such operations (e.g., seqinr, Biostrings, DADA2, see other packages in the Bioconductor repository). However, if these analyses are your primary interest, I suggest you look into other programming languages due to the inefficiencies of R in this regard.
+
+## A brief detour
+
+This lesson will briefly step away from *exploratory data analyses* and explore the realm of string-based methods in R via the **stringr** package. For this lesson, we will work with the following biological context: 
+
+> A characteristic of estuarine sediment (where this data originated from) is its active nitrogen-cycling members of the prokaryotic community. For those participating in ammonia or nitrite oxidation, their lineages often have the prefix "Nitroso-" for putative ammonia oxidisers and "Nitro-" for putative nitrite oxidisers. However, specific lineages within these groups (assigned at varying taxonomic levels) bear the prefix but do not harbour the necessary genetic machinery for this function.
+
+The above forms the boundary around the data which we will use for this lesson. Here, we will explore a group of functions at an abstract level. We aim to provide awareness to a set of tools to manipulate (i.e., search, subset, substitute) strings. Alongside that, we want you to be comfortable in constructing regular expressions. This can be daunting if you are new to them. However, we like you to keep in mind that it is both an engineering problem (maximising efficiency with pattern captures) and an art form (being creative and playful to adapt to situations). We stress that there are multiple ways (even within the same framework) to obtain similar results. Some functions are Swiss-army knives when paired with the right regex patterns.
+
+## Subset a character vector
+
+Lets prepare a character vector for us to work on.
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">nitros</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">str_subset</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Nitro&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nf">head</span><span class="p">(</span><span class="n">nitros</span><span class="p">)</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[1] &quot;d__Bacteria; p__Nitrospirota; c__Nitrospiria; o__Nitrospirales; f__Nitrospiraceae; g__Nitrospira; s__uncultured_Cytophaga&quot;            
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>[2] &quot;d__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Nitrosococcales; f__Nitrosococcaceae; g__SZB85; s__uncultured_bacterium&quot;   
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>[3] &quot;d__Archaea; p__Crenarchaeota; c__Nitrososphaeria; o__Nitrosopumilales; f__Nitrosopumilaceae; g__Candidatus_Nitrosopumilus&quot;            
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>[4] &quot;d__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Nitrosococcales; f__Nitrosococcaceae; g__SZB85; s__uncultured_bacterium&quot;   
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>[5] &quot;d__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Nitrosococcales; f__Nitrosococcaceae; g__SZB85; s__uncultured_bacterium&quot;   
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>[6] &quot;d__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Nitrosococcales; f__Nitrosococcaceae; g__FS142-36B-02; s__uncultured_gamma&quot;
+</code></pre></div>
+
+This block of code returns a new character object `nitros`, which is made up of every element (line) where the pattern `"Nitro"` occurrs. In this case the pattern is a sub-string - any string that contains "Nitro" i.e., both "Nitro" and "Nitros" will be captured. 
+
+
+??? tip "Equivalent code"
+
+    === "Vector subset (tidyverse)"
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">[</span><span class="nf">str_detect</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Nitro&quot;</span><span class="p">)]</span>
+</code></pre></div>
+
+    === "Pattern matching (base R)"
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nf">grep</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Nitro&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</code></pre></div>
+
+!!! note "Anatomy of pattern-based string functions in **stringr**"
+
+    All stringr functions start with the string to operate on as the first argument. For functions that work with regex, the second argument is always the pattern. For functions that perform replacements, the pattern used for replacement is the third argument. For functions that perform searches, the third argument is usually `negate = <Boolean>` which when `TRUE` does an inverse search of the pattern along the string.
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>str_*(&lt;string&gt;, &lt;pattern&gt;, &lt;replacement&gt;|&lt;negate&gt;)
+</code></pre></div>
+
+## Extract sub-string
+
+What lineages do our ammonia and nitrite oxidisers come from? We can inspect their assignment at various taxonomic levels to find out.
+
+!!! r-project "code"    
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Extract domain-level assignments</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nf">str_extract</span><span class="p">(</span><span class="n">nitros</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;d__[^;]+&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="nf">unique</span><span class="p">()</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c1"># Extract phylum-level assignments</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="nf">str_replace</span><span class="p">(</span><span class="n">nitros</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.+p__([^;]+);.+&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Phylum: \\1&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">  </span><span class="nf">unique</span><span class="p">()</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>[1] &quot;d__Bacteria&quot; &quot;d__Archaea&quot;
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>[1] &quot;Phylum: Nitrospirota&quot;   &quot;Phylum: Proteobacteria&quot; &quot;Phylum: Crenarchaeota&quot;  &quot;Phylum: Nitrospinota&quot;  
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>[5] &quot;Phylum: Zixibacteria&quot;  
+</code></pre></div>
+
+Here we used two different ways of getting sub-strings out of long strings. 
+
+1. `str_extract()` searches the `nitros` vector for cases of `d__` followed by anything that is NOT a ";" (`[^;]`) more than once (`+`). Note that the taxonomic levels are delineated using a semicolon. When it finds a match to a semicolon, it will stop and return the resulting sub-string. The text below illustrates the pattern matching where `+` represents "still matching" and `!` represents "not a match".
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>string:     d__Bacteria; p__Nitrospirota; c__Nitrospiria; o__Nitrospirales; f__Nitrospiraceae; g__Nitrospira; s__uncultured_Cytophaga
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>extract:    d__[^;]++++!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</code></pre></div>
+2. `str_replace` looks at everything `.+` before `p__` then captures the pattern "anything except a semicolon more than once" `[^;]+`. This captured pattern ends with a semicolon and everything else in the string *et cetera*. We replace the pattern with `Phylum: ` then the captured pattern represented in regex by `\\1` (meaning captured pattern 1). The text below illustrates the matched string, where "everything else" is represented using `*`.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>string:     d__Bacteria; p__Nitrospirota; c__Nitrospiria; o__Nitrospirales; f__Nitrospiraceae; g__Nitrospira; s__uncultured_Cytophaga
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>match:      *************p__[^;]++++++++;********************************************************************************************
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>capture:    !!!!!!!!!!!!!!!!Nitrospirota!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</code></pre></div>
+
+Lets attempt to capture more than one pattern:
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Extract phylum and genus level assignments and sort unique outputs</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nf">str_replace</span><span class="p">(</span><span class="n">nitros</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.+p__([^;]+);.+g__([^;]+).*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Phylum: \\1, Genus: \\2&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="nf">unique</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="nf">str_sort</span><span class="p">()</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a> [1] &quot;d__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Nitrococcales; f__Nitrococcaceae&quot;    
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a> [2] &quot;d__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Nitrosococcales; f__Nitrosococcaceae&quot;
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a> [3] &quot;Phylum: Crenarchaeota, Genus: Candidatus_Nitrosopelagicus&quot;                                      
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a> [4] &quot;Phylum: Crenarchaeota, Genus: Candidatus_Nitrosopumilus&quot;                                        
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a> [5] &quot;Phylum: Crenarchaeota, Genus: Nitrosopumilaceae&quot;                                                
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a> [6] &quot;Phylum: Nitrospinota, Genus: P9X2b3D02&quot;                                                         
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a> [7] &quot;Phylum: Nitrospirota, Genus: 4-29-1&quot;                                                            
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a> [8] &quot;Phylum: Nitrospirota, Genus: Nitrospira&quot;                                                        
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a> [9] &quot;Phylum: Nitrospirota, Genus: uncultured&quot;                                                        
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>[10] &quot;Phylum: Proteobacteria, Genus: 3PJM14&quot;                                                          
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>[11] &quot;Phylum: Proteobacteria, Genus: AqS1&quot;                                                            
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>[12] &quot;Phylum: Proteobacteria, Genus: Cm1-21&quot;                                                          
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>[13] &quot;Phylum: Proteobacteria, Genus: FS142-36B-02&quot;                                                    
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>[14] &quot;Phylum: Proteobacteria, Genus: IS-44&quot;                                                           
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>[15] &quot;Phylum: Proteobacteria, Genus: MSB-1D1&quot;                                                         
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>[16] &quot;Phylum: Proteobacteria, Genus: Nitrosomonas&quot;                                                    
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>[17] &quot;Phylum: Proteobacteria, Genus: SZB85&quot;                                                           
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>[18] &quot;Phylum: Zixibacteria, Genus: Zixibacteria&quot;
+</code></pre></div>
+
+Let's break a few items down:
+
+1. We are now capturing two patterns: `\\1` represents the phylum name, and `\\2` represents the genus name. The numbers represent the order of the captured pattern that occurs in the string.
+2. Some of it did not work, resulting in the entire string being printed out (the default behaviour in many of the stringr functions, better safe than sorry!)
+
+??? question "How would you fix the issue in point 2?"
+
+    Prior to `str_replace()`, add a `str_subset()` and use the genus prefix `g__` to retain all taxonomies with valid genera assignments.
+
+    !!! r-project "code"
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nf">str_subset</span><span class="p">(</span><span class="n">nitros</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;g__&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="nf">str_replace</span><span class="p">(</span><span class="s">&quot;.+p__([^;]+);.+g__([^;]+).*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Phylum: \\1, Genus: \\2&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span><span class="nf">unique</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">  </span><span class="nf">str_sort</span><span class="p">()</span>
+</code></pre></div>
+
+Notice the subtle change in the regex from `.+` to `.*` at the end of the pattern? The combination `.+` means "anything more than **once**", whereas `.*` means "anything more than **zero times**". Most of the time, either pattern will create the desired output. However, in this example, the result will look strange if `+` was used instead of `*`. Try it to see for yourself what the difference is.
+
+## Detecting and counting patterns
+
+How many of these lineages are putative ammonia oxidisers (i.e., "Nitroso-")? Lets count them:
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nf">str_detect</span><span class="p">(</span><span class="n">nitros</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Nitroso&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="nf">sum</span><span class="p">()</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>[1] 75
+</code></pre></div>
+
+If we only run the `str_detect()` part, it will return a Boolean logical vector which `sum()` uses to tally up the number of `TRUE` elements. 
+
+!!! question "How would you count the number of lineages for putative nitrite, but not ammonia, oxidisers?"
+
+    Remember that putative nitrite oxidisers carry the "Nitro-" prefix.
+
+    ??? success "Solution"
+
+        Given that the entirety of `nitros` contains sequence variants that have `"Nitro"` somewhere along it's assigned lineage, we need only count those that **do not** contain `"Nitroso"`.
+
+        !!! r-project "code"
+
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nf">str_detect</span><span class="p">(</span><span class="n">nitros</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Nitroso&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">negate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="nf">sum</span><span class="p">()</span>
+</code></pre></div>
+
+Lets ask a different question:
+
+> How often does the prefix Nitroso- occur along the taxonomic lineage?
+
+Here, we are interested in the substring frequency along each element across the vector. The difference between this and the previous question is subtle. The code below can help illuminate the distinction.
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nf">str_count</span><span class="p">(</span><span class="n">nitros</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Nitroso&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a> [1] 0 2 4 2 2 2 0 2 4 2 2 0 2 4 4 0 2 4 0 0 2 0 0 4 0 0 2 0 0 0 2 4 2 1 4 2 4 1 4 4 1 4 2 0 5 2 0 0 2 1 2 0 0 0 0
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>[56] 2 0 2 0 2 2 2 2 4 4 4 0 4 0 4 2 4 2 4 0 4 2 0 4 0 1 4 4 4 2 0 4 4 2 2 0 4 2 1 2 0 2 2 2 2 0 2 2 0 2 4 44
+</code></pre></div>
+
+To summarise:
+
+* `str_detect() %>% sum()` tallies the number of elements that contain a pattern. A Boolean vector is returned by `str_detect()`, and then `TRUE` statements are tallied by `sum()`.
+* `str_count()` tallies the number of times a pattern is observed in an element. A numeric vector is returned.
+
+## Tap tap... Is this working?
+
+How do you know if the search pattern worked? In other words, did the search pattern target the intended sub-strings? Conversely, *did it also target sub-strings we did not intend to capture*? When starting out in learning regular expressions, it is useful to visually inspect what the pattern supplied is matching to. Here, we will use `str_view()` to do "unit tests" on strings to check our patterns.
+
+In the previous section, we extracted and printed phylum-genera pairs from the `nitros` vector. Notice that there are genera with odd code-like name (e.g., P9X2b3D02, Cm1-21)? How would we construct a regex that can be used to count the number of named genera we have in `tax$Taxon`? Before exploring the logic required to construct this regex, lets create a smaller vector of unique genus assignments. It is easier to build up a regex by working on a smaller problem.
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">genera</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">str_extract</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;g__[^;]+&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="nf">unique</span><span class="p">()</span>
+</code></pre></div>
+
+Now lets work through the logic:
+
+??? question "What differentiates named genera from code-name genera?"
+
+    Named genera are words in a linguistic sense. They are also "names" where they start with an upper-case letter followed by a string of lower-case letters. Notice that there are no non-alphabet characters in them.
+
+Using our logic, we can construct this pattern `[A-Z][a-z]+` which means "any capital letter from A to Z next to any lower case letters from a to z more than once". Lets check how the pattern did:
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1"># Named genera starts with an upper-case letter, followed by multiple lower-case letters</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="nf">str_view</span><span class="p">(</span><span class="n">genera</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[A-Z][a-z]+&quot;</span><span class="p">)</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="c1"># And the tail</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="nf">str_view</span><span class="p">(</span><span class="n">genera</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[A-Z][a-z]+&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">tail</span><span class="p">()</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a> [1] │ g__&lt;Chloroplast&gt;
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a> [2] │ g__&lt;Woeseia&gt;
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a> [3] │ g__&lt;Mitochondria&gt;
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a> [4] │ g__&lt;Sva&gt;1033
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a> [7] │ g__&lt;Parahaliea&gt;
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a> [8] │ g__&lt;Actibacter&gt;
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a> [9] │ g__&lt;Lutimonas&gt;
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>[10] │ g__&lt;Robiginitalea&gt;
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>[11] │ g__&lt;Anaerosolibacter&gt;
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a>[13] │ g__&lt;Aquibacter&gt;
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a>[14] │ g__&lt;Pseudophaeobacter&gt;
+<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a>[15] │ g__&lt;Flavirhabdus&gt;
+<a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a>[16] │ g__&lt;Lutibacter&gt;
+<a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a>[17] │ g__&lt;Candidatus&gt;_&lt;Fritschea&gt;
+<a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a>[18] │ g__&lt;Sva&gt;0081_sediment_group
+<a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a>[19] │ g__&lt;Halioglobus&gt;
+<a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a>[20] │ g__&lt;Fusibacter&gt;
+<a id="__codelineno-30-18" name="__codelineno-30-18" href="#__codelineno-30-18"></a>[21] │ g__&lt;Erythrobacter&gt;
+<a id="__codelineno-30-19" name="__codelineno-30-19" href="#__codelineno-30-19"></a>[22] │ g__&lt;Limibacillus&gt;
+<a id="__codelineno-30-20" name="__codelineno-30-20" href="#__codelineno-30-20"></a>[23] │ g__&lt;Crassaminicella&gt;
+<a id="__codelineno-30-21" name="__codelineno-30-21" href="#__codelineno-30-21"></a>... and 213 more
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>[281] │ g__&lt;Gven&gt;-F17
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>[282] │ g__&lt;Gaetbulibacter&gt;
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>[283] │ g__&lt;Sneathiella&gt;
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>[285] │ g__&lt;Thermomarinilinea&gt;
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>[286] │ g__&lt;Dadabacteriales&gt;
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>[287] │ g__&lt;Colwellia&gt;
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>[288] │ g__&lt;Gemmatimonadaceae&gt;
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>[289] │ g__&lt;Bacteroidetes&gt;_vadinHA17
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>[290] │ g__&lt;Dechloromonas&gt;
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a>[291] │ g__&lt;Vicinamibacteraceae&gt;
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>[292] │ g__&lt;Desulfobulbus&gt;
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>[293] │ g__&lt;Pelagicoccus&gt;
+<a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a>[296] │ g__&lt;Pirellula&gt;
+<a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a>[297] │ g__&lt;Hyphomicrobium&gt;
+<a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a>[298] │ g__&lt;Spirochaeta&gt;_2
+<a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a>[299] │ g__[&lt;Desulfobacterium&gt;]_catecholicum_group
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>[301] │ g__&lt;Porticoccus&gt;
+<a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a>[303] │ g__&lt;Iodidimonas&gt;
+<a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a>[306] │ g__&lt;Oceanibulbus&gt;
+<a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a>[307] │ g__&lt;Carboxylicivirga&gt;
+</code></pre></div>
+
+Notice how `str_view()` differentiates matches from non-matches using different colours and envelopes them in `<match>`. This is how it can help us build the intuition for using regex. 
+
+Our pattern looks good, but there are a few unintended matches as well:
+
+* Some have numbers suffixed immediately after the name-like genera or following a `-` or `_`
+* One is encased in square brackets (`g__[Desulfobacterium]_catecholicum_group`)
+
+We will refine our pattern by incorporating the fact that named genera must end with a lower-case letter:
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nf">str_view</span><span class="p">(</span><span class="n">genera</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[A-Z][a-z]+$&quot;</span><span class="p">)</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nf">str_view</span><span class="p">(</span><span class="n">genera</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[A-Z][a-z]+$&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">tail</span><span class="p">()</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a> [1] │ g__&lt;Chloroplast&gt;
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a> [2] │ g__&lt;Woeseia&gt;
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a> [3] │ g__&lt;Mitochondria&gt;
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a> [7] │ g__&lt;Parahaliea&gt;
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a> [8] │ g__&lt;Actibacter&gt;
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a> [9] │ g__&lt;Lutimonas&gt;
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>[10] │ g__&lt;Robiginitalea&gt;
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>[11] │ g__&lt;Anaerosolibacter&gt;
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a>[13] │ g__&lt;Aquibacter&gt;
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a>[14] │ g__&lt;Pseudophaeobacter&gt;
+<a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a>[15] │ g__&lt;Flavirhabdus&gt;
+<a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a>[16] │ g__&lt;Lutibacter&gt;
+<a id="__codelineno-33-13" name="__codelineno-33-13" href="#__codelineno-33-13"></a>[17] │ g__Candidatus_&lt;Fritschea&gt;
+<a id="__codelineno-33-14" name="__codelineno-33-14" href="#__codelineno-33-14"></a>[19] │ g__&lt;Halioglobus&gt;
+<a id="__codelineno-33-15" name="__codelineno-33-15" href="#__codelineno-33-15"></a>[20] │ g__&lt;Fusibacter&gt;
+<a id="__codelineno-33-16" name="__codelineno-33-16" href="#__codelineno-33-16"></a>[21] │ g__&lt;Erythrobacter&gt;
+<a id="__codelineno-33-17" name="__codelineno-33-17" href="#__codelineno-33-17"></a>[22] │ g__&lt;Limibacillus&gt;
+<a id="__codelineno-33-18" name="__codelineno-33-18" href="#__codelineno-33-18"></a>[23] │ g__&lt;Crassaminicella&gt;
+<a id="__codelineno-33-19" name="__codelineno-33-19" href="#__codelineno-33-19"></a>[24] │ g__&lt;Ulvibacter&gt;
+<a id="__codelineno-33-20" name="__codelineno-33-20" href="#__codelineno-33-20"></a>[25] │ g__&lt;Gracilimonas&gt;
+<a id="__codelineno-33-21" name="__codelineno-33-21" href="#__codelineno-33-21"></a>... and 174 more
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>[296] │ g__&lt;Pirellula&gt;
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>[297] │ g__&lt;Hyphomicrobium&gt;
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>[301] │ g__&lt;Porticoccus&gt;
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>[303] │ g__&lt;Iodidimonas&gt;
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>[306] │ g__&lt;Oceanibulbus&gt;
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>[307] │ g__&lt;Carboxylicivirga&gt;
+</code></pre></div>
+
+That looks much better! Notice also we have managed to capture Candidatus genera because our pattern matches the proposed name. This is okay as they will be on their way to being named sometime in the future. Lets now use this to count the number of named genera overall:
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="nf">str_extract</span><span class="p">(</span><span class="n">tax</span><span class="o">$</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;g__[^;]+&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="nf">str_detect</span><span class="p">(</span><span class="s">&quot;[A-Z][a-z]+$&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">  </span><span class="nf">sum</span><span class="p">(</span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>[1] 1490
+</code></pre></div>
+
+    The `na.rm = TRUE` argument is necessary as there is an `NA` generated by the code that created `genera`. This is from lineages that did not have valid genus-level assignments.
+
+In summary, the code above extracted the genus-level assignments from the long lineage string, detected which of them were named, then counted those while ignoring `NA`s.
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../0.prep/" class="md-footer__link md-footer__link--prev" aria-label="Previous: An introduction to the data">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                An introduction to the data
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../2.relational_data/" class="md-footer__link md-footer__link--next" aria-label="Next: Relational data">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Relational data
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Intermediate-R workshop material is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
