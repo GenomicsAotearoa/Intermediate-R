@@ -1,5 +1,5 @@
 <center>
-# ![image](./figures/r-logo.png){width="300"}
+<img src="./figures/r-logo.png" alt="R logo" width="300"/>
 </center>
 
 ## Preamble
