@@ -1,0 +1,1228 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Intermediate-R/2.relational_data/">
+      
+      
+        <link rel="prev" href="../1.string_manipulation/">
+      
+      
+        <link rel="next" href="../3.function_conditions/">
+      
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Relational data - Intermediate R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#relational-data" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Intermediate R" class="md-header__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Intermediate R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Relational data
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Intermediate-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Intermediate-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Intermediate R" class="md-nav__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Intermediate R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Intermediate-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Intermediate-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    An introduction to the data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.string_manipulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    String manipulation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Relational data
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Relational data
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-introduction-to-relational-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      A brief introduction to relational data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A brief introduction to relational data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-keys-to-relational-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      The key(s) to relational data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environmental-distribution-of-putative-ammonia-oxidising-taxa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environmental distribution of putative ammonia oxidising taxa
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environmental distribution of putative ammonia oxidising taxa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#joining-tables-using-dplyr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Joining tables using dplyr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cleaning-up-taxon-and-summarising-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cleaning up Taxon and summarising data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#joining-environmental-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Joining environmental variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#duplicated-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Duplicated keys
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-filtering-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      (Optional) Filtering joins
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.function_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Functions and conditional statements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.iterations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iterations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.data_structures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Supplementary
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Supplementary
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/s1.seq_prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sequence processing for Intermediate R workshop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/s2.dat_prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data preparation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-introduction-to-relational-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      A brief introduction to relational data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A brief introduction to relational data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-keys-to-relational-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      The key(s) to relational data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environmental-distribution-of-putative-ammonia-oxidising-taxa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environmental distribution of putative ammonia oxidising taxa
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environmental distribution of putative ammonia oxidising taxa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#joining-tables-using-dplyr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Joining tables using dplyr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cleaning-up-taxon-and-summarising-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cleaning up Taxon and summarising data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#joining-environmental-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Joining environmental variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#duplicated-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Duplicated keys
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-filtering-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      (Optional) Filtering joins
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="relational-data">Relational data<a class="headerlink" href="#relational-data" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Lesson objectives</p>
+<ul>
+<li>Understand the concepts in relational data</li>
+<li>Use <code>left_join()</code> to join two tables based on shared <em>keys</em></li>
+<li>Understand the different <code>join</code> functions</li>
+</ul>
+</div>
+<h2 id="a-brief-introduction-to-relational-data">A brief introduction to relational data<a class="headerlink" href="#a-brief-introduction-to-relational-data" title="Permanent link">&para;</a></h2>
+<p>Data analysis rarely involves only one data source. In many cases, insightful conclusions (and hypotheses) can only be gleaned and built by combining data from multiple sources. Collectively, this type of data is termed relational data, where the relationships between data points are of primary importance. Relational data is widespread in biology and you have probably encountered and generated it during your research. The table below outlines some cases where relational data can arise from:</p>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Example scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Subjecting the same data to different types of analyses</td>
+<td>Based on an amino acid sequence, predict signal peptide sequences, active site motifs, and secondary structures using different software.</td>
+</tr>
+<tr>
+<td>Collecting and analysing different data from the same sample.</td>
+<td>Correlate chemical measurements of different metabolites with sequence variants within a population.</td>
+</tr>
+<tr>
+<td>Comparing your data with data available in the literature or public databases.</td>
+<td>Identify homology between your set of sequences and those in NCBI’s RefSeq and then query the sequence’s role in metabolism via gene ontology.</td>
+</tr>
+</tbody>
+</table>
+<p>Almost all modern databases rely on concepts derived from relational data. For example, searching for something in NCBI will return matches across various databases (e.g., Gene, Protein, Nucleotide, etc.). When you access one of the records you will see links to other NCBI databases for that record (e.g., Taxonomy, Conserved Domains, BioProjects, etc.). Moreover, the use of controlled vocabulary across biological databases (e.g., KEGG orthology (KO), enzyme commission (EC) numbers, transporter classification (TC) numbers, GO IDs, etc.) has made it easier to cross-reference information stored in other databases.</p>
+<h3 id="the-keys-to-relational-data">The <em>key(s)</em> to relational data<a class="headerlink" href="#the-keys-to-relational-data" title="Permanent link">&para;</a></h3>
+<p>An essential characteristic of relational data is that data across multiple tables are connected via <em>keys</em>. You can think of keys as IDs. When analysing tabular biological data there is often a sequence ID (almost always based on the FASTA header) and other accompanying information (e.g., prediction scores, alignment scores, and other statistics). Let’s say we annotated this sequence using BLAST and set it to produce a tabular output (<code>-outfmt 6</code>). BLAST would use the sequence header as the query ID/accession, and there would be another subject ID/accession column for hits in the database. This subject ID can then be used as a key to access other information kept in another table, perhaps taxonomic lineage, functional information, or even other accessions/IDs/keys to other records maintained in other databases.</p>
+<!-- Figure: An image of a BLAST table, linked with other tabular information -->
+
+<h2 id="environmental-distribution-of-putative-ammonia-oxidising-taxa">Environmental distribution of putative ammonia oxidising taxa<a class="headerlink" href="#environmental-distribution-of-putative-ammonia-oxidising-taxa" title="Permanent link">&para;</a></h2>
+<p>In the previous lesson, we found that there were biogeochemically important ammonia oxidising and nitrifying taxa in our samples. Here, we want to visualise how these taxa change with environmental conditions. This can give us some idea of the conditions that enrich or constrain these important taxa. Before visualisation, we will need to prepare the data used as input for <code>ggplot2</code>. Given that we are interested in environmental conditions of a taxanomically narrow functional guild, we will need to combine information from all three data: <code>asv</code>, <code>env</code>, and <code>tax</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Relationships between tables</p>
+<ul>
+<li><code>asv</code> and <code>tax</code> are related by the same hash (md5 checksum) key, but they are named <code>ASVID</code> in <code>asv</code> and <code>Feature_ID</code> in <code>tax</code>.</li>
+<li><code>asv</code> and <code>env</code> are related based on column names in <code>asv</code> and <code>sample</code> column in <code>env</code>.</li>
+</ul>
+<p>This is a graphical representation of their relationship with each other:</p>
+<p><a class="glightbox" href="../figures/relational_data_table.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="relationship between tables" src="../figures/relational_data_table.PNG" /></a></p>
+</div>
+<h3 id="joining-tables-using-dplyr">Joining tables using <code>dplyr</code><a class="headerlink" href="#joining-tables-using-dplyr" title="Permanent link">&para;</a></h3>
+<p>To help us combine tabular data in R, we will use a set of <code>*_join()</code> functions from the <code>dplyr</code> package. Join functions can be used to add columns from one dataset to another dataset. If you are familiar with the relational database management system SQL, you should feel comfortable with these functions’ relational operations. These functions will return a <code>NA</code> for non-matching keys or missing observations while preserving valid joins for other observations.</p>
+<p>Based on the previous lesson, we know that ammonia oxidisers often carry the "Nitroso-" prefix. The only table with that information is <code>tax</code>. To begin, we will subset that table to the relevant taxa and remove the <code>Confidence</code> metric.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">amo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">tax</span><span class="p">,</span><span class="w"> </span><span class="nf">str_detect</span><span class="p">(</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Nitroso&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="o">-</span><span class="n">Confidence</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>We then need to add count per ASV per sample information from <code>asv</code>. To do this, we will use the <code>left_join()</code> function:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">amo_abd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">left_join</span><span class="p">(</span><span class="n">amo</span><span class="p">,</span><span class="w"> </span><span class="n">asv</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">join_by</span><span class="p">(</span><span class="s">&quot;Feature_ID&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;ASVID&quot;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>Quite literally, the function joins the table on the right to the table on the left. We also use the <code>by =</code> argument and the <code>join_by()</code> function to specify which columns are <em>keys</em> in both tables. In layperson English, we can read the above as "join the <code>asv</code> table to the <code>amo</code> table where the columns <code>Feature_ID</code> in <code>amo</code> and <code>ASVID</code> in <code>asv</code> are keys".</p>
+<p>The function <code>left_join()</code> is one of four mutating (<em>sensu</em> <code>mutate()</code> where new columns are appended to the table) joins in <code>dplyr</code>. The others are:</p>
+<ul>
+<li><code>right_join()</code> Joins the table on the left to the table on the right (i.e., <code>left_join()</code> in the opposite direction).</li>
+<li><code>inner_join()</code> Adds columns for matching keys in both tables.</li>
+<li><code>full_join()</code> Adds columns for all keys in both tables.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Practical use</p>
+<p>In my experience, <code>left_join()</code> is sufficient for most cases and is often the default choice for many users for its readable syntax (especially in chained pipes). However, there are some compelling cases for using <code>inner_join()</code> and <code>full_join()</code>.</p>
+<p>Many bioinformatics analyses are run in parallel (e.g., annotations against multiple databases or sequence curation using multiple software) to obtain as much information as possible about a given sequence. Essentially, these are identical sequences analysed in different ways.</p>
+<p>Let’s assume that we are interested in well-characterised genes and pathways. Multiple analyses should produce concordant results for a subset of sequences thereby reducing the chance of false positives or hits with low probability of homology (e.g., a query sequence with homology to citrate synthase should be found regardless of searches against KEGG, NCBI RefSeq, or UniProt databases). In this scenario, using <code>inner_join()</code> will create a table that includes only those results that are consistent across analyses.</p>
+<p>Under different circumstances we might be interested in looking at all the outputs captured by multiple analyses. For example when looking for novel or less well-characterised genes, suspect some analyses may propagate database biases, or want to perform further analyses to eliminate redundancies based on home-grown criteria. Here, we are likely more interested in preventing false negatives. In this case use <code>full_join()</code> to preserve all data points for further curation.</p>
+</div>
+<h3 id="cleaning-up-taxon-and-summarising-data">Cleaning up <code>Taxon</code> and summarising data<a class="headerlink" href="#cleaning-up-taxon-and-summarising-data" title="Permanent link">&para;</a></h3>
+<p>Next, lets use our skills from the previous lesson to only pick out "Nitroso-" from the Taxon column. Given that <code>ggplot2</code> requires data in "long" format, we will also pivot the data and create sums of the abundance values so we have an overview of the distribution of ammonia oxidisers.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">amo_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">amo_abd</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="n">Taxon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str_replace</span><span class="p">(</span><span class="n">Taxon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.*(Nitroso[^;]+).*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\\1&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span><span class="nf">pivot_longer</span><span class="p">(</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">where</span><span class="p">(</span><span class="n">is.numeric</span><span class="p">),</span><span class="w"> </span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sample&quot;</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;abundance&quot;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span><span class="w"> </span><span class="n">Taxon</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">  </span><span class="nf">summarise</span><span class="p">(</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">abundance</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">  </span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<h3 id="joining-environmental-variables">Joining environmental variables<a class="headerlink" href="#joining-environmental-variables" title="Permanent link">&para;</a></h3>
+<p>Finally, we need to join environmental variables to our ammonia oxidiser abundance table. Then, we can plot the data using <code>ggplot2</code>.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#__codelineno-3-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">amo_summary</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">left_join</span><span class="p">(</span><span class="n">amo_summary</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">join_by</span><span class="p">(</span><span class="s">&quot;sample&quot;</span><span class="p">))</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="c1"># Plot using ggplot2</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">amo_summary</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dnpoc</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Taxon</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;loess&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<h2 id="duplicated-keys">Duplicated keys<a class="headerlink" href="#duplicated-keys" title="Permanent link">&para;</a></h2>
+<p>The keys in the <code>asv</code> table are MD5 hash values generated directly based on the sequence data. A benefit of using this convention is that adding more sequences to the analysis involves very little remapping of sequence to IDs. Thanks to the way MD5 hash algorithm works, read counts from the new batch will be added to read counts from the previous batch if they were the same ASV, while new unique sequences will be appended to the table as new entries.</p>
+<p>However, what would happen if we tried to join data that had redundancies in their key naming conventions? In this case, the default behaviour of mutating joins is to output the Cartesian product of both data frames based on their keys. That is to say, all possible combinations of the keys will be used to generate the newly joined table.</p>
+<h2 id="optional-filtering-joins">(Optional) Filtering joins<a class="headerlink" href="#optional-filtering-joins" title="Permanent link">&para;</a></h2>
+<p><code>dplyr</code> also has two filtering joins (<em>sensu</em> <code>filter()</code> where rows are removed/retained based on keys). These are:</p>
+<ul>
+<li><code>anti_join()</code> removes rows if keys in <code>x</code> match those in <code>y</code>.</li>
+<li><code>semi_join()</code> retains rows if keys in <code>x</code> match those in <code>y</code>.</li>
+</ul>
+<p>These are similar to piping a data frame to a <code>filter()</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># anti_join(x, y)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nf">filter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">y</span><span class="o">$</span><span class="n">key</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># semi_join(x, y)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nf">filter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">y</span><span class="o">$</span><span class="n">key</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<p>Personally, I prefer using <code>filter()</code> for its flexibility and verbose syntax, and then perform joining operations when necessary.</p>
+<!--
+
+## Managing relational tabular data in R using `dplyr`
+
+To help us combine tabular data in R, we will use a set of `*_join()` functions from the `dplyr` package. Join functions can be used to add columns from one dataset to another dataset. If you are familiar with the relational database management system SQL, you should feel comfortable with these functions’ relational operations. These functions will return a `NA` for non-matching keys or missing observations while preserving valid joins for other observations. The functions are split into two categories depending on the output, namely **mutating joins** and **filtering joins**. The sub-sections below aim to summarise how the joins work. If you would prefer a Cartesian representation of the joins this [book section](https://r4ds.hadley.nz/joins.html#how-do-joins-work) may be helpful in genuinely grasping the procedure.
+
+!!! note "Joining keys"
+
+    By default, all join functions will look for columns with the same name across both tables and attempt a join by specifying those columns as keys. In addition, all join functions have a `by` argument that allows you to determine which columns should be considered as keys across both tables. 
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nf">left_join</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;patient_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;treatment_id&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+    The code above `mutate()` new columns into table `x` based on matching keys found in the `patient_id` and `treatment_id` columns in both tables `x` and `y`.
+
+    This is also handy when tables have columns with matching values (keys) but are named differently.
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nf">left_join</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;patient_id&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hospital_ID&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+    Above, the tables `x` and `y` are joined based on key values named `patient_id` in table `x` and `Hospital_ID` in table `y`.
+
+### Mutating joins
+
+These combine columns from two tables by adding new columns (i.e., `mutate()`) to table `x` from table `y`. These new columns are added **to the right of table `x`**. There are four mutating joins split into two sub-categories, namely inner and outer joins.
+
+| Join type  | Function           | Description                                                                  |
+| ---------- | ------------------ | ---------------------------------------------------------------------------- |
+| Inner join | `inner_join(x, y)` | Add columns for observations with matching keys in both `x` and `y`.         |
+| Outer join | `left_join(x, y)`  | Add columns for observations with matching keys in `x` but not in `y`.       |
+| Outer join | `right_join(x, y)` | Same as `left_join()`, but preserves all observations in `y` instead of `x`. |
+| Outer join | `full_join(x, y)`  | Add columns for all observations in both `x` and `y`.                        |
+
+### How are our data frames related? An experiment with mutating joins
+
+At the beginning of the workshop, we have imported 3 data frames. 
+
+??? question "How are these tables related?" 
+
+    `View()` each of them to get a feel for how these tables are related.
+
+    ??? success "Solution"
+
+        * `asv` and `tax` are related by the same hash (md5 checksum) key, but they are named `ASVID` in `asv` and `Feature_ID` in `tax`.
+        * `asv` and `env` are related based on column names in `asv` and `sample` column in `env`.
+
+        This is a graphical representation of their relationship with each other:
+
+        ![relationship between tables](figures/relational_data_table.PNG)
+
+Let's experiment how mutating joins work in practice using tables `asv` and `env`.
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">asv_tax_left</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">left_join</span><span class="p">(</span><span class="n">asv</span><span class="p">,</span><span class="w"> </span><span class="n">tax</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ASVID&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Feature_ID&quot;</span><span class="p">))</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">asv_tax_right</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">right_join</span><span class="p">(</span><span class="n">asv</span><span class="p">,</span><span class="w"> </span><span class="n">tax</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ASVID&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Feature_ID&quot;</span><span class="p">))</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">asv_tax_inner</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">inner_join</span><span class="p">(</span><span class="n">asv</span><span class="p">,</span><span class="w"> </span><span class="n">tax</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ASVID&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Feature_ID&quot;</span><span class="p">))</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">asv_tax_full</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">full_join</span><span class="p">(</span><span class="n">asv</span><span class="p">,</span><span class="w"> </span><span class="n">tax</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ASVID&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Feature_ID&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+The four data frames have $\gt$ 4 thousand lines and 24 columns. We could explore the results of the different joins using `View()`, but that might take awhile. Instead, let's use some fundamental properties of the data to deduce how the results differ. These properties are:
+
+* Dimensions
+* Existence of `NA`
+
+**Dimensions (size of data frames)**
+
+We will check the number of rows and columns in our newly created data frames and compare them against the original data frames `asv` and `tax`. We can do this by inspecting the top-right panel in RStudio or using the `dim()` function.
+
+All joined data contains 24 columns. In general, we should be expect to have 
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nf">ncol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ncol</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
+</code></pre></div>
+
+columns in the joined data.
+
+Depending on the type of join, we have different number of rows for each joined data frame. Data frames `asv_tax_left` and `asv_tax_inner` have 4031 rows (the same as `asv`), whereas `asv_tax_right` and `asv_tax_full` have 4227 rows (the same as `tax`). Why is that?
+
+??? success "Discrepancies in row numbers."
+
+    === "`asv_tax_left`"
+
+        Recall that `left_join()` adds columns from the `tax` to the table `asv` based on matching observations in `asv`. This means that you should expect to obtain the same number of rows as in `asv` regardless of right table (with an [exception](#duplicated-keys)).
+
+    === "`asv_tax_right`"
+
+        When using `right_join()`, it is crucial to remember that while we are still joining columns to `asv` from `tax`, the resulting joined data frame is **based on matches in `tax`**. While the arrangement of columns look similar to that of `asv_tax_left`, the joining is based on keys in `tax`, not `asv`. 
+
+    === "`asv_tax_inner`"
+
+        When using `inner_join()`, we are retaining rows with matches in **both** `asv` and `tax`. Given that the resulting number of rows here is equal to that of `asv_tax_left`, this should hint at the shape of the relationship between these two data frames.
+
+    === "`asv_tax_full`"
+
+        This is the union of both data frames `asv` and `tax`. As long as keys exist in both data frames, the columns will join.
+
+**Existence of `NA`**
+
+As explored in the above sections, we know the following statements are `TRUE`:
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nf">nrow</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">asv</span><span class="p">)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nf">dim</span><span class="p">(</span><span class="n">asv_tax_left</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">dim</span><span class="p">(</span><span class="n">asv_tax_inner</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nf">dim</span><span class="p">(</span><span class="n">asv_tax_right</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">dim</span><span class="p">(</span><span class="n">asv_tax_full</span><span class="p">)</span>
+</code></pre></div>
+
+Therefore, where the number of rows in our joined data frames are similar to `tax`, that means there are non-matching keys, ergo `NA`s. We can quickly run a check to confirm our suspicions:
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">anyNA</span><span class="p">(</span><span class="n">asv_tax_left</span><span class="p">)</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nf">anyNA</span><span class="p">(</span><span class="n">asv_tax_inner</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nf">anyNA</span><span class="p">(</span><span class="n">asv_tax_right</span><span class="p">)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nf">anyNA</span><span class="p">(</span><span class="n">asv_tax_full</span><span class="p">)</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[1] FALSE
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>[1] FALSE
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>[1] TRUE
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>[1] TRUE
+</code></pre></div>
+
+**Venn diagram of our data**
+
+Based on the information above, our data can be represented using a Venn diagram as below.
+
+![venn](./figures/relational_data_venn.png)
+
+$$
+\Large
+\textrm{keys}(\texttt{asv}) \in \textrm{keys}(\texttt{tax})
+$$
+
+**Practical usage**
+
+Of the four mutating joins, `left_join()` is often the default choice. In a block of code, it is syntactically easier to understand it's operation, especially if the code block consists of multiple chaining pipes.
+
+??? question "Why use `inner_join()` and `full_join()`? An anecdotal account."
+
+    Occasionally, there are compelling reasons to dabble in `inner_join()` and `full_join()`. Many bioinformatics analyses are run in parallel (e.g., annotations against multiple databases or sequence curation using multiple software) to obtain as much information as possible. Essentially, these are identical sequences analysed in different ways.
+
+    Let’s assume that we are interested in well-characterised genes and pathways. Multiple analyses should produce concordant results for a subset of sequences thereby reducing the chance of false positives or hits with low probability of homology (e.g., a query sequence with homology to citrate synthase should be found regardless of annotation against KEGG, NCBI RefSeq, or UniProt databases). In this scenario, using `inner_join()` will create a table that includes only those results that are consistent across analyses.
+
+    Under different circumstances we might be interested in looking at all the outputs captured by multiple analyses. For example when looking for novel or less well-characterised genes, suspect some analyses may propagate database biases, or want to perform further analyses to eliminate redundancies based on home-grown criteria. Here, we are likely more interested in preventing false negatives. In this case use `full_join()` to preserve all data points for further curation.
+
+
+### Filtering joins
+
+These joins filter table `x` based on matches with table `y`. There are only two members of this category:
+
+| Function          | Description                                                        |
+| ----------------- | ------------------------------------------------------------------ |
+| `semi_join(x, y)` | Filter table `x` to **retain** rows based on matching keys in `y`. |
+| `anti_join(x, y)` | Filter table `x` to **remove** rows based on matching keys in `y`. |
+
+If you are joining tables based on one key, these functions are equivalent to the following:
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># semi_join(x, y)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nf">filter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">y</span><span class="o">$</span><span class="n">key</span><span class="p">)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># anti_join(x, y)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nf">filter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">y</span><span class="o">$</span><span class="n">key</span><span class="p">))</span>
+</code></pre></div>
+
+??? question "If `filter()` works, why use with filtering joins?"
+
+    Filtering joins come in handy when you have to filter by multiple keys. You can probably use `filter()` for a few keys (1 – 3 columns, your mileage may vary). However, it gets cumbersome quickly if you have too many or if they might be named differently. Perhaps you may have an expert collaborator who has done some curation of your results for you and produced a table. Using a `semi_join()` will likely save you time (and lines of code) to create a table you can analyse downstream. Think of the poor reader who has to figure out which column things are being filtered by!
+
+### What is NOT in our data?
+
+We have established that `asv` only contains some of ASVs identified by QIIME2 and that `tax` has more records. So, what was left out of `asv` that is still in `tax`? How would we find out?
+
+??? success "Solution"
+
+    Recall that we are interested to know what is in `tax` that is NOT in `asv`. `anti_join()` requires that the table to be filtered to be on the left.
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">tax_asv_anti</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">anti_join</span><span class="p">(</span><span class="n">tax</span><span class="p">,</span><span class="w"> </span><span class="n">asv</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Feature_ID&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ASVID&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+    `View()` the created data frame to inspect what might be different. 
+
+## Duplicated keys
+
+The ASV data here is identified using a md5 hash key. This means that if we were to add more sequences to the pile and recreate the count and taxonomy table, the new sequences will simply be appended to the already existing data. What if you were working with data that may contain duplicate key values? 
+
+In those cases, the default behaviour of mutating joins is to output the Cartesian product of both data frames based on their keys. That is to say, all combinations of the keys will be used to generate the newly joined table.
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../1.string_manipulation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: String manipulation">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                String manipulation
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../3.function_conditions/" class="md-footer__link md-footer__link--next" aria-label="Next: Functions and conditional statements">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Functions and conditional statements
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Intermediate-R workshop material is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

@@ -1,0 +1,2024 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Intermediate-R/4.iterations/">
+      
+      
+        <link rel="prev" href="../3.function_conditions/">
+      
+      
+        <link rel="next" href="../5.data_structures/">
+      
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Iterations - Intermediate R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#iterations" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Intermediate R" class="md-header__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Intermediate R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Iterations
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Intermediate-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Intermediate-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Intermediate R" class="md-nav__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Intermediate R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Intermediate-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Intermediate-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    An introduction to the data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.string_manipulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    String manipulation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.relational_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Relational data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.function_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Functions and conditional statements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Iterations
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iterations
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#say-again" class="md-nav__link">
+    <span class="md-ellipsis">
+      Say again?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      for loops
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="for loops">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#handling-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handling outputs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-map-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      The map() family
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pairwise-correlation-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pairwise correlation analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pairwise correlation analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#table-to-table-using-nested-for-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table-to-table using nested for loops
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cartesian-product-using-expandgrid-and-map2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cartesian product using expand.grid() and map2()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rules-to-iterate-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rules to iterate by
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rules to iterate by">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterate-indices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iterate indices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#they-can-grow-vectors-with-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      They can grow vectors (with constraints)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefer-vectorised-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prefer vectorised functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-is-more" class="md-nav__link">
+    <span class="md-ellipsis">
+      Less is more
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capture-errors-return-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capture errors, return results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structural-and-analytical-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structural and analytical considerations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.data_structures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Supplementary
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Supplementary
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/s1.seq_prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sequence processing for Intermediate R workshop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/s2.dat_prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data preparation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#say-again" class="md-nav__link">
+    <span class="md-ellipsis">
+      Say again?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      for loops
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="for loops">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#handling-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handling outputs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-map-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      The map() family
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pairwise-correlation-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pairwise correlation analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pairwise correlation analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#table-to-table-using-nested-for-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table-to-table using nested for loops
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cartesian-product-using-expandgrid-and-map2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cartesian product using expand.grid() and map2()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rules-to-iterate-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rules to iterate by
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rules to iterate by">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterate-indices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iterate indices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#they-can-grow-vectors-with-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      They can grow vectors (with constraints)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefer-vectorised-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prefer vectorised functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-is-more" class="md-nav__link">
+    <span class="md-ellipsis">
+      Less is more
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capture-errors-return-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capture errors, return results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structural-and-analytical-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structural and analytical considerations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="iterations">Iterations<a class="headerlink" href="#iterations" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Learning objectives</p>
+<ul>
+<li>Construct <code>for</code> loops</li>
+<li>Apply functions iteratively using <code>map_*()</code></li>
+<li>Make "good enough" design choices when iterating</li>
+</ul>
+</div>
+<h2 id="say-again">Say again?<a class="headerlink" href="#say-again" title="Permanent link">&para;</a></h2>
+<p>Here, we leave behind copy-pasting and really start to accelerate workflows. To iterate means to do something repetitively on <em>different</em> objects. All programming languages have at least one implementation of iterations (arguably the main reason to do anything on a computer). In R, this is done in one of two ways:</p>
+<p><strong><code>for</code> loop</strong></p>
+<p>This is a ubiquitous method across many programming languages with slight syntax differences between languages.</p>
+<p><strong>Applying functions using <code>map()</code></strong></p>
+<p>"Applies" a function along a vector/list with more concise code. In other words, the function supplied is recycled for every element in the vector/list. The iteration is happening in the background.</p>
+<p>This episode will cover how to use both methods via a pairwise correlation analysis. The goal of the analysis is to determine what environmental factors might be correlated with sequence variant, and consequently, taxa, distribution. Finally, we will discuss some design choices with regards to iterations based on data properties.</p>
+<h2 id="for-loops"><code>for</code> loops<a class="headerlink" href="#for-loops" title="Permanent link">&para;</a></h2>
+<p>A <code>for</code> loop is the most common way to iterate through objects. All <code>for</code> loops look like the following:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="o">&lt;</span><span class="n">iterator</span><span class="o">&gt;</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">expressions</span><span class="o">&gt;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>Here is what each part of the pseudocode above means:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>for</code></td>
+<td>Initialises the loop.</td>
+</tr>
+<tr>
+<td><code>&lt;iterator&gt;</code></td>
+<td>A variable that represents each element of the object being iterated on</td>
+</tr>
+<tr>
+<td><code>&lt;vector&gt;</code></td>
+<td>An object to iterate</td>
+</tr>
+<tr>
+<td><code>&lt;expressions&gt;</code></td>
+<td>Lines of code that does something per iteration</td>
+</tr>
+</tbody>
+</table>
+<p>Here is a simple working example:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>The above example iterated through numbers <code>1:10</code>, where each number was represented by <code>i</code> (i.e., <code>for (i in 1:10)</code>), then multiplied each number by <code>2</code>, then printed the result on the console (i.e., <code>{print(i * 2)}</code>).</p>
+<p>The syntax of a <code>for</code> loop is remarkably flexible and can be used in a variety of scenarios. Powerful as it is, there are a few best practices that we need to be mindful of. We will get to them in our practical exercise section below.</p>
+<h3 id="handling-outputs">Handling outputs<a class="headerlink" href="#handling-outputs" title="Permanent link">&para;</a></h3>
+<p>Consider the following loop:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="n">Ni</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="p">}</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="n">Ni</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>We constructed a loop to multiply each number by 2, but we only have 1 number as a result. This is because we assigned <code>Ni</code> with a new value with each iteration. To overcome this, we need to prepare an output vector that can store the result of each iteration.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#__codelineno-3-6">6</a></span>
+<span class="normal"><a href="#__codelineno-3-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">Ni</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="c1"># Produces a vector of 0s</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="n">Ni</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="p">}</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="n">Ni</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Thy shall not grow vectors</p>
+<p>It is possible to create an empty vector and then growing it by appending values from a <code>for</code> loop.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">Ni</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">()</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">  </span><span class="n">Ni</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">Ni</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="p">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="n">Ni</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>However, this kind of construct is not recommended for <strong><em>most</em></strong> use cases. If an iteration generates large number of elements, there might not be sufficient RAM to hold it and the entire R session will stall and terminate.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><code>while</code> loops</p>
+<p>As seen above, <code>for</code> loops require a defined range for iteration. There are scenarios where we want an iteration to run for as long as required until some condition is reached. In this case, we can use the <code>while</code> loop. </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">while</span><span class="p">(</span><span class="o">&lt;</span><span class="n">predicate</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">statement</span><span class="o">&gt;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>As long as the expression returns a <code>TRUE</code>, the statement will continue to run. This is common in numerical optimisation where procedures are required for model fitting.</p>
+<p>The following code block illustrates how <code>while</code> loops are used in an iterative process to obtain small number solutions to the <a href="https://en.wikipedia.org/wiki/Collatz_conjecture">Collatz conjecture</a>.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span>
+<span class="normal"><a href="#__codelineno-6-21">21</a></span>
+<span class="normal"><a href="#__codelineno-6-22">22</a></span>
+<span class="normal"><a href="#__codelineno-6-23">23</a></span>
+<span class="normal"><a href="#__codelineno-6-24">24</a></span>
+<span class="normal"><a href="#__codelineno-6-25">25</a></span>
+<span class="normal"><a href="#__codelineno-6-26">26</a></span>
+<span class="normal"><a href="#__codelineno-6-27">27</a></span>
+<span class="normal"><a href="#__codelineno-6-28">28</a></span>
+<span class="normal"><a href="#__codelineno-6-29">29</a></span>
+<span class="normal"><a href="#__codelineno-6-30">30</a></span>
+<span class="normal"><a href="#__codelineno-6-31">31</a></span>
+<span class="normal"><a href="#__codelineno-6-32">32</a></span>
+<span class="normal"><a href="#__codelineno-6-33">33</a></span>
+<span class="normal"><a href="#__codelineno-6-34">34</a></span>
+<span class="normal"><a href="#__codelineno-6-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">collatz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">  </span><span class="c1"># Output</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">  </span><span class="n">PATH</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">  </span><span class="c1"># Initiate index</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">  </span><span class="c1"># Expand output stepwise</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">PATH</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">    </span><span class="n">PATH</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="m">10</span><span class="p">))</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">  </span><span class="c1"># Exit</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="kr">return</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="w">  </span><span class="c1"># Test</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="w">  </span><span class="kr">while</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">if_else</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="m">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="w">    </span><span class="n">PATH</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">n</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22"></a>
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a><span class="w">  </span><span class="n">PATH</span><span class="p">[</span><span class="n">PATH</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">]</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24"></a><span class="p">}</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25"></a>
+<a id="__codelineno-6-26" name="__codelineno-6-26"></a><span class="c1"># Solutions for numbers 2 to anything</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27"></a><span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28"></a>
+<a id="__codelineno-6-29" name="__codelineno-6-29"></a><span class="n">collatz_res</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vector</span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;list&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">numbers</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="n">test</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31"></a><span class="w">  </span><span class="n">collatz_res</span><span class="p">[[</span><span class="n">numbers</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">]]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">collatz</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32"></a><span class="w">  </span><span class="nf">names</span><span class="p">(</span><span class="n">collatz_res</span><span class="p">)[</span><span class="n">numbers</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">numbers</span>
+<a id="__codelineno-6-33" name="__codelineno-6-33"></a><span class="p">}</span>
+<a id="__codelineno-6-34" name="__codelineno-6-34"></a>
+<a id="__codelineno-6-35" name="__codelineno-6-35"></a><span class="n">collatz_res</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>In lines 17 to 21, we applied a <code>while</code> loop to ensure that <code>collatz()</code> continues to be applied until <code>x == 1</code>, which marks the end of the loop. </p>
+</div>
+<h2 id="the-map-family">The <code>map()</code> family<a class="headerlink" href="#the-map-family" title="Permanent link">&para;</a></h2>
+<p>While <code>for</code> loops are flexible and powerful, writing them can sometimes result in long expressions. This hampers others (including future self) from auditing/reading the code. To help alleviate some of this, we can use the <code>purrr::map()</code> family of functions. These functions aim to make code more function-oriented and makes code more concise. The table below shows some commonly used ones from both families:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>map()</code></td>
+<td>Iterate over a vector.</td>
+</tr>
+<tr>
+<td><code>map2()</code></td>
+<td>Iterate over 2 vectors.</td>
+</tr>
+<tr>
+<td><code>pmap()</code></td>
+<td>Iterate over multiple vectors.</td>
+</tr>
+</tbody>
+</table>
+<p>The base forms above always return a list regardless of coercion within the "mapped" function. However, each function also has modifiers that can output different modes of data:</p>
+<table>
+<thead>
+<tr>
+<th>Modifier</th>
+<th>Return values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_int()</code></td>
+<td>Integer (numeric whole numbers)</td>
+</tr>
+<tr>
+<td><code>_dbl()</code></td>
+<td>Double (numeric with decimals)</td>
+</tr>
+<tr>
+<td><code>_chr()</code></td>
+<td>Character</td>
+</tr>
+<tr>
+<td><code>_lgl()</code></td>
+<td>Boolean (<code>TRUE</code> or <code>FALSE</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>These functions are designed to produce predictable outputs (or, as written in the help pages, "die trying"). They all have the following syntax:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># One vector</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nf">map</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">function</span><span class="p">,</span><span class="n">character</span><span class="p">,</span><span class="n">integer</span><span class="o">&gt;</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Two vectors</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nf">map2</span><span class="p">(</span><span class="n">vector_1</span><span class="p">,</span><span class="w"> </span><span class="n">vector_2</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">function</span><span class="p">,</span><span class="n">character</span><span class="p">,</span><span class="n">integer</span><span class="o">&gt;</span><span class="p">)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># List of multiple vectors</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="nf">pmap</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">vector_1</span><span class="p">,</span><span class="w"> </span><span class="n">vector_2</span><span class="p">,</span><span class="w"> </span><span class="n">vector_3</span><span class="p">,</span><span class="w"> </span><span class="kc">...</span><span class="p">),</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">function</span><span class="p">,</span><span class="n">character</span><span class="p">,</span><span class="n">integer</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre></div>
+<p>If a character or integer is supplied in place of a function, it will extract the component by name or position, respectively.</p>
+<p>We'll make some examples to get a grasp of what <code>map()</code> does:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span>
+<span class="normal"><a href="#__codelineno-8-6">6</a></span>
+<span class="normal"><a href="#__codelineno-8-7">7</a></span>
+<span class="normal"><a href="#__codelineno-8-8">8</a></span>
+<span class="normal"><a href="#__codelineno-8-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># Something to iterate</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">  </span><span class="n">some_characters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruit</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">],</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">  </span><span class="n">some_logical</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">),</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">  </span><span class="n">some_integers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rpois</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">  </span><span class="n">some_doubles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rcauchy</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="p">)</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="nf">map</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>We wrote a simple expression that concatenates elements of vectors in list <code>b</code> and prints them out as one string per list element. Here's another example that uses a variation of <code>map_*()</code> to calculate the coefficient of variation among biological replicates:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">example_pmap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pmap_dbl</span><span class="p">(</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nf">list</span><span class="p">(</span><span class="n">asv</span><span class="o">$</span><span class="n">AS1A1</span><span class="p">,</span><span class="w"> </span><span class="n">asv</span><span class="o">$</span><span class="n">AS1A2</span><span class="p">,</span><span class="w"> </span><span class="n">asv</span><span class="o">$</span><span class="n">AS1A3</span><span class="p">),</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span>\<span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="n">values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nf">sd</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="nf">str</span><span class="p">(</span><span class="n">example_pmap</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Notice that it is a numeric vector instead of a list as we used the <code>_dbl</code> modifier. If we tried to use a different modifier that does not match the output mode, we will get an error returned and not produce an output.</p>
+<div class="admonition tip">
+<p class="admonition-title">Try different modifiers and see what are the outcomes. Include coercion inside the function and see if you can produce different results.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Sidestepping for side effects</p>
+<p>The above <code>map_*()</code> family of functions all produce an output per element. However, if your primary interest is to generate <em>side effects</em> (i.e., plots, console outputs via <code>cat()</code>, saving files, etc.), it is better to use <code>purrr</code>'s <code>walk()</code> family of functions. Like <code>map_*()</code>, it comes in variations for two (<code>walk2()</code>) or more (<code>pwalk()</code>) vectors. Compare the following outputs:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span>
+<span class="normal"><a href="#__codelineno-10-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">fn_glue</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">nm</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">  </span><span class="nf">str_glue</span><span class="p">(</span><span class="s">&quot;Vector named {nm} is a {class(x)}&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="p">}</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="nf">map2</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">nm</span><span class="p">)</span><span class="w"> </span><span class="nf">cat</span><span class="p">(</span><span class="nf">fn_glue</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">nm</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">))</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="nf">walk2</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">nm</span><span class="p">)</span><span class="w"> </span><span class="nf">cat</span><span class="p">(</span><span class="nf">fn_glue</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">nm</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<!--
+## The `apply()` family
+
+This is `map()`'s older cousin implemented in base R.
+
+lapply() similar to map()
+mapply() similar to pmap()
+sapply()
+other use cases: 
+- array outputs
+- speed
+- dependencies
+-->
+
+<p>Let's compare and contrast use cases of <code>for</code> and <code>map()</code> using the exercise below.</p>
+<h2 id="pairwise-correlation-analysis">Pairwise correlation analysis<a class="headerlink" href="#pairwise-correlation-analysis" title="Permanent link">&para;</a></h2>
+<p>Community data is inherently multivariate. These are counts of organisms across different habitats/environments. A useful piece of information is how some organisms are distributed depending on the characteristics of their habitat, e.g., nutrient supply, sediment permeability, salinity, elevation, etc. Here, correlation analysis can help us understand if some of these characteristics underlie an organism's distribution. At a higher level, large correlation analyses can help identify some conditions that are more suited to groups of organisms (correlations can be a precondition of cluster analysis). From there, other analyses or more robust sampling designs can be used to test the validity of our observations.</p>
+<p>Before delving into the analyses, it is important to filter out data that may not be important. This means removing ASV that are only sparsely present. For this exercise, we will retain ASVs that are present in more than half of all samples. We will also convert the data frames of <code>asv</code> and <code>env</code> into matrices for ease of processing.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c1"># Filter data</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">retain_threshold</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="n">asv_retained</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rowSums</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">asv</span><span class="p">[,</span><span class="w"> </span><span class="m">-1</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">retain_threshold</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="n">asv_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">asv</span><span class="p">[</span><span class="n">asv_retained</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="c1"># Convert to matrices</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="n">asv_subset_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">asv_subset</span><span class="p">[,</span><span class="w"> </span><span class="m">-1</span><span class="p">])</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="nf">rownames</span><span class="p">(</span><span class="n">asv_subset_matrix</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">asv_subset</span><span class="o">$</span><span class="n">ASVID</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="n">env_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">env</span><span class="p">[,</span><span class="w"> </span><span class="m">-1</span><span class="p">])</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="nf">rownames</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">env</span><span class="o">$</span><span class="n">sample</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<h3 id="table-to-table-using-nested-for-loops">Table-to-table using nested <code>for</code> loops<a class="headerlink" href="#table-to-table-using-nested-for-loops" title="Permanent link">&para;</a></h3>
+<p>In this method, we will:</p>
+<ol>
+<li>Create matrices for storing correlation coefficients and their P-values.</li>
+<li>Use nested <code>for</code> loops to iterate through the rows of <code>asv</code> and columns of <code>env</code>.</li>
+<li>Calculate correlation coefficients and significance per iteration</li>
+<li>Assign the values to relevant matrices</li>
+</ol>
+<p><strong>Pre-assign outputs</strong></p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># Assign output</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="n">rho_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">  </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">asv_subset_matrix</span><span class="p">),</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">  </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ncol</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">),</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">  </span><span class="n">dimnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">    </span><span class="n">asv_subset</span><span class="o">$</span><span class="n">ASVID</span><span class="p">,</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">    </span><span class="nf">colnames</span><span class="p">(</span><span class="n">env</span><span class="p">)[</span><span class="m">-1</span><span class="p">]</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">  </span><span class="p">)</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="p">)</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="n">p_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rho_matrix</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="nf">str</span><span class="p">(</span><span class="n">rho_matrix</span><span class="p">)</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="nf">str</span><span class="p">(</span><span class="n">p_matrix</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p><strong>Run correlation analyses via nested loop</strong></p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-13-10">10</a></span>
+<span class="normal"><a href="#__codelineno-13-11">11</a></span>
+<span class="normal"><a href="#__codelineno-13-12">12</a></span>
+<span class="normal"><a href="#__codelineno-13-13">13</a></span>
+<span class="normal"><a href="#__codelineno-13-14">14</a></span>
+<span class="normal"><a href="#__codelineno-13-15">15</a></span>
+<span class="normal"><a href="#__codelineno-13-16">16</a></span>
+<span class="normal"><a href="#__codelineno-13-17">17</a></span>
+<span class="normal"><a href="#__codelineno-13-18">18</a></span>
+<span class="normal"><a href="#__codelineno-13-19">19</a></span>
+<span class="normal"><a href="#__codelineno-13-20">20</a></span>
+<span class="normal"><a href="#__codelineno-13-21">21</a></span>
+<span class="normal"><a href="#__codelineno-13-22">22</a></span>
+<span class="normal"><a href="#__codelineno-13-23">23</a></span>
+<span class="normal"><a href="#__codelineno-13-24">24</a></span>
+<span class="normal"><a href="#__codelineno-13-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="c1"># The outer loop that loops through ASVs (rows)</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">asv_subset_matrix</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="w">  </span><span class="n">abundance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">asv_subset_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">  </span><span class="c1"># Nested loop</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">ncol</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1"># Looping over environmental measures (columns)</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">    </span><span class="n">env_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">[,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">    </span><span class="c1"># Correlation tests</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cor.test</span><span class="p">(</span><span class="n">abundance</span><span class="p">,</span><span class="w"> </span><span class="n">env_value</span><span class="p">)</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="w">    </span><span class="c1"># Assign values to output matrices</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">    </span><span class="n">rho_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">test</span><span class="o">$</span><span class="n">estimate</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="w">    </span><span class="n">p_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">test</span><span class="o">$</span><span class="n">p.value</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a>
+<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19"></a>
+<a id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="w">  </span><span class="c1"># Print some output</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="nf">cat</span><span class="p">(</span><span class="nf">str_glue</span><span class="p">(</span><span class="s">&quot;{i} ASVs done&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22"></a>
+<a id="__codelineno-13-23" name="__codelineno-13-23"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">asv_subset_matrix</span><span class="p">))</span><span class="w"> </span><span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Completed!\n&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24"></a>
+<a id="__codelineno-13-25" name="__codelineno-13-25"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p><strong>Code breakdown</strong></p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>for (i in 1:nrow(asv_subset_matrix)) {</code></td>
+<td>Initiates the outer <code>for</code> loop to iterate over the <em>rows</em> of <code>asv_subset_matrix</code></td>
+</tr>
+<tr>
+<td><code>abundance &lt;- as.numeric(asv_subset_matrix[i, ])</code></td>
+<td>Coerces the i<sup>th</sup> <em>row</em> of <code>asv_subset_matrix</code> into a numeric vector, then assigns it to an object called <code>abundance</code>. This object is temporary and is over-written with each iteration.</td>
+</tr>
+<tr>
+<td><code>for (j in 1:ncol(env_matrix)) {</code></td>
+<td>Initiates the inner loop to iterate over the <em>columns</em> of <code>env_matrix</code></td>
+</tr>
+<tr>
+<td><code>env_value &lt;- as.numeric(env_matrix[, j])</code></td>
+<td>Like for <code>abundance</code>, coerces the j<sup>th</sup> <em>column</em> of <code>env_matrix</code> into a numeric vector, then assigns it to <code>env_value</code>, a temporary object.</td>
+</tr>
+<tr>
+<td><code>test &lt;- cor.test(abundance, env_value)</code></td>
+<td>This is the workhorse function that calculates the Pearson's correlation coefficient and performs hypothesis testing (i.e. is the coefficient different from 0).</td>
+</tr>
+<tr>
+<td><code>rho_matrix[i, j] &lt;- test$estimate</code><br><code>p_matrix[i, j] &lt;- test$p.value</code></td>
+<td>Assigns the correlation coefficient and P-value to it's relevant position in the results matrices <code>rho_matrix</code> and <code>p_matrix</code>.</td>
+</tr>
+<tr>
+<td><code>if (i %% 50 == 0) cat(str_glue("{i} ASVs done"), "\n")</code><br><code>if (i == nrow(asv_subset_matrix)) cat("Completed!\n")</code></td>
+<td>Prints some informative outputs for us to track it's progress at intervals of every 50 ASVs (the outer loop) until it is complete.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Check output</strong></p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="nf">head</span><span class="p">(</span><span class="n">rho_matrix</span><span class="p">)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="nf">head</span><span class="p">(</span><span class="n">p_matrix</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title"><code>cor.test()</code></p>
+<p>Find out what <code>cor.test()</code> returns by reading the help page</p>
+</div>
+<h3 id="cartesian-product-using-expandgrid-and-map2">Cartesian product using <code>expand.grid()</code> and <code>map2()</code><a class="headerlink" href="#cartesian-product-using-expandgrid-and-map2" title="Permanent link">&para;</a></h3>
+<p>In the above method, we generated two matrices that stored different, but related, information. However, we could also create a single table that contained both coefficient and P-value. To achieve this, we will assign all outputs that come from <code>cor.test()</code> into one table that consists of all possible combinations between <code>colnames(env_matrix)</code> and <code>rownames(asv_subset_matrix)</code> (i.e., the Cartesian product).</p>
+<p><strong>Pre-assign output</strong></p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span>
+<span class="normal"><a href="#__codelineno-15-5">5</a></span>
+<span class="normal"><a href="#__codelineno-15-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">corr_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">expand.grid</span><span class="p">(</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="w">  </span><span class="s">&quot;ASVID&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">asv_subset_matrix</span><span class="p">),</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">  </span><span class="s">&quot;env_var&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">)</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="p">)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="nf">head</span><span class="p">(</span><span class="n">corr_results</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p><strong>Iterate through outputs</strong></p>
+<p>For this, we use the <code>tidyverse</code> dialect to perform the entirety of the analysis. We will use <code>map2()</code> to iterate over both columns simultaneously to <code>mutate()</code> columns that will store the results.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">corr_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">corr_results</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">    </span><span class="s">&quot;cor_test&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">map2</span><span class="p">(</span><span class="n">ASVID</span><span class="p">,</span><span class="w"> </span><span class="n">env_var</span><span class="p">,</span><span class="w"> </span>\<span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">      </span><span class="n">abundance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">asv_subset_matrix</span><span class="p">[</span><span class="nf">rownames</span><span class="p">(</span><span class="n">asv_subset_matrix</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">      </span><span class="n">env_value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">env_matrix</span><span class="p">[,</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">j</span><span class="p">]</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">      </span><span class="nf">cor.test</span><span class="p">(</span><span class="n">abundance</span><span class="p">,</span><span class="w"> </span><span class="n">env_value</span><span class="p">)</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">    </span><span class="p">}),</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="s">&quot;rho&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">map_dbl</span><span class="p">(</span><span class="n">cor_test</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;estimate&quot;</span><span class="p">),</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">    </span><span class="s">&quot;p&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">map_dbl</span><span class="p">(</span><span class="n">cor_test</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;p.value&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">  </span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p><strong>Code breakdown</strong></p>
+<p>Specifically, we will look at the <code>map2()</code> and <code>map_dbl()</code> calls:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>map2(ASVID, env_var, \(x, y) {&lt;expression&gt;})</code></td>
+<td>Here, <code>map2()</code> takes in two vectors, namely <code>ASVID</code> and <code>env_var</code> and iterates through every element in each, in order of position. The last argument is the function that will actually process elements of the vectors. <code>map2()</code> will only take functions that takes 2 arguments as inputs (i.e., <code>i</code> and <code>j</code>). In here, I've used an anonymous function as we do not need to keep this in our environment.</td>
+</tr>
+<tr>
+<td><code>map_dbl(cor_test, "estimate")</code></td>
+<td>After performing the analysis, we need to extract the relevant information. Here, <code>map_dbl()</code> is a strict and specific version of <code>map()</code> where it will only accept and output data with the mode <code>double</code>, meaning numerics with decimals or floating points. To indicate what we wanted to extract, we have given it a string that indicates the name of the vector we wish to take. You can also provide a function if you'd like, as long as the output of the function is strictly a <code>double</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="rules-to-iterate-by">Rules to iterate by<a class="headerlink" href="#rules-to-iterate-by" title="Permanent link">&para;</a></h2>
+<p>As shown, <code>for</code> loops and <code>map()</code> are incredibly powerful tools. However, there are some best practices that should be adhered to in most cases to ensure code runs and exits safely. The sections below list some of them and scenarios where exceptions may arise.</p>
+<h3 id="iterate-indices">Iterate indices<a class="headerlink" href="#iterate-indices" title="Permanent link">&para;</a></h3>
+<p>Iterating over indices of a vector, instead of directly iterating on the vector, allows for flexibility and predictable outputs. Vector indices are always sequential, thus you can be confident of which element is being processed, especially if it involves multiple inputs. The sequential nature of indices also mean that outputs are always in the order of the inputs, allowing you to safely join/bind them to existing data used as inputs. In addition, if you have data that contain extra information stored as attributes (discussed in next episode), you can safely re-assign them to the output for downstream use.</p>
+<h3 id="they-can-grow-vectors-with-constraints">They can grow vectors (with constraints)<a class="headerlink" href="#they-can-grow-vectors-with-constraints" title="Permanent link">&para;</a></h3>
+<p>As mentioned above, it is good practice to pre-assign vectors to store outputs of iterations (if desired). This ensures that R pre-allocates some amount of memory for the outputs. Whether or not it is a sufficient pre-allocation depends on the data structure of the outputs (see below). Even if the output vector is not strictly known (perhaps there are <code>if-else</code> statements that control which iteration is stored), an educated guess (with extra length for margin of error) is still better than nothing. Remember, <code>NA</code> can be filtered out later. Furthermore, a benefit of knowing (roughly) how many iterations required means that the index of the output can be used as the iterator.</p>
+<p>That being said, there may be situations where we truly do not know an appropriate length of an output vector. If that is the case, we should carefully construct loops with judicious use control flow elements like <code>if-else</code>, <code>while</code>, <code>next</code>, and <code>break</code>. Two reasonable scenarios where an empty vector can be grown (safely) is when you have control flow elements that (1) overwrite existing values (e.g., a counter or queue of sorts) or (2) control the size of the output vector. Growing vectors necessitates approaches that are position-agnostic. <em>If you knew certain indices will produce certain outcomes, then you should've pre-assigned a vector of known length.</em> </p>
+<p>If you think you will be processing a large number of iterations, need to store the results, and the output might exceed the size of available memory, consider coercing those into "flat" text formats (e.g., tab/comma separated values, strings, etc.) and writing it out to disk with a function that can open and append existing files (e.g., <code>readr::write_csv(x, append = TRUE)</code>). If you are going to do this, be mindful of the available disk space.</p>
+<h3 id="prefer-vectorised-functions">Prefer vectorised functions<a class="headerlink" href="#prefer-vectorised-functions" title="Permanent link">&para;</a></h3>
+<p>Functions that operate on the entirety of the vector input are called vectorised functions. These functions are optimised to run on entire data objects without explicitly iterating through the input element-by-element. This means that the processing is fast and efficient with minimal overheads. For example:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">num_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">num_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">9</span><span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Do this:</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="n">sums_a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">num_1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">num_2</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1"># Avoid this:</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="n">sums_b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">numeric</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">  </span><span class="n">sums_b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">num_1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">num_2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="p">}</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="c1"># The results are the same</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="nf">all</span><span class="p">(</span><span class="n">sums_a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sums_b</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Iterations in under the hood</p>
+<p>Technically, most vectorised functions are iterations. However, these are implemented in C. For many functions that come with base R, this C code is called immediately. This means the iterations are happening at the level closest to actual processing speeds. <em>Explicit</em> iterations like <code>for</code> loops in R require additional translation into machine code which is an overhead. While <code>map()</code> does implement iterations in C, there are some processes that happen at the R level before it reaches C-level code.</p>
+</div>
+<h3 id="less-is-more">Less is more<a class="headerlink" href="#less-is-more" title="Permanent link">&para;</a></h3>
+<p>While iterations are helpful when you have a lot of data to go through, it can be computationally expensive. Try to reduce the work done within an iteration and use vectorised functions to achieve part of the task. Consider also if only part of data requires an iteration for analysis (i.e., pre-filtering the input data). If there are many steps that must be achieved using iteration, try to break those steps up into smaller iterations (i.e., modular code). When using iterations inside a function, it is even more important to exit iterations as quickly as possible so as to not stall if things go wrong (recall "failing fast").</p>
+<p>"Less is more" also applies to the results of iterations. If each iteration computes and produces voluminous intermediate outcomes (e.g., permutation, bootstrapping, imputation, etc.), consider if all those values are required for downstream analyses within the same session. It is understood that these intermediate values can be valuable for troubleshooting and understanding the underlying assumptions of the analysis. In that case, consider redirecting them into files.</p>
+<p>If you must iterate through a large amount of data, also consider using combining control flow elements like <code>if-else</code> with loop specific statements like <code>break</code> or <code>next</code> to make sure you are computing on elements and storing outputs that meet certain conditions.</p>
+<h3 id="capture-errors-return-results">Capture errors, return results<a class="headerlink" href="#capture-errors-return-results" title="Permanent link">&para;</a></h3>
+<p>There are situations where errors persist despite our best efforts to guard against them. Defensive programming applies to scripting as well! It can be a expensive to run large numbers of iterations only for it to be stopped and error out without saving other valid outputs. In that case, R has a helpful function: <code>try()</code>. We know our <code>calc_alpha_diversity()</code> will error out on non-numeric data, let's use that to demonstrate how <code>try()</code> can help save computation from other valid inputs:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
+<span class="normal"><a href="#__codelineno-18-2">2</a></span>
+<span class="normal"><a href="#__codelineno-18-3">3</a></span>
+<span class="normal"><a href="#__codelineno-18-4">4</a></span>
+<span class="normal"><a href="#__codelineno-18-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="nf">map</span><span class="p">(</span><span class="n">asv</span><span class="p">,</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">  </span><span class="nf">try</span><span class="p">({</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="nf">calc_alpha_diversity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;shannon&quot;</span><span class="p">)</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">  </span><span class="p">})</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="p">})</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<h3 id="structural-and-analytical-considerations">Structural and analytical considerations<a class="headerlink" href="#structural-and-analytical-considerations" title="Permanent link">&para;</a></h3>
+<p>How data is structured is often the most important consideration when deciding between using <code>for</code> loops and <code>map()</code>. If data and subsequent analyses are easily amenable to combinatorial methods like <code>combn()</code> or <code>expand.grid()</code>, we can make life easier by using the <code>map()</code> method. On the other hand, it is difficult (sometimes impossible) to coerce some data structures into "flat" tables without extensive modification (and code). For example, if the data is stored in a highly nested, complex, and uneven manner (e.g., XML, JSON, graph/tree structures), a <code>for</code> loop may be more appropriate, maintainable (AKA easy to debug), readable, and verbose. Some analyses are not amenable to "flattening", such as those that require updating objects in the global environment or is (conditionally) dependent on results from previous iterations. If your analyses necessitates non-trivial code for intensive computation (e.g., generates dependent intermediates, has complex control flow), a <code>for</code> loop is certainly more readable than an abstraction using <code>map()</code>. Remember, computation time is cheap compared to human time. Choose the best construct that will get the job done in reasonable time within hardware constraints.</p>
+<!--
+
+## `for` loop
+
+### Anatomy of a `for` loop
+
+Formally, the `for` loop is constructed as:
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">statement</span><span class="o">&gt;</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="p">}</span>
+</code></pre></div>
+
+There are three items in the pseudocode above:
+
+* `<name>` is the variable that represents the value of each element in the vector as it is evaluated by the `<statement>` at each iteration.
+* `<vector>` is any vector or list.
+* `<statement>` is a block of code that does something.
+
+We can construct a straight-forward `for` loop to better understand how it operates
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="p">}</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>[1] 2
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>[1] 4
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>[1] 6
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>[1] 8
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>[1] 10
+</code></pre></div>
+
+In the example above, we constructed loop to do the following:
+
+1. Iterate through numbers 1 to 5 (`<vector>`)
+2. Represent each value using `i` (`<name>`)
+3. Multiply each value by 2 and print the results (`<statement>`)
+
+Notice that there are also some side effects that come with using a for loop: 
+
+* The name is retained in the environment. If you want to prevent this, append an `rm(<loop variables>)` to the end of the statement.
+* Here, `print()` is required for printing outputs to the console. Like functions, the printing of outputs is turned off. If you modify the code above by removing `print()`, observe that there is nothing printed to the console.
+
+### Assigning outputs
+
+Did you notice that the above code printed one value per number of iterations? Compare that to a vectorised multiplication:
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nf">print</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>[1]  2  4  6  8 10
+</code></pre></div>
+
+This exposes a difference between vectorised and iterative operations, where in vectorised functions the operations occur along the entire vector and the results are output in the same size as the vector (based on the example: 1 vector, 5 values). However, in iterations, the operation happens once per vector element and outputs are printed per element. 
+
+Consider the following:
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="p">}</span>
+</code></pre></div>
+
+Notice that `x` is a numeric object with length of 1. It also only stored the result of the evaluation of the last iteration, but not the results of the entire iteration. This is something to take note of: In R, outputs of `for` loops are individual objects. The implications of this is two-fold:
+
+1. The `<vector>` that is being iterated should not be the primary object of evaluation. Often, it is the index or name of each element that is becomes the `<vector>` for iteration.
+2. Output objects must be explicitly assigned prior to running the loop. It is not possible to assign an indexed output if the output object does not exist.
+
+The following code provides an example of how to iterate through an input vector and produce an output vector:
+
+!!! r-project "code"
+
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-25-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-25-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-25-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-25-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-25-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-25-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-25-10">10</a></span>
+<span class="normal"><a href="#__codelineno-25-11">11</a></span>
+<span class="normal"><a href="#__codelineno-25-12">12</a></span>
+<span class="normal"><a href="#__codelineno-25-13">13</a></span>
+<span class="normal"><a href="#__codelineno-25-14">14</a></span>
+<span class="normal"><a href="#__codelineno-25-15">15</a></span>
+<span class="normal"><a href="#__codelineno-25-16">16</a></span>
+<span class="normal"><a href="#__codelineno-25-17">17</a></span>
+<span class="normal"><a href="#__codelineno-25-18">18</a></span>
+<span class="normal"><a href="#__codelineno-25-19">19</a></span>
+<span class="normal"><a href="#__codelineno-25-20">20</a></span>
+<span class="normal"><a href="#__codelineno-25-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="c1"># Named vector to iterate on</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="nf">names</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">letters</span><span class="p">[</span><span class="nf">seq_along</span><span class="p">(</span><span class="n">a</span><span class="p">)]</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4"></a>
+<a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="c1"># Output object</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vector</span><span class="p">(</span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7"></a>
+<a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="c1"># Loop to produce named output</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_along</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10"></a><span class="w">  </span><span class="c1"># Iterate and calculate</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11"></a><span class="w">  </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12"></a><span class="w">  </span><span class="c1"># Set names equivalent to input</span>
+<a id="__codelineno-25-13" name="__codelineno-25-13"></a><span class="w">  </span><span class="nf">names</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">a</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14"></a><span class="w">  </span><span class="c1"># Print for verbosity</span>
+<a id="__codelineno-25-15" name="__codelineno-25-15"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16"></a><span class="w">    </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;i = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;; a = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;: x = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17"></a><span class="w">  </span><span class="p">)</span>
+<a id="__codelineno-25-18" name="__codelineno-25-18"></a><span class="p">}</span>
+<a id="__codelineno-25-19" name="__codelineno-25-19"></a>
+<a id="__codelineno-25-20" name="__codelineno-25-20"></a><span class="c1"># Column-bound representation</span>
+<a id="__codelineno-25-21" name="__codelineno-25-21"></a><span class="nf">cbind</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>[1] &quot;i = 1; a = 2: x = 5&quot;
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>[1] &quot;i = 2; a = 4: x = 9&quot;
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>[1] &quot;i = 3; a = 6: x = 13&quot;
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>[1] &quot;i = 4; a = 8: x = 17&quot;
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>[1] &quot;i = 5; a = 10: x = 21&quot;
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>[1] &quot;i = 6; a = 12: x = 25&quot;
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>[1] &quot;i = 7; a = 14: x = 29&quot;
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>[1] &quot;i = 8; a = 16: x = 33&quot;
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>[1] &quot;i = 9; a = 18: x = 37&quot;
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>[1] &quot;i = 10; a = 20: x = 41&quot;
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>   a  x
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>a  2  5
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>b  4  9
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>c  6 13
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>d  8 17
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>e 10 21
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>f 12 25
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>g 14 29
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>h 16 33
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>i 18 37
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>j 20 41
+</code></pre></div>
+
+We would like to use the above example to stress a few points on assigning outputs for iterations:
+
+* **Always create an output vector/list of defined size (line 6 in the above code block).** While `x <- c()` will also work for the example above, it is ill advised to do so, especially for large outputs. This is to do with how R handles memory: creating a vector of known size means R has already pre-allocated a certain amount of memory for the storage of outputs; an empty vector might balloon to a size that requires memory that R might not have access to.
+    * This is especially important if we require large volumes of output. There might be cases where you do not know when the code might stop iterating. In this situation, assign an output of a large enough size that you can guess will be enough to store all of it, then filter out the results later.
+* **Iteration by vector index is safer than by vector names (lines 9 and 11).** If you need the names to carry over, follow the example in line 13. Indices are sequential and therefore predictable. Names are not necessarily well behaving if you have mistakes in the code upstream. Again, if anything evaluates to `NA` or `NULL`, you can filter later.
+* **Printing some form of output is encouraged (lines 15 to 17)**. You do not need to write strings the way we did above, but some indication that the loop is running and iterating the correct things are important. That way, we will know if something has gone wrong in the evaluation of the statement(s). This is even more important if you have multi-step statements calling complex functions or conditional statements and/or nested loops (see below).
+
+!!! tip "Nested loops"
+
+    We can create nested loops like so:
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="o">&lt;</span><span class="n">name_1</span><span class="o">&gt;</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="o">&lt;</span><span class="n">vector_1</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">statement_1</span><span class="o">&gt;</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="o">&lt;</span><span class="n">name_2</span><span class="o">&gt;</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="o">&lt;</span><span class="n">vector_2</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="w">    </span><span class="o">&lt;</span><span class="n">statement_2</span><span class="o">&gt;</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="p">}</span>
+</code></pre></div>
+
+    Code wise, there are theoretically no limits as to how many "nests" we can create. The only limits are evaluation time, memory usage, and code readability. The loop within another loop is called the inner loop, whilst the one enveloping another loop is called the outer loop. This construct is very common for populating multi-dimensional vectors (i.e., matrices, data frames, and arrays) and recursively nested lists. Keep in mind that it is important to consider the output object's data structure as conceiving solutions to multi-dimensional/multi-level objects may not be straight-forward.
+
+!!! note "`while` loops"
+
+    As seen above, `for` loops require a defined range for iteration. There are scenarios where we want an iteration to run for as long as required until some condition is reached. In this case, we can use the `while` loop. 
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kr">while</span><span class="p">(</span><span class="o">&lt;</span><span class="n">expression</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">  </span><span class="o">&lt;</span><span class="n">statement</span><span class="o">&gt;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="p">}</span>
+</code></pre></div>
+
+    As long as the expression returns a `TRUE`, the statement will continue to run. This is common in numerical optimisation where procedures are required for model fitting.
+
+    The following code block illustrates how `while` loops are used in an iterative process to obtain small number solutions to the [Collatz conjecture](https://en.wikipedia.org/wiki/Collatz_conjecture).
+
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span>
+<span class="normal"><a href="#__codelineno-30-12">12</a></span>
+<span class="normal"><a href="#__codelineno-30-13">13</a></span>
+<span class="normal"><a href="#__codelineno-30-14">14</a></span>
+<span class="normal"><a href="#__codelineno-30-15">15</a></span>
+<span class="normal"><a href="#__codelineno-30-16">16</a></span>
+<span class="normal"><a href="#__codelineno-30-17">17</a></span>
+<span class="normal"><a href="#__codelineno-30-18">18</a></span>
+<span class="normal"><a href="#__codelineno-30-19">19</a></span>
+<span class="normal"><a href="#__codelineno-30-20">20</a></span>
+<span class="normal"><a href="#__codelineno-30-21">21</a></span>
+<span class="normal"><a href="#__codelineno-30-22">22</a></span>
+<span class="normal"><a href="#__codelineno-30-23">23</a></span>
+<span class="normal"><a href="#__codelineno-30-24">24</a></span>
+<span class="normal"><a href="#__codelineno-30-25">25</a></span>
+<span class="normal"><a href="#__codelineno-30-26">26</a></span>
+<span class="normal"><a href="#__codelineno-30-27">27</a></span>
+<span class="normal"><a href="#__codelineno-30-28">28</a></span>
+<span class="normal"><a href="#__codelineno-30-29">29</a></span>
+<span class="normal"><a href="#__codelineno-30-30">30</a></span>
+<span class="normal"><a href="#__codelineno-30-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="c1"># Procedure to apply</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="n">collatz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8"></a>
+<a id="__codelineno-30-9" name="__codelineno-30-9"></a><span class="w">  </span><span class="n">y</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10"></a><span class="p">}</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a>
+<a id="__codelineno-30-12" name="__codelineno-30-12"></a><span class="c1"># Function for iteration</span>
+<a id="__codelineno-30-13" name="__codelineno-30-13"></a><span class="n">collatz_calc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="w">  </span><span class="n">X</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span>
+<a id="__codelineno-30-15" name="__codelineno-30-15"></a><span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-30-16" name="__codelineno-30-16"></a>
+<a id="__codelineno-30-17" name="__codelineno-30-17"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="kr">return</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+<a id="__codelineno-30-18" name="__codelineno-30-18"></a>
+<a id="__codelineno-30-19" name="__codelineno-30-19"></a><span class="w">  </span><span class="kr">while</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-20" name="__codelineno-30-20"></a><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">collatz</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-30-21" name="__codelineno-30-21"></a><span class="w">    </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span>
+<a id="__codelineno-30-22" name="__codelineno-30-22"></a><span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-30-23" name="__codelineno-30-23"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-30-24" name="__codelineno-30-24"></a>
+<a id="__codelineno-30-25" name="__codelineno-30-25"></a><span class="w">  </span><span class="n">X</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">X</span><span class="p">)]</span>
+<a id="__codelineno-30-26" name="__codelineno-30-26"></a><span class="p">}</span>
+<a id="__codelineno-30-27" name="__codelineno-30-27"></a>
+<a id="__codelineno-30-28" name="__codelineno-30-28"></a><span class="c1"># Calculate steps for numbers 1 to 50</span>
+<a id="__codelineno-30-29" name="__codelineno-30-29"></a><span class="n">collatz_input</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span>
+<a id="__codelineno-30-30" name="__codelineno-30-30"></a><span class="nf">names</span><span class="p">(</span><span class="n">collatz_input</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span>
+<a id="__codelineno-30-31" name="__codelineno-30-31"></a><span class="n">collatz_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="n">collatz_input</span><span class="p">,</span><span class="w"> </span><span class="n">collatz_calc</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+
+    In lines 19 to 23, we applied a `while` loop to ensure that `collatz()` continues to be applied until `x == 1`, which marks the end of the loop. 
+
+
+## Iterations using `map_*()` 
+
+Another way to iterate through a vector/list is to use `map_*()`. These are a family of functions from the `purrr` package (part of the `tidyverse`) that apply another function (named or anonymous) throughout an iterable object. They come in several variations:
+
+| Function | Description                    |
+| -------- | ------------------------------ |
+| `map()`  | Iterate over a vector.         |
+| `map2()` | Iterate over 2 vectors.        |
+| `pmap()` | Iterate over multiple vectors. |
+
+The base forms above always return a list regardless of coercion. However, each function also have modifiers that can output different types of data:
+
+| Modifier | Description                                        |
+| -------- | -------------------------------------------------- |
+| `_int()` | Returns an integer vector (numeric whole numbers). |
+| `_dbl()` | Returns a double vector (numeric with decimals).   |
+| `_chr()` | Returns a character vector.                        |
+| `_lgl()` | Returns a Boolean logical vector (TRUE or FALSE).  |
+
+These functions are designed to produce predictable outputs (or, as written in the help pages, "die trying"). They all have the following syntax:
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">output</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">function</span><span class="p">,</span><span class="n">character</span><span class="p">,</span><span class="n">integer</span><span class="o">&gt;</span><span class="p">)</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">output</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">map2</span><span class="p">(</span><span class="n">vector_1</span><span class="p">,</span><span class="w"> </span><span class="n">vector_2</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">function</span><span class="p">,</span><span class="n">character</span><span class="p">,</span><span class="n">integer</span><span class="o">&gt;</span><span class="p">)</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="n">output</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pmap</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">vector_1</span><span class="p">,</span><span class="w"> </span><span class="n">vector_2</span><span class="p">,</span><span class="w"> </span><span class="n">vector_3</span><span class="p">,</span><span class="w"> </span><span class="kc">...</span><span class="p">),</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">function</span><span class="p">,</span><span class="n">character</span><span class="p">,</span><span class="n">integer</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre></div>
+
+If a character or integer is supplied in place of a function, it will extract the component by name or position, respectively. Let's give it a go to get a feel for how it works:
+
+!!! r-project "code"
+
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
+<span class="normal"><a href="#__codelineno-32-2">2</a></span>
+<span class="normal"><a href="#__codelineno-32-3">3</a></span>
+<span class="normal"><a href="#__codelineno-32-4">4</a></span>
+<span class="normal"><a href="#__codelineno-32-5">5</a></span>
+<span class="normal"><a href="#__codelineno-32-6">6</a></span>
+<span class="normal"><a href="#__codelineno-32-7">7</a></span>
+<span class="normal"><a href="#__codelineno-32-8">8</a></span>
+<span class="normal"><a href="#__codelineno-32-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="c1"># Something to iterate</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="w">  </span><span class="n">some_characters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruit</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">],</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="w">  </span><span class="n">some_logical</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">),</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="w">  </span><span class="n">some_integers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rpois</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">  </span><span class="n">some_doubles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rcauchy</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="p">)</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8"></a>
+<a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="nf">map</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>$some_characters
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>[1] &quot;apple apricot avocado banana bell pepper bilberry blackberry blackcurrant blood orange blueberry&quot;
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>$some_logical
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>[1] &quot;TRUE FALSE FALSE TRUE TRUE FALSE TRUE FALSE TRUE FALSE&quot;
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>$some_integers
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>[1] &quot;1 1 0 4 0 1 2 2 2 2&quot;
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a>
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a>$some_doubles
+<a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a>[1] &quot;-2.57064088089821 7.63892805348741 -0.265096215258503 -13.1956030820162 -3.31501579815553 -0.549345803083576 -18.9606149076079 6.02805881696039 -2.06572698682012 0.496937057657112&quot;
+</code></pre></div>
+
+We wrote a simple expression that concatenates elements of vectors in list `b` and prints them out as one string be list element. Here's another example that uses a variation of `map_*()` to calculate the coefficient of variation among biological replicates:
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">example_pmap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pmap_dbl</span><span class="p">(</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">  </span><span class="nf">list</span><span class="p">(</span><span class="n">asv</span><span class="o">$</span><span class="n">AS1A1</span><span class="p">,</span><span class="w"> </span><span class="n">asv</span><span class="o">$</span><span class="n">AS1A2</span><span class="p">,</span><span class="w"> </span><span class="n">asv</span><span class="o">$</span><span class="n">AS1A3</span><span class="p">),</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">  </span>\<span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">    </span><span class="n">values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="w">    </span><span class="nf">sd</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="p">)</span>
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>
+<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="nf">str</span><span class="p">(</span><span class="n">example_pmap</span><span class="p">)</span>
+</code></pre></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>num [1:4031] 0.337 0.267 0.596 0.421 0.358 ...
+</code></pre></div>
+
+Notice that it is a numeric vector instead of a list as we used the `_dbl` modifier. If we tried to use a different modifier (e.g., `_int`), it will generate an error and will not produce an output.
+
+!!! tip "Sidestepping for side effects"
+
+    The above `map_*()` family of functions all produce an output per element. However, if your primary interest is to generate *side effects* (i.e., plots, console outputs via `cat()`, saving files, etc.), it is better to use `purrr`'s family of functions: `walk()`. Like `map_*()`, it comes in variations for two (`walk2()`) or more (`pwalk()`) vectors. Compare the following outputs:
+
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1">1</a></span>
+<span class="normal"><a href="#__codelineno-36-2">2</a></span>
+<span class="normal"><a href="#__codelineno-36-3">3</a></span>
+<span class="normal"><a href="#__codelineno-36-4">4</a></span>
+<span class="normal"><a href="#__codelineno-36-5">5</a></span>
+<span class="normal"><a href="#__codelineno-36-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="n">fn_glue</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">nm</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="w">  </span><span class="nf">str_glue</span><span class="p">(</span><span class="s">&quot;Vector named {nm} is a {class(x)}&quot;</span><span class="p">)</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="p">}</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4"></a>
+<a id="__codelineno-36-5" name="__codelineno-36-5"></a><span class="nf">map2</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">nm</span><span class="p">)</span><span class="w"> </span><span class="nf">cat</span><span class="p">(</span><span class="nf">fn_glue</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">nm</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">))</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6"></a><span class="nf">walk2</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">nm</span><span class="p">)</span><span class="w"> </span><span class="nf">cat</span><span class="p">(</span><span class="nf">fn_glue</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">nm</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>Vector named some_characters is a character 
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>Vector named some_logical is a logical 
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>Vector named some_integers is a integer 
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>Vector named some_doubles is a numeric 
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>$some_characters
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>NULL
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a>$some_logical
+<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>NULL
+<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a>
+<a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a>$some_integers
+<a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a>NULL
+<a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a>
+<a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a>$some_doubles
+<a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a>NULL
+</code></pre></div>
+    > 
+    > <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>Vector named some_characters is a character 
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>Vector named some_logical is a logical 
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>Vector named some_integers is a integer 
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>Vector named some_doubles is a numeric 
+</code></pre></div>
+
+## Practical applications: `for` versus `map_*()`
+
+In older versions of R, there was a push to use `map_*()` (or the `apply()` family of functions, the predecessor of `map()`) as `for` loops were computationally slower. Thankfully, this is no longer a problem in modern R versions (to an extent). For small amounts of data/code, the choice between the two are largely stylistic. However, there are some reasons to prefer one over the other:
+
+* For pairs (or more) of vectors with **uneven number of elements, a `for` loop is required**. This is because `map2()` and `pmap()` requires all input vectors to have the same number of elements. That said, take care when constructing output data structures.
+* **Use `map()`/`walk()` and variants to apply throwaway functions.** This is especially useful if you are dealing with multiple data sets (e.g., need to clean data in specific ways). This way, you can use one script that produces clean data via anonymous functions and save precious time (and mental energy!) to write and name functions that serve general use cases!
+* **`map()` variants with their modifiers are preferred for programmatic use.** By this we mean that if you are primarily writing functions as objects (i.e., functional programming), you should use `map()` variants with their modifiers. This ensures that outputs are the expected type for all downstream use.
+
+Generally, `map()` and `pmap()` is sufficient for a wide variety of scenarios. We advocate for its use given the advantage of cleaner and more readable code. Furthermore, most analyses can be simplified from a multi/nested list problem to solutions involving vectorisation or iteration of multiple equal-length vectors. It is really about being creative with data structures.
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../3.function_conditions/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Functions and conditional statements">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Functions and conditional statements
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../5.data_structures/" class="md-footer__link md-footer__link--next" aria-label="Next: Data structures">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Data structures
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Intermediate-R workshop material is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

@@ -1,0 +1,1514 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Intermediate-R/5.data_structures/">
+      
+      
+        <link rel="prev" href="../4.iterations/">
+      
+      
+        <link rel="next" href="../Supplementary/s1.seq_prep/">
+      
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Data structures - Intermediate R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-structures" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Intermediate R" class="md-header__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Intermediate R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data structures
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Intermediate-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Intermediate-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Intermediate R" class="md-nav__button md-logo" aria-label="Intermediate R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Intermediate R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Intermediate-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Intermediate-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    An introduction to the data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.string_manipulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    String manipulation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.relational_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Relational data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.function_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Functions and conditional statements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.iterations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iterations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Data structures
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data structures
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tabular-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabular data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tabular data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-frames-are-special-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data frames are special lists
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-lazy-cousin-tibbles" class="md-nav__link">
+    <span class="md-ellipsis">
+      The lazy cousin: tibbles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-dimensional-superhero-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-dimensional superhero: Matrices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursive-objects-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursive objects: Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s3-and-s4-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      S3 and S4 objects
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Supplementary
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Supplementary
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/s1.seq_prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sequence processing for Intermediate R workshop
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/s2.dat_prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data preparation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tabular-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabular data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tabular data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-frames-are-special-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data frames are special lists
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-lazy-cousin-tibbles" class="md-nav__link">
+    <span class="md-ellipsis">
+      The lazy cousin: tibbles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-dimensional-superhero-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-dimensional superhero: Matrices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursive-objects-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursive objects: Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s3-and-s4-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      S3 and S4 objects
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="data-structures">Data structures<a class="headerlink" href="#data-structures" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Learning objectives</p>
+<ul>
+<li>Understand that data frames and tibbles are special lists</li>
+<li>Know when and why to use a matrix</li>
+<li>Understand attributes and how they affect data structure</li>
+<li>Understand recursion in functions</li>
+</ul>
+</div>
+<center>
+
+<pre class="mermaid"><code>graph BT
+  A["Vector"]
+  B["Atomic (1-D)"]
+  C["Matrix (2-D)"]
+  D["Array (n-D)"]
+  E["List"]
+  F["Data frame"]
+  G["Tibble"]
+  B --- A
+  C --- B
+  D --- B
+  E --- A
+  F --- E
+  G --- E  </code></pre>
+</center>
+
+<p>All data objects are vectors. The difference between the colloquial vector (<em>atomic vector</em>) and list is the kinds of data they can contain: atomic vectors only store data of the same type in a single dimension (e.g., <code>c(1, 2, 3, 4, 5)</code>); lists are <em>generic vectors</em> that are able to store data of different types and can also store other lists (i.e., <em>recursion</em>, see below). A further generalisation of the atomic vector are matrices (for 2-dimensional data) and arrays (for <em>n</em>-dimensions). While these types of data structures are seemingly restrictive (only one data mode allowed), they are how the vast majority of statistics and math is actually done!</p>
+<h2 id="tabular-data">Tabular data<a class="headerlink" href="#tabular-data" title="Permanent link">&para;</a></h2>
+<p>In Introduction to R, we introduced the data frame as a form tabular data storage. Here, we will extend that knowledge by exploring some of the underlying principles of tabular data structures in R. Additionally, we will also learn how to use them effectively.</p>
+<h3 id="data-frames-are-special-lists">Data frames are special lists<a class="headerlink" href="#data-frames-are-special-lists" title="Permanent link">&para;</a></h3>
+<p>Technically, <em>data frames are special lists</em>: they contain lists of variables of equal lengths (i.e., cases-by-variables). For practical purposes, think of each column as a vector, and that each vector has the same length that makes up the rows of the data frame. The following example exposes this construct:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">nr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">df_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">  </span><span class="s">&quot;A&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="n">asv</span><span class="o">$</span><span class="n">ASVID</span><span class="p">,</span><span class="w"> </span><span class="n">nr</span><span class="p">),</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="s">&quot;B&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="n">asv</span><span class="p">[[</span><span class="nf">sample</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">asv</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">)]],</span><span class="w"> </span><span class="n">nr</span><span class="p">),</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">  </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">),</span><span class="w"> </span><span class="n">nr</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="c1"># Print data.frame</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">df_list</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="c1"># Check equivalence and structure</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="nf">is.list</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">df_list</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">is.list</span><span class="p">(</span><span class="n">df_list</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="nf">str</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">df_list</span><span class="p">))</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="nf">str</span><span class="p">(</span><span class="n">df_list</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="admonition failure">
+<p class="admonition-title"><code>arguments imply differing number of rows</code></p>
+<p>If the number of elements of the vectors in the list is different, we will get the above error. This reinforces the special case of data frame as a list-based structure.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Inspect source code of <code>data.frame</code></p>
+<p>If you look closely at the source code of the <code>data.frame</code> function, it exposes how the input is handled as a list and how it iteratively reconstructs the list into a tabular form, assigns column and row names, and performs checks on lengths.</p>
+</div>
+<p>If we wanted to, we can also add row names for coercion:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span>
+<span class="normal"><a href="#__codelineno-1-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">rn</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="n">nr</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="n">df_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="n">df_list</span><span class="p">,</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">  </span><span class="nf">names</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rn</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">  </span><span class="n">x</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="p">})</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="nf">str</span><span class="p">(</span><span class="n">df_list</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">df_list</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>The list-based nature of the data frame means it is highly amenable to column-wise iteration via <code>map()</code> (or it's variants). However, due to the mixed data modes commonly found in data frames, the function being "mapped" will need to have some control flow statements to deal with them correctly.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span>
+<span class="normal"><a href="#__codelineno-2-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># Shannon&#39;s index for each sample</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nf">map</span><span class="p">(</span><span class="n">asv</span><span class="p">,</span><span class="w"> </span>\<span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="nf">calc_alpha_diversity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;shannon&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="p">})</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">  </span><span class="nf">unlist</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<h3 id="the-lazy-cousin-tibbles">The lazy cousin: tibbles<a class="headerlink" href="#the-lazy-cousin-tibbles" title="Permanent link">&para;</a></h3>
+<p>Tibbles are a modern implementation of data frames developed and maintained by the folks behind tidyverse. We'll use an example to showcase how they are "lazy".</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<p>Create a data frame and a tibble.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">df_A</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)),</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">  </span><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="p">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="n">tbl_A</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">  </span><span class="n">`245`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="o">:</span><span class="m">5</span><span class="p">,</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">  </span><span class="n">`first letters`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">    </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">    </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">    </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">  </span><span class="p">)</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Variables and their names are lazily evaluated</label><label for="__tabbed_1_2">Columns are built sequentially</label><label for="__tabbed_1_3">Enhanced printing</label><label for="__tabbed_1_4">Strict subsetting</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>This means that variables are automatically interpreted "as is", meaning we can store non-atomic vectors within tibbles without extra effort (compare lines 3-9 to lines 14-19). Furthermore, column names with characters that are illegal in base R (i.e. with spaces) are returned as is. </p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">tbl_A</span><span class="o">$</span><span class="n">`245`</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">tbl_A</span><span class="o">$</span><span class="n">`first letters`</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+<div class="tabbed-block">
+<p>Consider the following ways of obtaining the third column:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1"># Construct data frame</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">df_B</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="o">:</span><span class="m">9</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="p">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="n">df_B</span><span class="o">$</span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df_B</span><span class="o">$</span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">df_B</span><span class="o">$</span><span class="n">b</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="c1"># Construct tibble</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="n">tbl_B</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="o">:</span><span class="m">9</span><span class="p">,</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>Both multiply columns <code>a</code> and <code>b</code> in the respective tables to obtain column <code>c</code>. However, notice how in <code>tibble()</code> this is done more naturally?</p>
+</div>
+<div class="tabbed-block">
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="nf">print</span><span class="p">(</span><span class="n">asv</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nf">print</span><span class="p">(</span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">asv</span><span class="p">))</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="nf">print</span><span class="p">(</span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">asv</span><span class="p">),</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>Cleaner and informative output of a printed tibble compared to the data frame. Moreover, we can control how many lines (<code>n</code>) and number of characters (<code>width</code>) we want to see.</p>
+</div>
+<div class="tabbed-block">
+<p>When using single bracket notation to subset a tibble, the result is always a tibble. This is not the case with data frames. Compare the outputs below:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">df_A</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">str</span><span class="p">()</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">tbl_A</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">str</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Row names are not a thing in tibbles!</p>
+</div>
+<h3 id="2-dimensional-superhero-matrices">2-dimensional superhero: Matrices<a class="headerlink" href="#2-dimensional-superhero-matrices" title="Permanent link">&para;</a></h3>
+<p>The matrix is another class of tabular data object. They are the 2-dimensional generalisation of an atomic vector, which makes them simpler and stricter structures compared to data frames or tibbles. We'll explore some of the properties of matrices, and then discuss a key advantage they have over data frames.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Strict subsetting</label><label for="__tabbed_2_2">Iterating on vector elements, not list of vectors</label><label for="__tabbed_2_3">Memory usage</label><label for="__tabbed_2_4">Matrix operations</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>When using square bracket notation for subsetting matrices, the result is always an atomic vector if there is only one row OR column, or a matrix if more then 1 row AND column is desired.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="nf">str</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">])</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="nf">str</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="p">])</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="nf">str</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">4</span><span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>This property of strict subsetting and homogeneous data mode means that obtaining values from matrices is straight-forward and has predictable outputs. </p>
+</div>
+<div class="tabbed-block">
+<p>The atomic vector property of matrices means that iterations using <code>map()</code> is applied on each element. That is not the same as iterating on columns of a data frame. </p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nf">map</span><span class="p">(</span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="nf">map</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>Furthermore, the code above nicely illustrates that the total length of the data object. Line 1 gives the length of each column in a data frame, which is equivalent to the length of each vector in a list. Line 2 considers the length of each element of an atomic vector, hence the output is 1 repeated in a list of length 231, the latter of which is the number of elements in the matrix.</p>
+<div class="admonition info">
+<p class="admonition-title">Use <code>apply()</code> to iterate correctly on a matrix</p>
+<p>If iterating along the margins (AKA rows or columns) of the matrix is required, use the base R function <code>apply()</code> and specify the margin desired.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1"># Iterating along rows</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="nf">apply</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">,</span><span class="w"> </span><span class="n">MARGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="c1"># Iterating along columns</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="nf">apply</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">,</span><span class="w"> </span><span class="n">MARGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<div class="tabbed-block">
+<p>For storing and processing large amounts of homogeneous data, matrix should be the go to data storage class. Compared to data frames (and tibbles), matrices are more compact (occupy less RAM).</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c1"># Create data frame equivalent of asv_matrix</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">asv_dataframe</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">asv</span><span class="p">[,</span><span class="w"> </span><span class="m">-1</span><span class="p">]</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="nf">rownames</span><span class="p">(</span><span class="n">asv_dataframe</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">asv</span><span class="o">$</span><span class="n">ASVID</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="c1"># Create tibble equivalent</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="n">asv_tibble</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">asv_dataframe</span><span class="p">,</span><span class="w"> </span><span class="n">rownames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="nf">map</span><span class="p">(</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">  </span><span class="nf">mget</span><span class="p">(</span><span class="nf">ls</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;</span><span class="err">asv_.*), envir = .GlobalEnv),</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">  </span><span class="n">object.size</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="p">)</span><span class="w">        </span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+<div class="tabbed-block">
+<p>The atomic vector property of matrices also lends itself to powerful matrix operations. These are mathematical operations that work on entire matrices (recall vectorised functions), and they are the basis of much of the underlying statistical processes in R (e.g., matrix multiplication <code>%*%</code>, transposition <code>t()</code>, eigenvector <code>eigen()</code>, etc.). For most statistical analyses, such as calculating correlations <code>cor()</code>, covariance <code>cov()</code>, distances <code>dist()</code>, principle component analysis <code>princomp()</code> etc., the first thing that those functions do is coerce the input data into a matrix. Beyond R, entire branches of STEM rely on matrix operations to obtain numerical solutions to complex, high-dimensional problems (e.g., quantum physics, multiple sequence alignments, the color filter applied to your Instagram posts).</p>
+<p>Due to the fundamental nature of matrix operations, they are implemented at the C/C++ level (available in the <a href="https://svn.r-project.org/R/branches/R-4-3-branch/src/">R source code</a> or it's <a href="https://github.com/wch/r-source">GitHub mirror</a>). Higher level R functions (i.e., functions exposed to users) typically call those as soon as possible. This also means that users can exploit highly efficient and optimised algorithms packaged in Basic Linear Algebra Subprograms (BLAS) and Linear Algebra PACKage (LAPACK). Popular options include Intel's Math Kernel Library (optimised for Intel processors) and OpenBLAS. These software libraries provide substantial improvements in terms of computational efficiency, but are difficult to install for the average user (Thankfully, NeSI's R come pre-linked with BLAS and LAPACK libraries).</p>
+</div>
+</div>
+</div>
+<h3 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h3>
+<p>Think of attributes as metadata to the object. Some attributes determine the structure of the data so that R can interpret them properly, other attributes are attached as metadata or for the purposes of provenance. Every time we perform some action on an object, the object's class attribute will be examined prior to evaluation as some operations are restricted to certain classes. Besides <code>class()</code>, other basic attributes include <code>names()</code>, dimensions <code>dim()</code>, and dimension names <code>dimnames()</code>. In the context of matrices, <code>dim()</code> and <code>dimnames()</code> (list of row and column names, in that specific order) are important attributes that differentiates it from a 1-dimensional atomic vector. </p>
+<p>To extract and modify attributes:</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span>
+<span class="normal"><a href="#__codelineno-12-5">5</a></span>
+<span class="normal"><a href="#__codelineno-12-6">6</a></span>
+<span class="normal"><a href="#__codelineno-12-7">7</a></span>
+<span class="normal"><a href="#__codelineno-12-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># Create example data</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="n">env_scaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">env_matrix</span><span class="p">)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="c1"># Inspect attributes</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="nf">attributes</span><span class="p">(</span><span class="n">env_scaled</span><span class="p">)</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="c1"># Extract attributes</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="nf">attributes</span><span class="p">(</span><span class="n">env_scaled</span><span class="p">)</span><span class="o">$</span><span class="n">`scaled:scale`</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>As observed, calling <code>attributes()</code> returns a list object of the available attributes from which we can inspect. As it is a list, we can modify and add attributes by assigning it like a list-element.</p>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="nf">attributes</span><span class="p">(</span><span class="n">env_scaled</span><span class="p">)</span><span class="o">$</span><span class="n">method</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Z-score standardisation&quot;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="c1"># Inspect attributes</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="nf">attributes</span><span class="p">(</span><span class="n">env_scaled</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<h2 id="recursive-objects-functions">Recursive objects: Functions<a class="headerlink" href="#recursive-objects-functions" title="Permanent link">&para;</a></h2>
+<p>In the <a href="https://genomicsaotearoa.github.io/Introduction-to-R/01-r-basics/#lists">Data Prelude lesson</a> of Introduction to R, we were introduced to the list class of data storage and how to manipulate them. Lists are an example of a recursive data object. That means that they can store other objects of different modes and classes, thus allowing for complex and hierarchical structures through nesting (think Russian dolls). To check if something is recursive, we can use the predicate function <code>is.recursive()</code>.</p>
+<p>Something that may not be immediately intuitive is that functions are also recursive objects. In this context, recursion means something slightly different: a recursive function is a function that calls itself as part of it's source code/expression. For example, a factorial function applicable to integers:</p>
+<div class="arithmatex">\[
+n! = \prod_{i=1}^{n} i
+\]</div>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">calc_factorial</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">calc_factorial</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">    </span><span class="m">1</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="p">}</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="c1"># Test that it works</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="nf">calc_factorial</span><span class="p">(</span><span class="m">4</span><span class="p">)</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="nf">prod</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<p>This function is the first time <code>calc_factorial()</code> is defined, but it calls itself in its expression! This is one of the examples of a recursive function. The recursive nature might be more easily understood as a diagram:</p>
+<pre class="mermaid"><code>graph TD
+  F4("calc_factorial(4)")
+  F3("calc_factorial(3)")
+  F2("calc_factorial(2)")
+  F1("calc_factorial(1)")
+
+  F4 --&gt; 4
+  F4 --&gt; F3
+  F3 --&gt; 3
+  F3 --&gt; F2
+  F2 --&gt; 2
+  F2 --&gt; F1
+  F1 --&gt; 1</code></pre>
+<p>At the end of the diagram, we multiply all the tips (results) to get the solution.</p>
+<h2 id="s3-and-s4-objects">S3 and S4 objects<a class="headerlink" href="#s3-and-s4-objects" title="Permanent link">&para;</a></h2>
+<p>In R, objects obey different object-oriented programming systems (namely S3, S4, and R6) to define what the objects are. This primarily affects the object's class and how R interprets and processes the object. A large majority of the objects in R follow the S3 system.</p>
+<p>The major difference between the two is that S4 is formally defined and stricter than S3. S4 is generally preferred when building large packages or suites of interacting packages with complex methods so that outputs and methods are consistent and that all code contributors have the same "vocabulary" for handling objects. This is the reason that all packages in Bioconductor are written using the S4 system in mind.</p>
+<p>An additional item in S4 is slots, where slot values (think object property) are retrieved using package-specific accessor functions or the symbol <code>@</code>. The details that differentiates the systems are too detailed for the average R user and will not be covered here. For further reading, we refer you to the <a href="https://adv-r.hadley.nz/oo.html">Object-Oriented Programming section of Advanced R</a></p>
+<!--
+
+
+
+Special cases of the atomic vector are the matrix and array. The latter two all have one commonality: attributes `dim` and `dimnames`. A matrix is a special 2-dimensional case of an atomic vector (`dim(matrix) == 2`), whereas an array is a multi-dimensional (`dim(array) > 1`). As for `dimnames`, think of them as column and row names for matrices (for arrays, they are just the names of each dimension).
+
+!!! note "Attributes"
+
+
+
+Tibble is the only one out of the diagram that is not part of `base` R. It is implemented via the `tibble` package and is the primary way the `tidyverse` stores tabular data. It is similar to a data frame with some key differences:
+
+* Variables and their names are lazily evaluated (more on this soon)
+* Columns are built sequentially
+* Enhanced printing
+
+We will be exploring how to use tibbles and compare it to a data frame in the subsections below.
+
+## Matrix versus data frame, and why the choice matters
+
+While it seems that both matrices and data frames are similar in that they represent data in 2-dimensional structures, there are marked distinctions in how R interprets them. We will prepare an example based on a subset of `asv` to illustrate these differences.
+
+### Structure
+
+!!! r-project "code"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Example data uses the first 5 numeric columns and rows of asv</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1"># The ASVID is designated as the row name</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">num_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">asv</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">6</span><span class="p">],</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">asv</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">])</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">num_mt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">num_df</span><span class="p">)</span>
+</code></pre></div>
+
+    === "Printing"
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nf">print</span><span class="p">(</span><span class="n">num_df</span><span class="p">)</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nf">print</span><span class="p">(</span><span class="n">num_mt</span><span class="p">)</span>
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>                                 AS1A1 AS1A2 AS1A3 AS1B1 AS1B2
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>88c2f5ea8fd2f13cbd43e933049707c9    45    22    37    50    55
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>bab6b4a509dd01b93cbbf78e40616533    81    48    79    96    87
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>24b484137e882a5c77ea93b4574332e1    70    16    53    86    55
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>5d112573567f99604339d5d6b92bdea9    35    14    26    63    45
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>864ea29bffe398510cca601c0ce546c2    61    32    37    72    75
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>                                 AS1A1 AS1A2 AS1A3 AS1B1 AS1B2
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>88c2f5ea8fd2f13cbd43e933049707c9    45    22    37    50    55
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>bab6b4a509dd01b93cbbf78e40616533    81    48    79    96    87
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>24b484137e882a5c77ea93b4574332e1    70    16    53    86    55
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>5d112573567f99604339d5d6b92bdea9    35    14    26    63    45
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>864ea29bffe398510cca601c0ce546c2    61    32    37    72    75
+</code></pre></div>
+
+    === "Structure"
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nf">str</span><span class="p">(</span><span class="n">num_df</span><span class="p">)</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nf">str</span><span class="p">(</span><span class="n">num_mt</span><span class="p">)</span>
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>&#39;data.frame&#39;: 5 obs. of  5 variables:
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a> $ AS1A1: int  45 81 70 35 61
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a> $ AS1A2: int  22 48 16 14 32
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a> $ AS1A3: int  37 79 53 26 37
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a> $ AS1B1: int  50 96 86 63 72
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a> $ AS1B2: int  55 87 55 45 75
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a> int [1:5, 1:5] 45 81 70 35 61 22 48 16 14 32 ...
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a> - attr(*, &quot;dimnames&quot;)=List of 2
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>  ..$ : chr [1:5] &quot;88c2f5ea8fd2f13cbd43e933049707c9&quot; &quot;bab6b4a509dd01b93cbbf78e40616533&quot; &quot;24b484137e882a5c77ea93b4574332e1&quot; &quot;5d112573567f99604339d5d6b92bdea9&quot; ...
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>  ..$ : chr [1:5] &quot;AS1A1&quot; &quot;AS1A2&quot; &quot;AS1A3&quot; &quot;AS1B1&quot; ...
+</code></pre></div>
+
+    === "Class"
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nf">class</span><span class="p">(</span><span class="n">num_df</span><span class="p">)</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nf">class</span><span class="p">(</span><span class="n">num_mt</span><span class="p">)</span>
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>[1] &quot;data.frame&quot;
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>[1] &quot;matrix&quot; &quot;array&quot;
+</code></pre></div>
+
+    === "Attributes"
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nf">attributes</span><span class="p">(</span><span class="n">num_df</span><span class="p">)</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nf">attributes</span><span class="p">(</span><span class="n">num_mt</span><span class="p">)</span>
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>$names
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>[1] &quot;AS1A1&quot; &quot;AS1A2&quot; &quot;AS1A3&quot; &quot;AS1B1&quot; &quot;AS1B2&quot;
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>$class
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>[1] &quot;data.frame&quot;
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>$row.names
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>[1] &quot;88c2f5ea8fd2f13cbd43e933049707c9&quot; &quot;bab6b4a509dd01b93cbbf78e40616533&quot; &quot;24b484137e882a5c77ea93b4574332e1&quot;
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>[4] &quot;5d112573567f99604339d5d6b92bdea9&quot; &quot;864ea29bffe398510cca601c0ce546c2&quot;
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>$dim
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>[1] 5 5
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>$dimnames
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>$dimnames[[1]]
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>[1] &quot;88c2f5ea8fd2f13cbd43e933049707c9&quot; &quot;bab6b4a509dd01b93cbbf78e40616533&quot; &quot;24b484137e882a5c77ea93b4574332e1&quot;
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>[4] &quot;5d112573567f99604339d5d6b92bdea9&quot; &quot;864ea29bffe398510cca601c0ce546c2&quot;
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>$dimnames[[2]]
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>[1] &quot;AS1A1&quot; &quot;AS1A2&quot; &quot;AS1A3&quot; &quot;AS1B1&quot; &quot;AS1B2&quot;
+</code></pre></div>
+
+    === "Size"
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nf">length</span><span class="p">(</span><span class="n">num_df</span><span class="p">)</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nf">nrow</span><span class="p">(</span><span class="n">num_df</span><span class="p">)</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="nf">ncol</span><span class="p">(</span><span class="n">num_df</span><span class="p">)</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="nf">length</span><span class="p">(</span><span class="n">num_mt</span><span class="p">)</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="nf">nrow</span><span class="p">(</span><span class="n">num_mt</span><span class="p">)</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="nf">ncol</span><span class="p">(</span><span class="n">num_mt</span><span class="p">)</span>
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>[1] 5
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>[1] 5
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>[1] 5
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>[1] 25
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>[1] 5
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>[1] 5
+</code></pre></div>
+
+    === "Iteration"
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nf">map_lgl</span><span class="p">(</span><span class="n">num_df</span><span class="p">,</span><span class="w"> </span><span class="n">is.numeric</span><span class="p">)</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="nf">map_lgl</span><span class="p">(</span><span class="n">num_mt</span><span class="p">,</span><span class="w"> </span><span class="n">is.numeric</span><span class="p">)</span>
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>AS1A1 AS1A2 AS1A3 AS1B1 AS1B2 
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a> TRUE  TRUE  TRUE  TRUE  TRUE
+</code></pre></div>
+
+        > <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a> [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>[22] TRUE TRUE TRUE TRUE
+</code></pre></div>
+
+When printing, there are no differences between data frames and matrices. However, when we inspect the underlying structure, attributes, size, and iteration output of the objects we find that R interprets them very differently. Perhaps the most convincing observation that data frames are special cases of a list is that when we iterate using `map_lgl()`, the outputs match the number of columns with the column names printed. However, when it was used on the matrix, it returns a Boolean logical with the same length as `nrow(num_mt) * ncol(num_mt)`.
+
+!!! note "Operations"
+
+    Another distinction of matrices and data frames is the operations we can do with them. There are many applications in numerical and statistical analyses that require matrix-based operations: 
+
+    * Addition 
+    * Subtraction 
+    * Scalar multiplication
+    * Transposition
+    * Matrix multiplication.
+
+    Of the 5 operations, matrix multiplication only works with matrices; the other operations will work if the input is a numeric data frame, whereas transposition will also produce a valid object but if there are any data types that are not numeric, the entire data frame will be coerced into character variables.
+
+## Tibbles as flexible data storage
+
+Tibbles are lazy data frames. We'll try to describe what this implies for the points mentioned above:
+
+!!! r-project "code"
+
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-34-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-34-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-34-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-34-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-34-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-34-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-34-10">10</a></span>
+<span class="normal"><a href="#__codelineno-34-11">11</a></span>
+<span class="normal"><a href="#__codelineno-34-12">12</a></span>
+<span class="normal"><a href="#__codelineno-34-13">13</a></span>
+<span class="normal"><a href="#__codelineno-34-14">14</a></span>
+<span class="normal"><a href="#__codelineno-34-15">15</a></span>
+<span class="normal"><a href="#__codelineno-34-16">16</a></span>
+<span class="normal"><a href="#__codelineno-34-17">17</a></span>
+<span class="normal"><a href="#__codelineno-34-18">18</a></span>
+<span class="normal"><a href="#__codelineno-34-19">19</a></span>
+<span class="normal"><a href="#__codelineno-34-20">20</a></span>
+<span class="normal"><a href="#__codelineno-34-21">21</a></span>
+<span class="normal"><a href="#__codelineno-34-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="n">df_A</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)),</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5"></a><span class="w">    </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6"></a><span class="w">    </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="w">    </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+<a id="__codelineno-34-8" name="__codelineno-34-8"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-34-9" name="__codelineno-34-9"></a><span class="w">  </span><span class="p">)</span>
+<a id="__codelineno-34-10" name="__codelineno-34-10"></a><span class="p">)</span>
+<a id="__codelineno-34-11" name="__codelineno-34-11"></a>
+<a id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="n">tbl_A</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span>
+<a id="__codelineno-34-13" name="__codelineno-34-13"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span>
+<a id="__codelineno-34-14" name="__codelineno-34-14"></a><span class="w">  </span><span class="n">`245`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="o">:</span><span class="m">5</span><span class="p">,</span>
+<a id="__codelineno-34-15" name="__codelineno-34-15"></a><span class="w">  </span><span class="n">`first letters`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">letters</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">],</span>
+<a id="__codelineno-34-16" name="__codelineno-34-16"></a><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-34-17" name="__codelineno-34-17"></a><span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-34-18" name="__codelineno-34-18"></a><span class="w">    </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-34-19" name="__codelineno-34-19"></a><span class="w">    </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<a id="__codelineno-34-20" name="__codelineno-34-20"></a><span class="w">    </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">6</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+<a id="__codelineno-34-21" name="__codelineno-34-21"></a><span class="w">  </span><span class="p">)</span>
+<a id="__codelineno-34-22" name="__codelineno-34-22"></a><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+
+    === "Variables and their names are lazily evaluated"
+
+        This means that variables are not coerced into another data type as is commonly done in data frames (characters are often converted to factors). Also, we can store non-atomic vectors within tibbles without extra effort (compare lines 3-9 to lines 14-19). Furthermore, column names with characters that are illegal in base R (i.e. with spaces) are returned as is. 
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">tbl_A</span><span class="o">$</span><span class="n">`245`</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="n">tbl_A</span><span class="o">$</span><span class="n">`first letters`</span>
+</code></pre></div>
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>[1] 3 4 5
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>[1] &quot;a&quot; &quot;b&quot; &quot;c&quot;
+</code></pre></div>
+
+    === "Columns are built sequentially"
+
+        Consider the following ways of obtaining the third column:
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="c1"># Construct data frame</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="n">df_B</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="o">:</span><span class="m">9</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="p">)</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="n">df_B</span><span class="o">$</span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df_B</span><span class="o">$</span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">df_B</span><span class="o">$</span><span class="n">b</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="c1"># Construct tibble</span>
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="n">tbl_B</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span>
+<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span>
+<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="o">:</span><span class="m">9</span><span class="p">,</span>
+<a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span>
+<a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a><span class="p">)</span>
+</code></pre></div>
+
+        Both multiply columns `a` and `b` in the respective tables to obtain column `c`. However, notice how in `tibble()` this is done more naturally?
+
+    === "Enhanced printing"
+
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nf">print</span><span class="p">(</span><span class="n">asv</span><span class="p">)</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="nf">print</span><span class="p">(</span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">asv</span><span class="p">))</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="nf">print</span><span class="p">(</span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">asv</span><span class="p">),</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span><span class="p">)</span>
+</code></pre></div>
+
+        Notice the cleaner and informative output of a printed tibble compared to the data frame. Moreover, we can control how many lines (`n`) and number of characters (`width`) we want to see.
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../4.iterations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Iterations">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Iterations
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Supplementary/s1.seq_prep/" class="md-footer__link md-footer__link--next" aria-label="Next: Sequence processing for Intermediate R workshop">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Sequence processing for Intermediate R workshop
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Intermediate-R workshop material is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
